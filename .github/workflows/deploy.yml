@@ -1,0 +1,62 @@
+name: Test and Deploy
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: bjp_test_db
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - run: pip install -r requirements.txt -r requirements-dev.txt
+      - run: ruff check .
+      - run: black --check .
+      - run: pytest --tb=short
+        env:
+          DJANGO_SETTINGS_MODULE: config.settings.ci
+          DB_NAME: bjp_test_db
+          DB_USER: root
+          DB_PASS: root
+          DB_HOST: 127.0.0.1
+          SECRET_KEY: ci-test-secret-key-not-real
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to cPanel via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host:     ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USER }}
+          password: ${{ secrets.CPANEL_PASS }}
+          script: |
+            cd ~/bjp-technologies-web
+            git pull origin main
+            source ~/virtualenv/bjp-technologies-web/3.12/bin/activate
+            pip install -r requirements.txt --quiet
+            python manage.py migrate --no-input
+            python manage.py collectstatic --no-input
+            touch tmp/restart.txt
+            echo "Deploy complete: $(date)"
