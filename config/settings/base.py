@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 
 pymysql.install_as_MySQLdb()
 
+# Django 6 requires mysqlclient >= 2.2.1. PyMySQL reports an older version
+# so we patch it here to satisfy the version check.
+pymysql.version_info = (2, 2, 1, "final", 0)
+pymysql.__version__ = "2.2.1"
+
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
