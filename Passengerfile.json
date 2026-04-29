@@ -1,0 +1,7 @@
+{
+    "app_type": "wsgi",
+    "startup_file": "passenger_wsgi.py",
+    "python": "/home/bjptechn/virtualenv/bjp-technologies-web/3.12/bin/python",
+    "environment": "production",
+    "friendly_error_pages": false
+}
