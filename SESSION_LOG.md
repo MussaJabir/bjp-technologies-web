@@ -88,6 +88,53 @@
 
 ---
 
+---
+
+## Session 3 — 2026-04-29 EAT
+
+**Goal:** Update CLAUDE.md with correct primary domain and confirm Django 6.x as framework version.
+**Branch:** develop
+**Status:** ✅ Complete
+**Phase:** Phase 1 — Infrastructure & Hosting
+
+### What Was Done
+- Updated Section 1 (Project Identity): added primary domain `bjptechnologies.co.tz` and noted `technologies.bejundas.co.tz` as a 301 redirect alias on a separate cPanel — not the Django host
+- Updated Section 2 (Tech Stack): confirmed Django 6.x (was already updated; no change needed)
+- Updated Section 9 (Environment Variables): changed `ALLOWED_HOSTS` in `.env.example` to `bjptechnologies.co.tz,www.bjptechnologies.co.tz`
+- Updated Section 11 (Security Rules): added explicit `ALLOWED_HOSTS` production values with comment excluding the redirect alias
+- Updated Section 22 footer: changed domain reference to `bjptechnologies.co.tz (primary)`
+- Updated Phase 1 deliverables: added ALLOWED_HOSTS confirmation checklist item
+
+### Files Changed
+| File | Action | Notes |
+|---|---|---|
+| CLAUDE.md | Modified | 6 targeted changes — domain, ALLOWED_HOSTS, security, footer, phase checklist |
+| SESSION_LOG.md | Modified | This entry |
+
+### Migrations
+- N/A
+
+### Tests
+- N/A
+
+### Decisions Made
+- **Decision:** `bjptechnologies.co.tz` is the primary Django-hosted domain.
+  **Reason:** The site has its own dedicated domain. `technologies.bejundas.co.tz` is a 301 redirect alias configured on a separate cPanel account — Django never receives requests on that hostname so it must not appear in `ALLOWED_HOSTS`.
+- **Decision:** Django 6.x confirmed as the framework version.
+  **Reason:** Django 6.0.4 is available on PyPI and Python 3.12.3 is installed locally, which satisfies Django 6's minimum Python version requirement.
+
+### Blockers / Issues
+- Waiting for MySQL database (`bjp_db`, `bjp_user`) to be created in cPanel before proceeding with Phase 1.
+
+### Next Session Should
+- [ ] Confirm MySQL database created in cPanel (bjp_db / bjp_user) and note cPanel-prefixed names
+- [ ] Configure cPanel Python App (Python 3.12, Passenger, app root)
+- [ ] Create SSH deploy key and add to GitHub repo deploy keys
+- [ ] Set CPANEL_HOST, CPANEL_USER, CPANEL_PASS secrets in GitHub repo
+- [ ] Push develop → main and confirm first auto-deploy
+
+---
+
 <!-- 
 TEMPLATE FOR NEXT SESSION — copy this block and fill in:
 
