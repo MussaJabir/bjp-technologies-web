@@ -244,8 +244,8 @@ All models must inherit from `BaseModel` (defined in `apps/core/models.py`).
 
 ## 6. Database Rules
 
-- Database name: `bjp_db`
-- Database user: `bjp_user`
+- Database name: `bjptechn_bjp_db` (cPanel prefixes with account username)
+- Database user: `bjptechn_bjp_user` (cPanel prefixes with account username)
 - Host: `localhost`
 - Port: `3306`
 - Charset: `utf8mb4` always (supports emoji and full Unicode)
