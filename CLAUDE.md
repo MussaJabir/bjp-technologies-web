@@ -12,13 +12,14 @@
 **Company:** BJP Technologies (T) Limited
 **Tagline:** Secure Technology. Scalable Growth.
 **Location:** Ubungo – Dar es Salaam, Tanzania
-**Domain:** technologies.bejundas.co.tz
+**Primary Domain:** bjptechnologies.co.tz
+**Alias Domain:** technologies.bejundas.co.tz (301 redirects to primary — not the Django host)
 **Parent Platform:** bejundas.co.tz (multi-vertical business platform)
 **Contact:** info@bjptechnologies.co.tz | +255 678 290 994
 **Postal:** P.O Box 7276, Msakuzi – Mbezi
 
 **What this project is:**
-A professional corporate website and service platform for BJP Technologies — a premium IT solutions company in Tanzania. This site lives at `technologies.bejundas.co.tz` as one of 6 service subdomains under the Bejundas platform. It showcases IT services, enables client enquiries, and is the Technologies vertical of the wider Bejundas ecosystem. Built in Django, deployed on cPanel via Passenger (WSGI), uses MySQL, and version-controlled through GitHub with automated CI/CD via GitHub Actions.
+A professional corporate website and service platform for BJP Technologies — a premium IT solutions company in Tanzania. The primary domain is `bjptechnologies.co.tz`. The subdomain `technologies.bejundas.co.tz` is a 301 redirect alias configured on a separate cPanel — it points to the primary domain and is never listed in Django's `ALLOWED_HOSTS`. The site showcases IT services, enables client enquiries, and is the Technologies vertical of the wider Bejundas ecosystem. Built in Django, deployed on cPanel via Passenger (WSGI), uses MySQL, and version-controlled through GitHub with automated CI/CD via GitHub Actions.
 
 **Bejundas Platform Context:**
 This repo is one of 6 independent repos under the Bejundas brand. Each subdomain is its own Django project with its own CLAUDE.md and repo. Do not mix concerns across subdomains.
@@ -243,8 +244,8 @@ All models must inherit from `BaseModel` (defined in `apps/core/models.py`).
 
 ## 6. Database Rules
 
-- Database name: `bjp_db`
-- Database user: `bjp_user`
+- Database name: `bjptechn_bjp_db` (cPanel prefixes with account username)
+- Database user: `bjptechn_bjp_user` (cPanel prefixes with account username)
 - Host: `localhost`
 - Port: `3306`
 - Charset: `utf8mb4` always (supports emoji and full Unicode)
@@ -394,7 +395,7 @@ jobs:
 # Django
 SECRET_KEY=your-secret-key-here
 DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
+ALLOWED_HOSTS=bjptechnologies.co.tz,www.bjptechnologies.co.tz
 
 # Database
 DB_NAME=bjp_db
@@ -448,7 +449,11 @@ These are hard rules. Claude Code must never violate them.
 
 - `DEBUG = False` in production — always
 - `SECRET_KEY` from environment — never hardcoded
-- `ALLOWED_HOSTS` must list only real domains in production
+- `ALLOWED_HOSTS` must list only real domains in production:
+  ```python
+  ALLOWED_HOSTS = ['bjptechnologies.co.tz', 'www.bjptechnologies.co.tz']
+  # technologies.bejundas.co.tz is a 301 redirect — not listed here
+  ```
 - No credentials, API keys, passwords, or tokens in any committed file
 - All forms must have `{% csrf_token %}`
 - Use `HTTPS` in production — `SECURE_SSL_REDIRECT = True`
@@ -755,6 +760,7 @@ The BJP Technologies website is being built in structured phases. Claude Code mu
 - [ ] GitHub Actions `deploy.yml` workflow created
 - [ ] First successful auto-deploy confirmed (site returns 200 OK)
 - [ ] `SESSION_LOG.md` initialized with Session 1 entry
+- [ ] ALLOWED_HOSTS confirmed with both `bjptechnologies.co.tz` and `www.bjptechnologies.co.tz`
 
 **Definition of Done for Phase 1:**
 Pushing to `main` on GitHub automatically deploys to `technologies.bejundas.co.tz` and the Django default page (or a basic placeholder) loads in the browser with no errors.
@@ -849,6 +855,6 @@ Pushing to `main` on GitHub automatically deploys to `technologies.bejundas.co.t
 ---
 
 *Last updated: April 2026*
-*Project: BJP Technologies (T) Limited — technologies.bejundas.co.tz*
+*Project: BJP Technologies (T) Limited — bjptechnologies.co.tz (primary)*
 *Stack: Django 6 + MySQL + cPanel + GitHub Actions*
 *Current Phase: Phase 1 — Infrastructure & Hosting*
