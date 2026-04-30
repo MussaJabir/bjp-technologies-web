@@ -1,13 +1,7 @@
 from django.views.generic import TemplateView
 
-DEFAULT_INDUSTRIES = [
-    ("Startups & SMEs", "startups-smes"),
-    ("Financial Institutions", "financial-institutions"),
-    ("NGOs & Development Orgs", "ngos-development"),
-    ("Education Institutions", "education"),
-    ("Healthcare Providers", "healthcare"),
-    ("Retail & Wholesale", "retail-wholesale"),
-]
+from apps.industries.models import Industry
+from apps.services.models import Service
 
 
 class HomeView(TemplateView):
@@ -15,7 +9,8 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["default_industries"] = DEFAULT_INDUSTRIES
+        context["industries"] = Industry.objects.filter(is_active=True).order_by("order")
+        context["featured_services"] = Service.objects.filter(is_active=True).order_by("order")
         return context
 
 

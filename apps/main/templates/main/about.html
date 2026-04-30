@@ -1,18 +1,338 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}About Us{% endblock %}
-{% block meta_description %}Learn about BJP Technologies (T) Limited — Tanzania's trusted IT partner based in Dar es Salaam.{% endblock %}
+{% block title %}About Us — BJP Technologies (T) Limited{% endblock %}
+{% block meta_description %}Learn about BJP Technologies — Tanzania's trusted IT solutions partner. Secure technology, scalable growth, and enterprise-grade services for businesses across East Africa.{% endblock %}
 
 {% block content %}
-<div class="rts-section-gap">
-    <div class="container">
+
+<!-- Page Banner — CSS class handles background-image: about/01.webp -->
+<div class="about-banner-area-bg jarallax" data-jarallax='{"speed": 0.3}' style="position:relative;">
+    <!-- dark overlay for text readability -->
+    <div style="position:absolute; inset:0; background:rgba(8,15,46,0.60); z-index:1;"></div>
+    <div class="container" style="position:relative; z-index:2; padding-top:80px;">
         <div class="row">
             <div class="col-lg-12">
-                <h1>About BJP Technologies</h1>
-                <p>Coming soon — full About page in Phase 3.</p>
+                <div class="bread-plug wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s" style="margin-bottom:16px;">
+                    <a href="{% url 'main:home' %}" style="color:var(--accent); text-decoration:none;">Home</a>
+                    <i class="fa-regular fa-chevron-right" style="color:var(--grey); margin:0 8px; font-size:11px;"></i>
+                    <span style="color:var(--white);">About Us</span>
+                </div>
+                <h1 class="title wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s"
+                    style="font-family:'DM Serif Display', serif; color:var(--white); font-size:clamp(2rem,5vw,3.2rem); margin:0;">
+                    Secure Technology.<br>Scalable Growth.
+                </h1>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Counter Strip -->
+<div class="counter-up-wrapper mt-dec-80">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-counter-up-one border-top border-left">
+                    <div class="icon-area">
+                        <i class="fa-regular fa-briefcase" style="font-size:28px; color:var(--accent);"></i>
+                    </div>
+                    <p>Projects Delivered</p>
+                    <h3 class="title"><span class="counter">50</span>+</h3>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-counter-up-one border-top">
+                    <div class="icon-area">
+                        <i class="fa-regular fa-users" style="font-size:28px; color:var(--accent);"></i>
+                    </div>
+                    <p>Happy Clients</p>
+                    <h3 class="title"><span class="counter">30</span>+</h3>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-counter-up-one border-top">
+                    <div class="icon-area">
+                        <i class="fa-regular fa-shield-check" style="font-size:28px; color:var(--accent);"></i>
+                    </div>
+                    <p>Security Audits Done</p>
+                    <h3 class="title"><span class="counter">20</span>+</h3>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-counter-up-one border-top">
+                    <div class="icon-area">
+                        <i class="fa-regular fa-calendar-days" style="font-size:28px; color:var(--accent);"></i>
+                    </div>
+                    <p>Years in Business</p>
+                    <h3 class="title"><span class="counter">5</span>+</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- What We Do -->
+<div class="what-we-do-area-start rts-section-gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="what-we-do-wrapper-about">
+                    <p class="disc">
+                        BJP Technologies (T) Limited is a Tanzanian IT solutions company headquartered in Ubungo, Dar es Salaam.
+                        We deliver enterprise-grade technology services — from custom software development and cloud infrastructure
+                        to cybersecurity and managed IT — helping businesses across East Africa grow securely and operate at scale.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt--40 g-5">
+            <div class="col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
+                <div class="what-we-do-main-wrapper">
+                    <h5 class="title">What We Do</h5>
+                    <p class="disc">
+                        We bring together the technology, expertise, and support businesses need to solve real problems.
+                        From secure web applications to cloud infrastructure and mobile money payment integrations —
+                        we cover the full technology stack so our clients can focus on growth.
+                    </p>
+                    <a href="{% url 'services:list' %}" class="rts-btn btn-border btn-bold">
+                        Our Services
+                        <img src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
+                <div class="what-we-do-main-wrapper">
+                    <h5 class="title">Our Approach</h5>
+                    <p class="disc">
+                        We believe every client deserves solutions tailored to their context — not generic off-the-shelf products.
+                        Our team works closely with each organisation to understand their operations, constraints, and goals
+                        before recommending or building anything.
+                    </p>
+                    <a href="{% url 'contact:contact' %}" class="rts-btn btn-border btn-bold">
+                        Get In Touch
+                        <img src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mid Image Feature -->
+<div class="rts-image-feature-area">
+    <div class="container-full">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="thumbnail-about-mid jarallax" data-jarallax='{"speed": 0.2}'>
+                    <img class="jarallax-img" src="{% static 'images/about/02.webp' %}" alt="BJP Technologies team at work">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="thumbnail-about-mid jarallax" data-jarallax='{"speed": 0.2}'>
+                    <img class="jarallax-img" src="{% static 'images/about/03.webp' %}" alt="BJP Technologies office environment">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Key Benefits -->
+<div class="keybenefits-area rts-section-gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="benefits-area-title-wrapper">
+                    <h3 class="title">Why Clients Choose BJP Technologies</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row g-0 mt--15">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="single-benefits-area-wrapper bg-light">
+                    <div class="icon">
+                        <img src="{% static 'images/about/icons/01.svg' %}" alt="Enterprise Security">
+                    </div>
+                    <h5 class="title">Enterprise Security</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="single-benefits-area-wrapper">
+                    <div class="icon">
+                        <img src="{% static 'images/about/icons/02.svg' %}" alt="Scalable Solutions">
+                    </div>
+                    <h5 class="title">Scalable Solutions</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="single-benefits-area-wrapper bg-light">
+                    <div class="icon">
+                        <img src="{% static 'images/about/icons/03.svg' %}" alt="24/7 Support">
+                    </div>
+                    <h5 class="title">24/7 Support</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="single-benefits-area-wrapper">
+                    <div class="icon">
+                        <img src="{% static 'images/about/icons/04.svg' %}" alt="Local Expertise">
+                    </div>
+                    <h5 class="title">Local Expertise</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="single-benefits-area-wrapper">
+                    <div class="icon">
+                        <img src="{% static 'images/about/icons/05.svg' %}" alt="Cloud-Native">
+                    </div>
+                    <h5 class="title">Cloud-Native</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="single-benefits-area-wrapper bg-light">
+                    <div class="icon">
+                        <img src="{% static 'images/about/icons/06.svg' %}" alt="Mobile Payments">
+                    </div>
+                    <h5 class="title">Mobile Payments</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="single-benefits-area-wrapper">
+                    <div class="icon">
+                        <img src="{% static 'images/about/icons/07.svg' %}" alt="Trusted Partners">
+                    </div>
+                    <h5 class="title">Trusted Partners</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="single-benefits-area-wrapper bg-light">
+                    <div class="icon">
+                        <img src="{% static 'images/about/icons/08.svg' %}" alt="Agile Delivery">
+                    </div>
+                    <h5 class="title">Agile Delivery</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Services Grid -->
+<div class="gap-service-area rts-section-gap bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-style-4-center mb--50">
+                    <h2 class="title wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">Services We Offer</h2>
+                    <p class="mt--15 wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s"
+                       style="color:var(--grey); max-width:520px; margin:0 auto; text-align:center;">
+                        From development to security — we cover your entire technology stack
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row g-5">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
+                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="fa-regular fa-laptop-code" style="font-size:36px; color:var(--accent);"></i>
+                        </div>
+                        <div class="bottom">
+                            <h3 class="title animated fadeIn">Software Development</h3>
+                            <p class="disc">Custom web apps, ERP, HR, SACCOS, POS &amp; API integrations.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
+                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="fa-regular fa-globe" style="font-size:36px; color:var(--accent);"></i>
+                        </div>
+                        <div class="bottom">
+                            <h3 class="title animated fadeIn">Website &amp; Digital</h3>
+                            <p class="disc">Corporate websites, e-commerce, CMS and digital presence.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
+                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="fa-regular fa-cloud-arrow-up" style="font-size:36px; color:var(--accent);"></i>
+                        </div>
+                        <div class="bottom">
+                            <h3 class="title animated fadeIn">Cloud &amp; Infrastructure</h3>
+                            <p class="disc">AWS, Oracle Cloud, DigitalOcean, Linux admin &amp; backup.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
+                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="fa-regular fa-shield-halved" style="font-size:36px; color:var(--accent);"></i>
+                        </div>
+                        <div class="bottom">
+                            <h3 class="title animated fadeIn">Cybersecurity</h3>
+                            <p class="disc">WAF, VAPT, malware removal, server hardening &amp; secure auth.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
+                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="fa-regular fa-headset" style="font-size:36px; color:var(--accent);"></i>
+                        </div>
+                        <div class="bottom">
+                            <h3 class="title animated fadeIn">Managed IT Services</h3>
+                            <p class="disc">24/7 monitoring, patching, helpdesk &amp; data backup.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
+                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="fa-regular fa-mobile-screen-button" style="font-size:36px; color:var(--accent);"></i>
+                        </div>
+                        <div class="bottom">
+                            <h3 class="title animated fadeIn">Payment Integrations</h3>
+                            <p class="disc">M-Pesa, Tigo Pesa, Airtel Money, Mastercard &amp; bank gateways.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="rts-section-gap" style="background:linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mb_md--30 mb_sm--30">
+                <h2 class="wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s"
+                    style="font-family:'DM Serif Display', serif; color:var(--white); font-size:clamp(1.6rem,3vw,2.4rem); margin:0 0 12px;">
+                    Ready to transform your business with technology?
+                </h2>
+                <p class="wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s"
+                   style="color:var(--grey-light); margin:0;">
+                    Let's talk about your goals. Our team is ready to design the right solution for your organisation.
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="{% url 'contact:contact' %}" class="rts-btn btn-primary wow fadeInUp" data-wow-delay=".5s">
+                    Start a Conversation
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

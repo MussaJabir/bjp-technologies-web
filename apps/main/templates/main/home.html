@@ -396,17 +396,6 @@
                     </div>
                 </a>
             </div>
-            {% empty %}
-            {% for name, slug in default_industries %}
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120">
-                <a href="{% url 'industries:detail' slug=slug %}" class="single-service-area-wrapper">
-                    <div class="info">
-                        <h4 class="title">{{ name }}</h4>
-                        <img class="injectable" src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
             {% endfor %}
         </div>
     </div>
