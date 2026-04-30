@@ -244,6 +244,100 @@
 
 ---
 
+## Session 5 — 2026-04-30 EAT
+
+**Goal:** Complete Phase 2 — build all base templates, BJP brand CSS, home page content sections, and commit to feature branch.
+**Branch:** feature/phase-2-core-foundation
+**Status:** ✅ Complete
+**Phase:** Phase 2 — Core Foundation
+
+### What Was Done
+- Analysed Luminos HTML template (cloned locally) — selected `index-four.html` as design base
+- Copied all Luminos assets into `static/` (CSS, JS plugins, fonts, images)
+- Built `apps/core/templates/core/base.html` — full page shell with all blocks, Google Fonts, all JS deferred, mobile sidebar, preloader, scroll-to-top
+- Built `apps/core/templates/core/navbar.html` — `header-area-four header--sticky` structure, BJP white logo, 7-service dropdown, responsive hamburger
+- Built `apps/core/templates/core/footer.html` — original Luminos light gradient footer, BJP content (services, industries, contact info), CTA banner in BJP navy, copyright + social icons
+- Created `static/css/bjp.css` — purely additive brand overrides: logo sizing, sticky nav navy, CTA navy, primary button navy, scroll progress cyan
+- Restored all Luminos style.css color/font variables to originals — resolved all UI conflicts (invisible nav, wrong hero, invisible footer text, wrong font)
+- Built `apps/main/templates/main/home.html` — 7 sections: hero (jarallax), 3 service cards, 7-service grid, animated stats counters, About strip, Why Choose BJP, Tech Partners, Industries
+- Fixed animated counter: moved `.counter` class from `<h3>` to `<span>` inside it (CounterUp.js requirement)
+- Added 3 new home page sections:
+  - **About strip**: 2-col (image + text), key trust points, linked to About page
+  - **Why Choose BJP**: 4 differentiator cards using `single-working-process-choose-us` with tag badges
+  - **Tech Partners**: FA6 brand icons (AWS, Azure, Python, Laravel, Linux, Ubuntu, Stripe) + M-Pesa text badge
+- Generated `docs/BJP_Technologies_Phase1_Report.pdf` using reportlab
+- Created stub templates for all apps (services, industries, contact, 404, 500)
+- Wired up all URL namespaces in `config/urls.py`
+
+### Files Changed
+| File | Action | Notes |
+|---|---|---|
+| apps/core/templates/core/base.html | Created | Full page shell, all JS, mobile sidebar |
+| apps/core/templates/core/navbar.html | Created | BJP nav, dropdown, hamburger |
+| apps/core/templates/core/footer.html | Created | CTA banner + light gradient footer |
+| apps/main/templates/main/home.html | Created | 7 content sections including 3 new |
+| apps/services/templates/services/*.html | Created | List + detail stubs |
+| apps/industries/templates/industries/*.html | Created | List + detail stubs |
+| apps/contact/templates/contact/*.html | Created | Contact + success stubs |
+| templates/404.html | Created | Custom error page |
+| templates/500.html | Created | Custom error page |
+| static/css/bjp.css | Created | BJP brand additions only |
+| static/css/style.css | Created | Luminos base (variables restored to originals) |
+| static/css/plugins/ | Created | fontawesome, swiper, metismenu, popup |
+| static/css/vendor/ | Created | bootstrap.min.css |
+| static/js/ | Created | All JS plugins and vendor files |
+| static/fonts/ | Created | Aeonik + FontAwesome 6 Pro fonts |
+| static/images/ | Created | All Luminos image assets |
+| static/images/logo/ | Created | bjp-logo.svg + bjp-logo-white.svg |
+| config/urls.py | Modified | All 4 app URL namespaces wired up |
+| apps/main/views.py | Modified | HomeView + AboutView, default_industries context |
+| apps/*/urls.py | Modified | URL patterns for all apps |
+| docs/BJP_Technologies_Phase1_Report.pdf | Created | Phase 1 completion report (reportlab) |
+
+### Migrations
+- Migration name: N/A (no new models in Phase 2)
+- Applied: N/A
+
+### Tests
+- Tests written: 0 (Phase 2 — templates and static, no new model/form logic)
+- Tests passing: N/A
+- Coverage areas: N/A
+
+### Decisions Made
+- **Decision:** Keep Luminos CSS variables at their original values; add BJP identity only in bjp.css.
+  **Reason:** Changing Luminos's internal `--color-primary`, `--color-body`, and font variables cascades unpredictably across dark-background sections that expect white text. Additive overrides in bjp.css are safe and reversible.
+- **Decision:** Use FA6 brand icons for the Tech Partners section instead of image logos.
+  **Reason:** No official partner logo SVGs available locally. FA6 brand icons are already loaded, render crisply, and display correct brand colors. Sufficient for Phase 2 — real logos can replace them in Phase 6 polish.
+- **Decision:** Use placeholder image (about/01.webp from Luminos assets) for About strip.
+  **Reason:** Real BJP photography not yet available. Placeholder is contextually appropriate (tech/IT imagery). Replace with real photo in Phase 5/6.
+
+### Blockers / Issues
+- None for Phase 2 core foundation.
+- SSH auto-deploy still pending (inherited from Phase 1).
+
+### Phase Deliverables Completed (Phase 2)
+- [x] `apps/core/` templates: base.html, navbar.html, footer.html
+- [x] `static/css/bjp.css` with BJP brand CSS
+- [x] BJP logo SVG (dark + white versions)
+- [x] Google Fonts loaded (DM Serif Display, Outfit, Space Mono)
+- [x] All JS plugins: WOW, Jarallax, CounterUp, Swiper, MetisMenu, SVG-Inject
+- [x] `collectstatic` runs cleanly (Django check: 0 issues)
+- [x] Home page with 7 content sections including About strip, Why Choose BJP, Tech Partners
+- [x] Animated stat counters working (CounterUp.js `.counter` span pattern)
+- [x] Context processor for company info
+- [x] Placeholder 404 and 500 pages
+- [x] All URL routes wired: main, services, industries, contact
+
+### Next Session Should
+- [ ] Start Phase 3 — Content Pages
+- [ ] Build `apps/main/templates/main/about.html` — full About page
+- [ ] Build `apps/services/` — Services list + Service model + Service detail pages
+- [ ] Build `apps/industries/` — Industries list + Industry model + Industry detail pages
+- [ ] Seed 7 services and 6 industries via fixture or management command
+- [ ] Test all pages mobile-responsive
+
+---
+
 <!-- 
 TEMPLATE FOR NEXT SESSION — copy this block and fill in:
 
