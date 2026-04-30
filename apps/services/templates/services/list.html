@@ -10,7 +10,7 @@
 <div class="rts-service-banner-area ptb--80 position-relative" style="background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);">
     <div class="container">
         <div class="row d-flex align-items-center">
-            <div class="col-lg-8 mb_md--30 mb_sm--30">
+            <div class="col-lg-7 mb_md--30 mb_sm--30">
                 <div class="service-banner-content-wrapper">
                     <div class="bread-plug wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
                         <a href="{% url 'main:home' %}" style="color:var(--accent); text-decoration:none;">Home</a>
@@ -28,12 +28,21 @@
                     </p>
                 </div>
             </div>
+            <div class="col-lg-5 wow fadeInUp" data-wow-offset="120" data-wow-delay=".5s">
+                <div class="thumbnail-bannr-service-right jarallax" data-jarallax='{"speed": 0.3}'>
+                    <img class="jarallax-img" src="{% static 'images/service/04.webp' %}" alt="BJP Technologies IT services">
+                </div>
+            </div>
         </div>
     </div>
-    <div class="shape-area-start" style="position:absolute; top:0; right:0; width:40%; height:100%; pointer-events:none; overflow:hidden; opacity:.06;">
-        <i class="fa-regular fa-server" style="font-size:300px; color:var(--white); position:absolute; top:50%; right:-40px; transform:translateY(-50%);"></i>
+    <div class="shape-area-start">
+        <img src="{% static 'images/banner/06.png' %}" alt="" class="one wow move-right">
+        <img src="{% static 'images/banner/07.png' %}" alt="" class="two wow move-left">
     </div>
 </div>
+
+<!-- Full-width background image strip below banner -->
+<div class="large-image-area-bg-service-page jarallax rts-section-gap" data-jarallax='{"speed": 0.3}'></div>
 
 <!-- Services List (Luminos single-service-list pattern) -->
 <div class="rts-service-provide-area rts-section-gap">

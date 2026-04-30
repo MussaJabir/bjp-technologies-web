@@ -6,11 +6,12 @@
 
 {% block content %}
 
-<!-- Service Banner -->
+<!-- Service Banner — CSS class handles background-image: service/06.webp -->
 <div class="container-large">
-    <div class="service-single-area-banner bg_image jarallax"
-         style="background:linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%); min-height:320px; display:flex; align-items:flex-end; padding:40px;">
-        <div class="container">
+    <div class="service-single-area-banner jarallax" data-jarallax='{"speed": 0.3}' style="position:relative; display:flex; align-items:flex-end;">
+        <!-- dark overlay -->
+        <div style="position:absolute; inset:0; background:rgba(8,15,46,0.55); z-index:1;"></div>
+        <div class="container" style="position:relative; z-index:2; padding-bottom:40px;">
             <div class="bread-plug wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s" style="margin-bottom:12px;">
                 <a href="{% url 'main:home' %}" style="color:var(--accent); text-decoration:none;">Home</a>
                 <i class="fa-regular fa-chevron-right" style="color:var(--grey); margin:0 8px; font-size:11px;"></i>
@@ -21,6 +22,24 @@
             <h1 style="font-family:'DM Serif Display', serif; color:var(--white); font-size:clamp(2rem,5vw,3rem); margin:0;">
                 {{ service.name }}
             </h1>
+        </div>
+    </div>
+</div>
+
+<!-- Mid image pair -->
+<div class="service-image-mid-iamge-jarallax-area">
+    <div class="container-large">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <div class="thumbnail-area-large-service-detaile-mid jarallax jara-mask-1" data-jarallax='{"speed": 0.2}'>
+                    <img class="jarallax-img" src="{% static 'images/service/07.webp' %}" alt="{{ service.name }}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="thumbnail-area-large-service-detaile-mid jarallax jara-mask-1" data-jarallax='{"speed": 0.2}'>
+                    <img class="jarallax-img" src="{% static 'images/service/08.webp' %}" alt="{{ service.name }} team">
+                </div>
+            </div>
         </div>
     </div>
 </div>

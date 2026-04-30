@@ -6,9 +6,11 @@
 
 {% block content %}
 
-<!-- Page Banner -->
-<div class="about-banner-area-bg jarallax" style="background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-mid) 100%); min-height: 320px; display:flex; align-items:center; position:relative; overflow:hidden;">
-    <div class="container" style="position:relative; z-index:2;">
+<!-- Page Banner — CSS class handles background-image: about/01.webp -->
+<div class="about-banner-area-bg jarallax" data-jarallax='{"speed": 0.3}' style="position:relative;">
+    <!-- dark overlay for text readability -->
+    <div style="position:absolute; inset:0; background:rgba(8,15,46,0.60); z-index:1;"></div>
+    <div class="container" style="position:relative; z-index:2; padding-top:80px;">
         <div class="row">
             <div class="col-lg-12">
                 <div class="bread-plug wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s" style="margin-bottom:16px;">
@@ -22,10 +24,6 @@
                 </h1>
             </div>
         </div>
-    </div>
-    <div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;">
-        <span style="position:absolute; top:20%; left:10%; width:8px; height:8px; border-radius:50%; background:var(--accent); opacity:.3; animation:float 4s ease-in-out infinite;"></span>
-        <span style="position:absolute; top:60%; left:80%; width:5px; height:5px; border-radius:50%; background:var(--accent); opacity:.2; animation:float 6s ease-in-out infinite;"></span>
     </div>
 </div>
 
@@ -120,6 +118,24 @@
     </div>
 </div>
 
+<!-- Mid Image Feature -->
+<div class="rts-image-feature-area">
+    <div class="container-full">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="thumbnail-about-mid jarallax" data-jarallax='{"speed": 0.2}'>
+                    <img class="jarallax-img" src="{% static 'images/about/02.webp' %}" alt="BJP Technologies team at work">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="thumbnail-about-mid jarallax" data-jarallax='{"speed": 0.2}'>
+                    <img class="jarallax-img" src="{% static 'images/about/03.webp' %}" alt="BJP Technologies office environment">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Key Benefits -->
 <div class="keybenefits-area rts-section-gap">
     <div class="container">
@@ -134,7 +150,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="single-benefits-area-wrapper bg-light">
                     <div class="icon">
-                        <i class="fa-regular fa-shield-halved" style="font-size:28px; color:var(--navy);"></i>
+                        <img src="{% static 'images/about/icons/01.svg' %}" alt="Enterprise Security">
                     </div>
                     <h5 class="title">Enterprise Security</h5>
                 </div>
@@ -142,7 +158,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="single-benefits-area-wrapper">
                     <div class="icon">
-                        <i class="fa-regular fa-chart-line" style="font-size:28px; color:var(--navy);"></i>
+                        <img src="{% static 'images/about/icons/02.svg' %}" alt="Scalable Solutions">
                     </div>
                     <h5 class="title">Scalable Solutions</h5>
                 </div>
@@ -150,7 +166,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="single-benefits-area-wrapper bg-light">
                     <div class="icon">
-                        <i class="fa-regular fa-clock" style="font-size:28px; color:var(--navy);"></i>
+                        <img src="{% static 'images/about/icons/03.svg' %}" alt="24/7 Support">
                     </div>
                     <h5 class="title">24/7 Support</h5>
                 </div>
@@ -158,7 +174,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="single-benefits-area-wrapper">
                     <div class="icon">
-                        <i class="fa-regular fa-code" style="font-size:28px; color:var(--navy);"></i>
+                        <img src="{% static 'images/about/icons/04.svg' %}" alt="Local Expertise">
                     </div>
                     <h5 class="title">Local Expertise</h5>
                 </div>
@@ -166,7 +182,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="single-benefits-area-wrapper">
                     <div class="icon">
-                        <i class="fa-regular fa-cloud" style="font-size:28px; color:var(--navy);"></i>
+                        <img src="{% static 'images/about/icons/05.svg' %}" alt="Cloud-Native">
                     </div>
                     <h5 class="title">Cloud-Native</h5>
                 </div>
@@ -174,7 +190,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="single-benefits-area-wrapper bg-light">
                     <div class="icon">
-                        <i class="fa-regular fa-money-bill-wave" style="font-size:28px; color:var(--navy);"></i>
+                        <img src="{% static 'images/about/icons/06.svg' %}" alt="Mobile Payments">
                     </div>
                     <h5 class="title">Mobile Payments</h5>
                 </div>
@@ -182,7 +198,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="single-benefits-area-wrapper">
                     <div class="icon">
-                        <i class="fa-regular fa-handshake" style="font-size:28px; color:var(--navy);"></i>
+                        <img src="{% static 'images/about/icons/07.svg' %}" alt="Trusted Partners">
                     </div>
                     <h5 class="title">Trusted Partners</h5>
                 </div>
@@ -190,7 +206,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="single-benefits-area-wrapper bg-light">
                     <div class="icon">
-                        <i class="fa-regular fa-arrows-spin" style="font-size:28px; color:var(--navy);"></i>
+                        <img src="{% static 'images/about/icons/08.svg' %}" alt="Agile Delivery">
                     </div>
                     <h5 class="title">Agile Delivery</h5>
                 </div>
