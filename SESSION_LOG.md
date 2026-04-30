@@ -382,3 +382,104 @@ TEMPLATE FOR NEXT SESSION — copy this block and fill in:
 
 ---
 -->
+
+---
+
+## Session 5 — 2026-04-30 EAT
+
+**Goal:** Build all Phase 3 content pages — models, templates, seed command, and tests.
+**Branch:** feature/phase-3-content-pages
+**Status:** ✅ Complete
+**Phase:** Phase 3 — Content Pages
+
+### What Was Done
+- Added `BaseModel` (abstract UUID pk + timestamps) to `apps/core/models.py`
+- Built `Service` model: name, slug (auto-gen), tagline, description, bullet_points, icon_svg, order, is_active
+- Built `Industry` model: name, slug (auto-gen), tagline, description, services_offered, image, order, is_active
+- Created migrations for both models (0001_initial)
+- Registered both models in admin with list_display, search_fields, prepopulated_fields, readonly timestamps
+- Created `apps/core/management/commands/seed_content.py` — idempotent, seeds 7 services + 6 industries from company profile
+- Updated `ServicesListView` + `ServiceDetailView` to use real model (added other_services context)
+- Updated `IndustriesListView` + `IndustryDetailView` to use real model
+- Updated `HomeView` to pull industries and featured_services from DB; removed `{% empty %}` fallback
+- Built 5 full page templates using Luminos CSS patterns:
+  - `apps/main/templates/main/about.html` — counter strip, what-we-do-wrapper, keybenefits, service grid, CTA
+  - `apps/services/templates/services/list.html` — service banner + single-service-list rows + CTA
+  - `apps/services/templates/services/detail.html` — service-single-area-banner, service-area-details-wrapper, bullet list, sidebar CTA, other services
+  - `apps/industries/templates/industries/list.html` — rts-career-banner-area, industry cards grid, CTA
+  - `apps/industries/templates/industries/detail.html` — career banner, bg-gradient-one-industry, check-wrapper, 6-card services grid, CTA
+- Fixed `contact:submit` → `contact:contact` across all templates
+- Wrote 37 tests covering model str, slug, helper methods, timestamps; view status codes, templates, context, 404 for invalid/inactive
+
+### Files Changed
+| File | Action | Notes |
+|---|---|---|
+| apps/core/models.py | Modified | Added BaseModel abstract class |
+| apps/core/management/commands/seed_content.py | Created | Seeds 7 services + 6 industries |
+| apps/services/models.py | Created | Service model with auto-slug, get_bullet_list |
+| apps/services/admin.py | Modified | ServiceAdmin with all required fields |
+| apps/services/migrations/0001_initial.py | Created | Service table migration |
+| apps/services/views.py | Modified | Real CBVs replacing TemplateView stubs |
+| apps/services/urls.py | Modified | Wired to new views |
+| apps/services/templates/services/list.html | Modified | Full Luminos-styled template |
+| apps/services/templates/services/detail.html | Modified | Full Luminos-styled template |
+| apps/services/tests/test_models.py | Created | 8 model tests |
+| apps/services/tests/test_views.py | Created | 10 view tests |
+| apps/industries/models.py | Created | Industry model with auto-slug, get_services_list |
+| apps/industries/admin.py | Modified | IndustryAdmin with all required fields |
+| apps/industries/migrations/0001_initial.py | Created | Industry table migration |
+| apps/industries/views.py | Modified | Real CBVs replacing TemplateView stubs |
+| apps/industries/urls.py | Modified | Wired to new views |
+| apps/industries/templates/industries/list.html | Modified | Full Luminos-styled template |
+| apps/industries/templates/industries/detail.html | Modified | Full Luminos-styled template |
+| apps/industries/tests/test_models.py | Created | 8 model tests |
+| apps/industries/tests/test_views.py | Created | 9 view tests |
+| apps/main/templates/main/about.html | Modified | Full About page (was stub) |
+| apps/main/templates/main/home.html | Modified | Removed {% empty %} fallback from industries loop |
+| apps/main/views.py | Modified | HomeView pulls from DB |
+
+### Migrations
+- Migration name: `apps/services/migrations/0001_initial.py`
+- Applied: ❌ No — must be run on cPanel after deploy
+- Migration name: `apps/industries/migrations/0001_initial.py`
+- Applied: ❌ No — must be run on cPanel after deploy
+
+### Tests
+- Tests written: 37
+- Tests passing: 37 / 37
+- Coverage areas: Service model (str, slug, bullet_list, timestamps), Industry model (str, slug, services_list, timestamps), ServicesListView (200, template, active/inactive filter), ServiceDetailView (200, 404, other_services), IndustriesListView (200, template, active/inactive filter), IndustryDetailView (200, 404, context)
+
+### Decisions Made
+- **Decision:** Used `bg-gradient-one-industry` wrapper for industry detail pages, `single-service-list` for services list
+  **Reason:** Matches Luminos reference pages exactly — `industry.html` and `service.html` patterns
+- **Decision:** Service detail sidebar is sticky with contact CTA
+  **Reason:** Encourages lead generation on service pages without a separate page visit
+- **Decision:** `contact:contact` is the correct URL name (not `contact:submit` as initially assumed)
+  **Reason:** The contact app defines `name="contact"` in its urlpatterns
+
+### Blockers / Issues
+- None
+
+### Phase 3 Deliverables Completed
+- [x] `apps/services/` — Service model, list + detail views, templates
+- [x] `apps/industries/` — Industry model, list + detail views, templates
+- [x] `apps/main/templates/main/about.html` — full About page
+- [x] 7 services seeded via seed_content command
+- [x] 6 industries seeded via seed_content command
+- [x] HomeView pulls from DB, no fallback needed
+- [x] All pages use Luminos CSS patterns
+
+### Deploy Steps Required on cPanel After Merge
+1. `git pull origin main`
+2. `manage.py migrate --no-input` ← runs Service + Industry migrations
+3. `manage.py seed_content` ← seeds 7 services + 6 industries
+4. `manage.py collectstatic --no-input`
+5. Touch `tmp/restart.txt`
+
+### Next Session Should
+- [ ] Merge feature/phase-3-content-pages → develop → main
+- [ ] Deploy to cPanel and run the 4 commands above
+- [ ] Verify all pages live: /about/, /services/, /services/<slug>/, /industries/, /industries/<slug>/
+- [ ] Start Phase 4 — Contact System
+
+---

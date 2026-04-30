@@ -1,5 +1,127 @@
 {% extends 'core/base.html' %}
-{% block title %}Services{% endblock %}
+{% load static %}
+
+{% block title %}{{ service.name }} — BJP Technologies (T) Limited{% endblock %}
+{% block meta_description %}{{ service.tagline }}{% endblock %}
+
 {% block content %}
-<div class="rts-section-gap"><div class="container"><h2>Services — Coming Soon</h2></div></div>
+
+<!-- Service Banner — CSS class handles background-image: service/06.webp -->
+<div class="container-large">
+    <div class="service-single-area-banner jarallax" data-jarallax='{"speed": 0.3}' style="position:relative; display:flex; align-items:flex-end;">
+        <!-- dark overlay -->
+        <div style="position:absolute; inset:0; background:rgba(8,15,46,0.55); z-index:1;"></div>
+        <div class="container" style="position:relative; z-index:2; padding-bottom:40px;">
+            <div class="bread-plug wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s" style="margin-bottom:12px;">
+                <a href="{% url 'main:home' %}" style="color:var(--accent); text-decoration:none;">Home</a>
+                <i class="fa-regular fa-chevron-right" style="color:var(--grey); margin:0 8px; font-size:11px;"></i>
+                <a href="{% url 'services:list' %}" style="color:var(--accent); text-decoration:none;">Services</a>
+                <i class="fa-regular fa-chevron-right" style="color:var(--grey); margin:0 8px; font-size:11px;"></i>
+                <span style="color:var(--white);">{{ service.name }}</span>
+            </div>
+            <h1 style="font-family:'DM Serif Display', serif; color:var(--white); font-size:clamp(2rem,5vw,3rem); margin:0;">
+                {{ service.name }}
+            </h1>
+        </div>
+    </div>
+</div>
+
+<!-- Mid image pair -->
+<div class="service-image-mid-iamge-jarallax-area">
+    <div class="container-large">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <div class="thumbnail-area-large-service-detaile-mid jarallax jara-mask-1" data-jarallax='{"speed": 0.2}'>
+                    <img class="jarallax-img" src="{% static 'images/service/07.webp' %}" alt="{{ service.name }}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="thumbnail-area-large-service-detaile-mid jarallax jara-mask-1" data-jarallax='{"speed": 0.2}'>
+                    <img class="jarallax-img" src="{% static 'images/service/08.webp' %}" alt="{{ service.name }} team">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Service Detail Content -->
+<div class="service-area-details-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="inner-content">
+                    <div class="top">
+                        <h2 class="title" style="font-family:'DM Serif Display', serif; color:var(--navy); margin-bottom:16px;">
+                            {{ service.tagline }}
+                        </h2>
+                        <p class="disc">{{ service.description }}</p>
+                    </div>
+
+                    {% if service.get_bullet_list %}
+                    <div class="mid-content mt--40">
+                        <h4 style="color:var(--navy); margin-bottom:20px;">What's Included</h4>
+                        <div class="check-wrapper-main">
+                            <div class="single-wrapper">
+                                <div class="check-wrapper">
+                                    {% for bullet in service.get_bullet_list %}
+                                    <div class="single-check">
+                                        <img src="{% static 'images/service/01.svg' %}" alt="check">
+                                        <p>{{ bullet }}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- Contact CTA sidebar -->
+                <div style="background:var(--off-white); border-radius:12px; padding:32px; border:1px solid var(--grey-light); position:sticky; top:100px;">
+                    <h5 style="font-family:'DM Serif Display', serif; color:var(--navy); margin-bottom:8px;">
+                        Interested in this service?
+                    </h5>
+                    <p style="color:var(--grey); font-size:14px; margin-bottom:24px;">
+                        Get in touch and our team will prepare a tailored proposal for your organisation.
+                    </p>
+                    <a href="{% url 'contact:contact' %}" class="rts-btn btn-primary" style="display:block; text-align:center; margin-bottom:16px;">
+                        Request a Quote
+                    </a>
+                    <a href="tel:+255678290994" style="display:flex; align-items:center; gap:8px; color:var(--navy); text-decoration:none; font-size:14px;">
+                        <i class="fa-regular fa-phone"></i> +255 678 290 994
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Other Services -->
+{% if other_services %}
+<div class="rts-solution-area rts-section-gap bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-style-4-center mb--50">
+                    <h2 class="title wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">Other Services</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for svc in other_services %}
+            <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120">
+                <a href="{% url 'services:detail' slug=svc.slug %}" class="single-service-area-wrapper" style="display:block;">
+                    <div class="info">
+                        <h4 class="title">{{ svc.name }}</h4>
+                        <img class="injectable" src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}
