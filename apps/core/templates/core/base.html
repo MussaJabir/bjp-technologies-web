@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}BJP Technologies (T) Limited — Secure Technology. Scalable Growth. Professional IT solutions in Tanzania.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}IT solutions Tanzania, cybersecurity, cloud, software development, Dar es Salaam{% endblock %}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}BJP Technologies (T) Limited{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Secure Technology. Scalable Growth.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bjptechnologies.co.tz{% block og_url %}{% endblock %}">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/fav.png' %}">
+    <title>{% block title %}BJP Technologies (T) Limited{% endblock %} | Secure Technology. Scalable Growth.</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet preload" href="{% static 'css/vendor/bootstrap.min.css' %}" as="style" media="print" onload="this.media='all'">
+    <link rel="stylesheet preload" href="{% static 'css/plugins/fontawesome.css' %}" as="style" media="print" onload="this.media='all'">
+    <link rel="stylesheet preload" href="{% static 'css/plugins/magnifying-popup.css' %}" as="style" media="print" onload="this.media='all'">
+    <link rel="stylesheet preload" href="{% static 'css/plugins/swiper.css' %}" as="style" media="print" onload="this.media='all'">
+    <link rel="stylesheet preload" href="{% static 'css/plugins/metismenu.css' %}" as="style" media="print" onload="this.media='all'">
+
+    <!-- Main CSS (Luminos base, BJP recolored) -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- BJP Brand Overrides -->
+    <link rel="stylesheet" href="{% static 'css/bjp.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+{% include 'core/navbar.html' %}
+
+{% block content %}{% endblock %}
+
+{% include 'core/footer.html' %}
+
+<!-- Pre-loader -->
+<div class="loader-wrapper">
+    <div class="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+
+<!-- Mobile sidebar menu -->
+<div id="side-bar" class="side-bar header-two" dir="ltr">
+    <button class="close-icon-menu" aria-label="Close menu"><i class="far fa-times"></i></button>
+    <div class="mobile-menu-main">
+        <nav class="nav-main mainmenu-nav mt--30">
+            <ul class="mainmenu metismenu" id="mobile-menu-active">
+                <li>
+                    <a href="{% url 'main:home' %}" class="main">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'main:about' %}" class="main">About</a>
+                </li>
+                <li class="has-droupdown">
+                    <a href="#" class="main">Services</a>
+                    <ul class="submenu mm-collapse">
+                        <li><a href="{% url 'services:list' %}">All Services</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'industries:list' %}" class="main">Industries</a>
+                </li>
+                <li>
+                    <a href="{% url 'contact:contact' %}" class="main">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="rts-social-border-area right-sidebar mt--80">
+            <ul>
+                <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                <li><a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="anywhere-home"></div>
+
+<!-- Scroll-to-top -->
+<div class="progress-wrap">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+            style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
+        </path>
+    </svg>
+</div>
+
+<!-- JS -->
+<script defer src="{% static 'js/plugins/jquery.js' %}"></script>
+<script defer src="{% static 'js/vendor/waw.js' %}"></script>
+<script defer src="{% static 'js/vendor/jarallax.js' %}"></script>
+<script defer src="{% static 'js/plugins/smooth-scroll.js' %}"></script>
+<script defer src="{% static 'js/plugins/counter-up.js' %}"></script>
+<script defer src="{% static 'js/vendor/waypoint.js' %}"></script>
+<script defer src="{% static 'js/plugins/popup.js' %}"></script>
+<script defer src="{% static 'js/plugins/swiper.js' %}"></script>
+<script defer src="{% static 'js/plugins/svg-inject.js' %}"></script>
+<script defer src="{% static 'js/plugins/metismenu.js' %}"></script>
+<script defer src="{% static 'js/vendor/contact-form.js' %}"></script>
+<script defer src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+<script defer src="{% static 'js/main.js' %}"></script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>
