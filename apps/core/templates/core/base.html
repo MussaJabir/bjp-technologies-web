@@ -13,8 +13,10 @@
     <meta property="og:description" content="{% block og_description %}Secure Technology. Scalable Growth.{% endblock %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bjptechnologies.co.tz{% block og_url %}{% endblock %}">
+    <meta property="og:image" content="https://bjptechnologies.co.tz{% static 'images/logo/bjp-app-icon-512-navy.png' %}">
 
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo/bjp-favicon-32.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/logo/bjp-favicon-32.png' %}">
+    <link rel="icon" type="image/png" sizes="64x64" href="{% static 'images/logo/bjp-favicon-64.png' %}">
     <link rel="apple-touch-icon" href="{% static 'images/logo/bjp-favicon-256.png' %}">
     <title>{% block title %}BJP Technologies (T) Limited{% endblock %} | Secure Technology. Scalable Growth.</title>
 
@@ -58,6 +60,9 @@
 <div id="side-bar" class="side-bar header-two" dir="ltr">
     <button class="close-icon-menu" aria-label="Close menu"><i class="far fa-times"></i></button>
     <div class="mobile-menu-main">
+        <div class="logo-mobile-sidebar" style="padding: 20px 0 10px;">
+            <img src="{% static 'images/logo/bjp-mark-transparent.png' %}" alt="BJP Technologies" style="height:48px; width:auto;">
+        </div>
         <nav class="nav-main mainmenu-nav mt--30">
             <ul class="mainmenu metismenu" id="mobile-menu-active">
                 <li>
