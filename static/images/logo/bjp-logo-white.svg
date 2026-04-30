@@ -1,0 +1,28 @@
+<svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- BJP dot-grid icon: white version for dark backgrounds -->
+  <circle cx="8"  cy="8"  r="3.5" fill="#00C6FF"/>
+  <circle cx="20" cy="8"  r="3.5" fill="#FFFFFF"/>
+  <circle cx="32" cy="8"  r="3.5" fill="#FFFFFF"/>
+  <circle cx="8"  cy="20" r="3.5" fill="#FFFFFF"/>
+  <circle cx="20" cy="20" r="3.5" fill="#00C6FF"/>
+  <circle cx="32" cy="20" r="3.5" fill="#FFFFFF"/>
+  <circle cx="8"  cy="32" r="3.5" fill="#FFFFFF"/>
+  <circle cx="20" cy="32" r="3.5" fill="#FFFFFF"/>
+  <circle cx="32" cy="32" r="3.5" fill="#00C6FF"/>
+  <!-- Connecting lines -->
+  <line x1="8"  y1="8"  x2="20" y2="8"  stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="20" y1="8"  x2="32" y2="8"  stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="8"  y1="20" x2="20" y2="20" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="20" y1="20" x2="32" y2="20" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="8"  y1="32" x2="20" y2="32" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="20" y1="32" x2="32" y2="32" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="8"  y1="8"  x2="8"  y2="20" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="8"  y1="20" x2="8"  y2="32" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="20" y1="8"  x2="20" y2="20" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="20" y1="20" x2="20" y2="32" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="32" y1="8"  x2="32" y2="20" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="32" y1="20" x2="32" y2="32" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+  <!-- BJP text -->
+  <text x="46" y="20" font-family="'Outfit', sans-serif" font-weight="700" font-size="16" fill="#FFFFFF" letter-spacing="1">BJP TECHNOLOGIES</text>
+  <text x="46" y="36" font-family="'Outfit', sans-serif" font-weight="400" font-size="10" fill="rgba(255,255,255,0.6)" letter-spacing="2">(T) LIMITED</text>
+</svg>

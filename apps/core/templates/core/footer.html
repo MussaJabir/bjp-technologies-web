@@ -1,0 +1,109 @@
+{% load static %}
+
+<!-- CTA Banner -->
+<div class="rts-cta-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cta-main-wrapper-area-four rts-section-gap">
+                    <div class="inner">
+                        <h3 class="title wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
+                            Ready to Transform Your Business?
+                        </h3>
+                        <p class="disc wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
+                            Schedule a free consultation with our team. We'll assess your needs
+                            and recommend the right technology solutions for your organisation.
+                        </p>
+                        <a href="{% url 'contact:contact' %}" class="rts-btn btn-primary btn-bold wow fadeInUp"
+                           data-wow-offset="120" data-wow-delay=".6s">Get Free Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer — original Luminos light gradient style -->
+<div class="gradient-footer-wrapper">
+    <div class="rts-footer-area rts-section-gapTop pb--80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="logo-area">
+                        <a href="{% url 'main:home' %}" class="logo">
+                            <img src="{% static 'images/logo/bjp-logo.svg' %}" alt="BJP Technologies (T) Limited">
+                        </a>
+                        <p class="disc">
+                            BJP Technologies (T) Limited is Tanzania's trusted IT partner — delivering
+                            secure, scalable technology solutions to businesses across East Africa.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row g-5">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="single-nav-area-footer">
+                                <p class="parent">Services</p>
+                                <ul>
+                                    <li><a href="{% url 'services:detail' slug='software-development' %}">Software Development</a></li>
+                                    <li><a href="{% url 'services:detail' slug='website-digital-solutions' %}">Website &amp; Digital</a></li>
+                                    <li><a href="{% url 'services:detail' slug='cloud-infrastructure' %}">Cloud &amp; Infrastructure</a></li>
+                                    <li><a href="{% url 'services:detail' slug='cybersecurity' %}">Cybersecurity</a></li>
+                                    <li><a href="{% url 'services:detail' slug='managed-it-services' %}">Managed IT Services</a></li>
+                                    <li><a href="{% url 'services:detail' slug='payment-system-integrations' %}">Payment Integrations</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="single-nav-area-footer">
+                                <p class="parent">Industries</p>
+                                <ul>
+                                    <li><a href="{% url 'industries:detail' slug='startups-smes' %}">Startups &amp; SMEs</a></li>
+                                    <li><a href="{% url 'industries:detail' slug='financial-institutions' %}">Financial Institutions</a></li>
+                                    <li><a href="{% url 'industries:detail' slug='ngos-development' %}">NGOs &amp; Development</a></li>
+                                    <li><a href="{% url 'industries:detail' slug='education' %}">Education</a></li>
+                                    <li><a href="{% url 'industries:detail' slug='healthcare' %}">Healthcare</a></li>
+                                    <li><a href="{% url 'industries:detail' slug='retail-wholesale' %}">Retail &amp; Wholesale</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="single-nav-area-footer">
+                                <p class="parent">Contact</p>
+                                <ul>
+                                    <li><a href="{% url 'main:about' %}">About Us</a></li>
+                                    <li><a href="{% url 'contact:contact' %}">Contact</a></li>
+                                    <li><a href="mailto:info@bjptechnologies.co.tz">info@bjptechnologies.co.tz</a></li>
+                                    <li><a href="tel:+255678290994">+255 678 290 994</a></li>
+                                    <li><a href="#">Ubungo, Dar es Salaam</a></li>
+                                    <li><a href="#">P.O Box 7276, Mbezi</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="rts-copyright-area-one">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright-wrapper">
+                        <p>© {% now "Y" %} BJP Technologies (T) Limited. All rights reserved.</p>
+                        <div class="social-copyright-area">
+                            <ul>
+                                <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+                                <li><a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
+                                <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
