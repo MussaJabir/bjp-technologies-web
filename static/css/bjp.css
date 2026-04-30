@@ -1,0 +1,46 @@
+/* BJP Technologies (T) Limited — Brand Additions
+   Rules here ONLY add BJP identity on top of the intact Luminos base.
+   No overrides of Luminos layout, colors, fonts, or footer styling.
+*/
+
+/* ── Logo sizing ── */
+.header-area-four .logo img {
+  height: 40px;
+  width: auto;
+}
+
+.rts-footer-area .logo img {
+  height: 40px;
+  width: auto;
+}
+
+/* ── Sticky header: BJP navy (replaces Luminos default dark) ── */
+.header-area-four.sticky {
+  background: #0D1B4B !important;
+}
+
+/* ── CTA banner before footer: BJP navy ── */
+.rts-cta-area {
+  background: #0D1B4B;
+}
+
+/* ── Primary button: BJP navy instead of purple ── */
+.rts-btn.btn-primary {
+  background: #0D1B4B;
+  border-color: #0D1B4B;
+  color: #fff;
+}
+
+.rts-btn.btn-primary:hover {
+  color: #0D1B4B;
+}
+
+/* btn-border hover ripple: BJP navy */
+.rts-btn.btn-border::after {
+  background-color: #0D1B4B;
+}
+
+/* ── Scroll-to-top progress circle: cyan ── */
+.progress-wrap svg path {
+  stroke: #00C6FF;
+}

@@ -7,6 +7,6 @@ def company_info(request):
             "phone": "+255 678 290 994",
             "address": "Ubungo – Dar es Salaam, Tanzania",
             "postal": "P.O Box 7276, Msakuzi – Mbezi",
-            "domain": "technologies.bejundas.co.tz",
+            "domain": "bjptechnologies.co.tz",
         }
     }

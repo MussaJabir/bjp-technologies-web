@@ -1,0 +1,59 @@
+{% load static %}
+<header class="header-area-four header--sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="header-four-wrapper">
+                    <a href="{% url 'main:home' %}" class="logo">
+                        <img src="{% static 'images/logo/bjp-logo-white.svg' %}" alt="BJP Technologies (T) Limited" style="height:40px; width:auto;">
+                    </a>
+                    <div class="nav-area">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                                       href="{% url 'main:home' %}">Home</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                                       href="{% url 'main:about' %}">About</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a class="nav-link" href="{% url 'services:list' %}">
+                                        Services
+                                        <i class="fa-duotone fa-regular fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="submenu parent-nav with-border">
+                                        <li><a href="{% url 'services:detail' slug='software-development' %}"><i class="fa-sharp fa-regular fa-chevron-right"></i> Software Development</a></li>
+                                        <li><a href="{% url 'services:detail' slug='website-digital-solutions' %}"><i class="fa-sharp fa-regular fa-chevron-right"></i> Website &amp; Digital</a></li>
+                                        <li><a href="{% url 'services:detail' slug='cloud-infrastructure' %}"><i class="fa-sharp fa-regular fa-chevron-right"></i> Cloud &amp; Infrastructure</a></li>
+                                        <li><a href="{% url 'services:detail' slug='cybersecurity' %}"><i class="fa-sharp fa-regular fa-chevron-right"></i> Cybersecurity</a></li>
+                                        <li><a href="{% url 'services:detail' slug='managed-it-services' %}"><i class="fa-sharp fa-regular fa-chevron-right"></i> Managed IT Services</a></li>
+                                        <li><a href="{% url 'services:detail' slug='payment-system-integrations' %}"><i class="fa-sharp fa-regular fa-chevron-right"></i> Payment Integrations</a></li>
+                                        <li><a href="{% url 'services:detail' slug='it-consulting-advisory' %}"><i class="fa-sharp fa-regular fa-chevron-right"></i> IT Consulting</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="{% url 'industries:list' %}">Industries</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                                       href="{% url 'contact:contact' %}">Contact</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="button-area-right-header">
+                        <div class="menu-btn-toggle" id="menu-btn">
+                            <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect y="14" width="20" height="2" fill="#ffffff"></rect>
+                                <rect y="7" width="20" height="2" fill="#ffffff"></rect>
+                                <rect width="20" height="2" fill="#ffffff"></rect>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

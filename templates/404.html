@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Page Not Found{% endblock %}
+
+{% block content %}
+<div class="rts-section-gap" style="min-height:60vh; display:flex; align-items:center;">
+    <div class="container text-center">
+        <h1 style="font-size:8rem; font-family:'DM Serif Display',serif; color:var(--navy); line-height:1;">404</h1>
+        <h3 style="font-family:'DM Serif Display',serif; color:var(--navy);">Page Not Found</h3>
+        <p style="color:var(--grey); margin:20px auto; max-width:480px;">
+            The page you are looking for doesn't exist or has been moved.
+        </p>
+        <a href="{% url 'main:home' %}" class="rts-btn btn-primary btn-bold mt--20">Back to Home</a>
+    </div>
+</div>
+{% endblock %}
