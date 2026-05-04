@@ -1,5 +1,231 @@
 {% extends 'core/base.html' %}
-{% block title %}Contact Us{% endblock %}
+{% load static %}
+
+{% block title %}Contact Us — BJP Technologies (T) Limited{% endblock %}
+{% block meta_description %}Get in touch with BJP Technologies. Submit an enquiry about our IT services, request a consultation, or reach our team in Dar es Salaam, Tanzania.{% endblock %}
+
 {% block content %}
-<div class="rts-section-gap"><div class="container"><h2>Contact — Coming Soon</h2></div></div>
+
+<!-- Contact Banner -->
+<div class="contact-page-banner jarallax bg_iamge" data-jarallax='{"speed": 0.4}'
+     style="background-image: url('{% static "images/contact/01.webp" %}'); min-height: 320px; display:flex; align-items:center; position:relative;">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,15,46,0.82) 0%,rgba(13,27,75,0.70) 100%);"></div>
+    <div class="container" style="position:relative;z-index:2;">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bread-plug wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s" style="margin-bottom:16px;">
+                    <a href="{% url 'main:home' %}" style="color:var(--accent); text-decoration:none;">Home</a>
+                    <i class="fa-regular fa-chevron-right" style="color:var(--grey); margin:0 8px; font-size:11px;"></i>
+                    <span style="color:var(--white);">Contact</span>
+                </div>
+                <h1 class="wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s"
+                    style="font-family:'DM Serif Display',serif; color:var(--white); font-size:clamp(2rem,5vw,3rem); margin:0 0 16px;">
+                    Get in Touch
+                </h1>
+                <p class="wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s"
+                   style="color:var(--grey-light); max-width:520px; margin:0;">
+                    Have a project in mind? Tell us about it — we'll get back to you within 1–2 business days.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Info Cards -->
+<div class="rts-section-gapTop">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
+                <div class="single-location-area-contact text-center"
+                     style="background:var(--off-white); border-radius:12px; padding:40px 30px; height:100%;">
+                    <div class="icon" style="color:var(--navy); font-size:32px; margin-bottom:16px;">
+                        <i class="fa-sharp fa-regular fa-location-dot"></i>
+                    </div>
+                    <p style="font-weight:600; color:var(--navy); margin-bottom:8px;">Office Address</p>
+                    <span style="color:var(--text-body); line-height:1.7;">
+                        Ubungo, Dar es Salaam<br>
+                        P.O Box 7276, Msakuzi – Mbezi<br>
+                        Tanzania
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-offset="120" data-wow-delay=".35s">
+                <div class="single-location-area-contact text-center"
+                     style="background:var(--off-white); border-radius:12px; padding:40px 30px; height:100%;">
+                    <div class="icon" style="color:var(--navy); font-size:32px; margin-bottom:16px;">
+                        <i class="fa-sharp fa-regular fa-phone"></i>
+                    </div>
+                    <p style="font-weight:600; color:var(--navy); margin-bottom:8px;">Phone</p>
+                    <span style="color:var(--text-body); line-height:1.7;">
+                        <a href="tel:+255678290994" style="color:inherit; text-decoration:none;">+255 678 290 994</a><br>
+                        Mon – Sat &nbsp;|&nbsp; 8 AM – 6 PM EAT
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-offset="120" data-wow-delay=".5s">
+                <div class="single-location-area-contact text-center"
+                     style="background:var(--off-white); border-radius:12px; padding:40px 30px; height:100%;">
+                    <div class="icon" style="color:var(--navy); font-size:32px; margin-bottom:16px;">
+                        <i class="fa-sharp fa-regular fa-envelope"></i>
+                    </div>
+                    <p style="font-weight:600; color:var(--navy); margin-bottom:8px;">Email</p>
+                    <span style="color:var(--text-body); line-height:1.7;">
+                        <a href="mailto:info@bjptechnologies.co.tz" style="color:inherit; text-decoration:none;">
+                            info@bjptechnologies.co.tz
+                        </a><br>
+                        We reply within 1–2 business days
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Form -->
+<div class="contact-area-form-wrapper rts-section-gap">
+    <div class="container-contact">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center-title-bg-white">
+                    <h2 class="title">Send Us a Message</h2>
+                    <p>Fill out the form below and a member of our team will get back to you shortly.</p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+
+                {% if form.non_field_errors %}
+                <div class="alert" role="alert"
+                     style="background:#fff3cd; border:1px solid #ffc107; border-radius:8px; padding:16px 20px; margin-bottom:24px; color:#7a4c00;">
+                    {% for error in form.non_field_errors %}
+                        <p style="margin:0;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form class="contact-form" method="post" action="{% url 'contact:contact' %}" novalidate>
+                    {% csrf_token %}
+
+                    <div class="half-input-wrapper">
+                        <div class="single">
+                            <label for="id_first_name">First name <span style="color:#e53935;">*</span></label>
+                            <input type="text"
+                                   id="id_first_name"
+                                   name="first_name"
+                                   value="{{ form.first_name.value|default:'' }}"
+                                   placeholder="First name"
+                                   required
+                                   {% if form.first_name.errors %}style="border-color:#e53935;"{% endif %}>
+                            {% if form.first_name.errors %}
+                            <span style="color:#e53935; font-size:13px;">{{ form.first_name.errors.0 }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="single">
+                            <label for="id_last_name">Last name <span style="color:#e53935;">*</span></label>
+                            <input type="text"
+                                   id="id_last_name"
+                                   name="last_name"
+                                   value="{{ form.last_name.value|default:'' }}"
+                                   placeholder="Last name"
+                                   required
+                                   {% if form.last_name.errors %}style="border-color:#e53935;"{% endif %}>
+                            {% if form.last_name.errors %}
+                            <span style="color:#e53935; font-size:13px;">{{ form.last_name.errors.0 }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="single">
+                        <label for="id_email">Email address <span style="color:#e53935;">*</span></label>
+                        <input type="email"
+                               id="id_email"
+                               name="email"
+                               value="{{ form.email.value|default:'' }}"
+                               placeholder="you@company.com"
+                               required
+                               {% if form.email.errors %}style="border-color:#e53935;"{% endif %}>
+                        {% if form.email.errors %}
+                        <span style="color:#e53935; font-size:13px;">{{ form.email.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="half-input-wrapper">
+                        <div class="single">
+                            <label for="id_phone">Phone number</label>
+                            <input type="text"
+                                   id="id_phone"
+                                   name="phone"
+                                   value="{{ form.phone.value|default:'' }}"
+                                   placeholder="+255 6XX XXX XXX">
+                        </div>
+                        <div class="single">
+                            <label for="id_company">Company / Organisation</label>
+                            <input type="text"
+                                   id="id_company"
+                                   name="company"
+                                   value="{{ form.company.value|default:'' }}"
+                                   placeholder="Your company name">
+                        </div>
+                    </div>
+
+                    <div class="single">
+                        <label for="id_service">Service of interest</label>
+                        <select id="id_service" name="service"
+                                style="width:100%; padding:14px 18px; border:1px solid #e0e0e0; border-radius:8px;
+                                       font-family:'Outfit',sans-serif; font-size:15px; color:var(--text-body);
+                                       background:#fff; appearance:none; background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A94B0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\"); background-repeat:no-repeat; background-position:right 16px center;">
+                            <option value="">Select a service (optional)</option>
+                            {% for service in form.service.field.queryset %}
+                            <option value="{{ service.pk }}"
+                                {% if form.service.value|stringformat:"s" == service.pk|stringformat:"s" %}selected{% endif %}>
+                                {{ service.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="single">
+                        <label for="id_message">Your message <span style="color:#e53935;">*</span></label>
+                        <textarea id="id_message"
+                                  name="message"
+                                  placeholder="Tell us about your project or enquiry..."
+                                  rows="6"
+                                  required
+                                  {% if form.message.errors %}style="border-color:#e53935;"{% endif %}>{{ form.message.value|default:'' }}</textarea>
+                        {% if form.message.errors %}
+                        <span style="color:#e53935; font-size:13px;">{{ form.message.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="rts-btn btn-primary">
+                        Send Message
+                        <i class="fa-regular fa-paper-plane" style="margin-left:8px;"></i>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Google Map — Dar es Salaam / Ubungo -->
+<div class="rts-google-map-area rts-section-gapTop">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="google-map-wrapper" style="border-radius:12px; overflow:hidden;">
+                    <iframe
+                        src="https://www.google.com/maps?q=-6.750417,39.090111&z=17&output=embed"
+                        width="100%" height="420" style="border:0; display:block;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="BJP Technologies office location — Msakuzi, Mbezi, Dar es Salaam">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom spacing -->
+<div class="pb--80"></div>
+
 {% endblock %}

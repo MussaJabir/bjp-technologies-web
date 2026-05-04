@@ -483,3 +483,85 @@ TEMPLATE FOR NEXT SESSION — copy this block and fill in:
 - [ ] Start Phase 4 — Contact System
 
 ---
+
+## Session 6 — 2026-05-04 EAT
+
+**Goal:** Build Phase 4 — complete contact system with model, form, views, email notifications, admin, templates, and tests.
+**Branch:** feature/phase-4-contact-system
+**Status:** ✅ Complete
+**Phase:** Phase 4 — Contact System
+
+### What Was Done
+- Created `ContactEnquiry` model (inherits BaseModel) with 10 fields: first_name, last_name, email, phone, company, service (FK → Service), message, ip_address, status (new/read/replied), timestamps
+- Created `ContactForm` (ModelForm) with service dropdown from active Service records, message minimum-length validation (10 chars), and strip on name fields
+- Created `ContactView` (FormView): IP capture (X-Forwarded-For aware), IP-based rate limiting (5 submissions per 30 min), saves enquiry, sends notification email to info@bjptechnologies.co.tz via EmailMessage with reply-to set, sends confirmation email to submitter
+- Created `ContactSuccessView` (TemplateView) 
+- Created `ContactEnquiryAdmin` with list_display, list_filter, search_fields, list_editable status, readonly meta fields, fieldsets
+- Updated `urls.py` — replaced TemplateView stubs with real views
+- Built full `contact.html` template: jarallax banner, 3 info cards (address/phone/email), Luminos contact-form structure with all 7 fields, inline field errors, non-field error block, Google Map (Dar es Salaam / Ubungo coordinates)
+- Built `success.html` template: navy circle check icon, confirmation message, Back to Home + Explore Services buttons, phone fallback card
+- Created migration `0001_initial` and applied locally
+- Wrote 30 tests: 8 model, 10 form, 12 view (GET, POST valid/invalid, IP capture, rate limit block, rate limit window reset)
+- All 67 tests across entire project pass
+- ruff and black pass clean
+
+### Files Changed
+| File | Action | Notes |
+|---|---|---|
+| apps/contact/models.py | Created | ContactEnquiry model with BaseModel, FK to Service |
+| apps/contact/forms.py | Created | ContactForm with service dropdown + message validation |
+| apps/contact/views.py | Created | ContactView + ContactSuccessView + email methods |
+| apps/contact/admin.py | Created | ContactEnquiryAdmin with full configuration |
+| apps/contact/urls.py | Modified | Real views replacing TemplateView stubs |
+| apps/contact/migrations/0001_initial.py | Created | ContactEnquiry table |
+| apps/contact/templates/contact/contact.html | Modified | Full Luminos-styled contact page |
+| apps/contact/templates/contact/success.html | Modified | Branded success page |
+| apps/contact/tests/test_models.py | Created | 8 model tests |
+| apps/contact/tests/test_forms.py | Created | 10 form tests |
+| apps/contact/tests/test_views.py | Created | 12 view tests |
+| docs/generate_phase3_report.py | Modified | black formatting only |
+
+### Migrations
+- Migration name: `apps/contact/migrations/0001_initial.py`
+- Applied: ✅ Yes — locally (SQLite dev db)
+- Applied: ❌ No — cPanel production (run after deploy)
+
+### Tests
+- Tests written: 30
+- Tests passing: 67 / 67 (full project suite)
+- Coverage areas: ContactEnquiry str/full_name/status default/optional fields/FK null/timestamps/ordering; ContactForm valid/invalid/required fields/message length/optional service; ContactView GET/POST redirect/DB save/IP capture/status default/invalid data/rate limit block/rate limit window
+
+### Decisions Made
+- **Decision:** IP-based rate limiting implemented in the view using DB query (no external library).
+  **Reason:** No django-ratelimit or caching layer is set up. Simple DB query counting submissions from same IP in last 30 minutes is sufficient for a corporate contact form with low submission volume.
+- **Decision:** Email uses `EmailMessage` (not `send_mail`) with `reply_to` set to the submitter's email.
+  **Reason:** `send_mail` does not support `reply_to`. This lets `info@bjptechnologies.co.tz` reply directly to the enquirer with one click.
+- **Decision:** Both email methods use `fail_silently=True`.
+  **Reason:** Email delivery failure should not block the user from seeing the success page or the enquiry being saved to the database. Admin can see all enquiries regardless.
+
+### Blockers / Issues
+- None
+
+### Phase 4 Deliverables Completed
+- [x] `apps/contact/` — ContactEnquiry model, form, view, template
+- [x] Form validates all fields correctly
+- [x] On submit: saves to DB, sends email to info@bjptechnologies.co.tz
+- [x] Confirmation email sent to submitter
+- [x] Admin panel shows enquiries with status management
+- [x] Contact success page
+- [x] Rate limiting on form submission (5/30 min per IP)
+
+### Deploy Steps Required on cPanel After Merge
+1. `git pull origin main`
+2. `manage.py migrate --no-input` ← runs ContactEnquiry migration
+3. `manage.py seed_content` ← (if not already run from Phase 3)
+4. `manage.py collectstatic --no-input`
+5. Touch `tmp/restart.txt`
+
+### Next Session Should
+- [ ] Merge feature/phase-4-contact-system → develop → main via PR
+- [ ] Deploy to cPanel (migrate + collectstatic + restart)
+- [ ] Verify /contact/ form submits and saves to admin
+- [ ] Start Phase 5 — Admin & CMS (admin branding, rich admin config, content management)
+
+---

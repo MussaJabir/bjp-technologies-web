@@ -1,9 +1,10 @@
 from django.urls import path
-from django.views.generic import TemplateView
+
+from . import views
 
 app_name = "contact"
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="contact/contact.html"), name="contact"),
-    path("success/", TemplateView.as_view(template_name="contact/success.html"), name="success"),
+    path("", views.ContactView.as_view(), name="contact"),
+    path("success/", views.ContactSuccessView.as_view(), name="success"),
 ]

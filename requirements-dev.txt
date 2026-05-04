@@ -5,3 +5,4 @@ factory-boy==3.3.3
 ruff==0.11.9
 black==25.1.0
 pip-audit==2.9.0
+cryptography==44.0.3

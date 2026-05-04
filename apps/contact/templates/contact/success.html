@@ -1,5 +1,66 @@
 {% extends 'core/base.html' %}
-{% block title %}Message Sent{% endblock %}
+{% load static %}
+
+{% block title %}Message Sent — BJP Technologies (T) Limited{% endblock %}
+{% block meta_description %}Your enquiry has been received. The BJP Technologies team will be in touch within 1–2 business days.{% endblock %}
+
 {% block content %}
-<div class="rts-section-gap"><div class="container text-center"><h2>Thank you! We'll be in touch soon.</h2><a href="/" class="rts-btn btn-primary mt--20">Back to Home</a></div></div>
+
+<div class="rts-section-gap">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-10 text-center wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
+
+                <!-- Icon -->
+                <div style="width:96px; height:96px; border-radius:50%; background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 100%);
+                            display:flex; align-items:center; justify-content:center; margin:0 auto 32px; box-shadow:0 8px 32px rgba(13,27,75,0.18);">
+                    <i class="fa-regular fa-check" style="font-size:40px; color:var(--accent);"></i>
+                </div>
+
+                <h1 style="font-family:'DM Serif Display',serif; color:var(--navy); font-size:clamp(2rem,5vw,2.8rem); margin-bottom:20px;">
+                    Message Received!
+                </h1>
+
+                <p style="color:var(--text-body); font-size:17px; line-height:1.8; margin-bottom:12px;">
+                    Thank you for reaching out. A member of our team will review your enquiry and
+                    get back to you within <strong>1–2 business days</strong>.
+                </p>
+                <p style="color:var(--grey); font-size:15px; margin-bottom:48px;">
+                    We also sent a confirmation to your email address. If you don't see it,
+                    please check your spam folder.
+                </p>
+
+                <!-- Action buttons -->
+                <div class="d-flex flex-wrap gap-3 justify-content-center">
+                    <a href="{% url 'main:home' %}" class="rts-btn btn-primary">
+                        Back to Home
+                        <i class="fa-regular fa-house" style="margin-left:8px;"></i>
+                    </a>
+                    <a href="{% url 'services:list' %}" class="rts-btn btn-border">
+                        Explore Our Services
+                        <i class="fa-regular fa-arrow-right" style="margin-left:8px;"></i>
+                    </a>
+                </div>
+
+                <!-- Contact fallback -->
+                <div style="margin-top:56px; padding:28px 32px;
+                            background:var(--off-white); border-radius:12px; border:1px solid var(--grey-light);">
+                    <p style="color:var(--text-body); margin-bottom:12px; font-size:15px;">
+                        <strong>Need a faster response?</strong> Call us directly:
+                    </p>
+                    <a href="tel:+255678290994"
+                       style="font-size:22px; font-weight:700; color:var(--navy); text-decoration:none; letter-spacing:0.5px;">
+                        <i class="fa-regular fa-phone" style="color:var(--accent); margin-right:8px;"></i>
+                        +255 678 290 994
+                    </a>
+                    <p style="color:var(--grey); font-size:13px; margin-top:8px; margin-bottom:0;">
+                        Mon – Sat &nbsp;|&nbsp; 8 AM – 6 PM EAT
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
