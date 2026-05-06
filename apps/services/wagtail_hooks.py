@@ -1,5 +1,4 @@
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
-from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
 
 from .models import Service
@@ -8,7 +7,7 @@ from .models import Service
 class ServiceSnippetViewSet(SnippetViewSet):
     model = Service
     menu_label = "Services"
-    menu_icon = "cogs"
+    menu_icon = "list-ul"
     menu_order = 200
     list_display = ["name", "tagline", "order", "is_active"]
     list_filter = ["is_active"]
@@ -36,4 +35,4 @@ class ServiceSnippetViewSet(SnippetViewSet):
     ]
 
 
-register_snippet(ServiceSnippetViewSet)
+# Registered via WebsiteContentGroup in apps/core/wagtail_hooks.py
