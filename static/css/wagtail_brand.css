@@ -229,3 +229,134 @@ textarea:focus {
     padding: 1rem 0;
     font-size: 0.875rem;
 }
+
+/* ---- Site Overview Stats Panel ---- */
+
+.bjp-stats-panel {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e8ecf4;
+    border-top: 4px solid #1565C0;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.bjp-stats-panel__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0D1B4B;
+    margin: 0 0 1.25rem;
+}
+
+.bjp-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.bjp-stats-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #f4f6fc;
+    border-radius: 8px;
+    padding: 1.1rem 1rem;
+    border: 1px solid #e8ecf4;
+    position: relative;
+    transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.bjp-stats-card:hover {
+    box-shadow: 0 4px 16px rgba(13, 27, 75, 0.08);
+    border-color: #c4cde4;
+}
+
+.bjp-stats-card--alert {
+    border-color: #1565C0;
+    background: #eef4ff;
+}
+
+.bjp-stats-card__icon {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bjp-stats-card__icon--blue {
+    background: #dceeff;
+    color: #1565C0;
+}
+
+.bjp-stats-card__icon--cyan {
+    background: #d0f7ff;
+    color: #0097b8;
+}
+
+.bjp-stats-card__icon--navy {
+    background: #d8def0;
+    color: #0D1B4B;
+}
+
+.bjp-stats-card__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bjp-stats-card__number {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #0D1B4B;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bjp-stats-card__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #3a4468;
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.bjp-stats-card__sub {
+    font-size: 0.75rem;
+    color: #8a94b0;
+    margin-top: 0.2rem;
+}
+
+.bjp-stats-card__link {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e8ecf4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8a94b0;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+}
+
+.bjp-stats-card__link:hover {
+    background: #1565C0;
+    color: #fff;
+}
+
+.bjp-new-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    background: #1565C0;
+    color: #fff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+    vertical-align: middle;
+}

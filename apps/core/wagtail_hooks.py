@@ -21,7 +21,32 @@ class WebsiteContentGroup(SnippetViewSetGroup):
 register_snippet(WebsiteContentGroup)
 
 
-# ── Dashboard panel: enquiry stats ───────────────────────────────────────────
+# ── Dashboard panel: site-wide stats (services, industries, enquiries) ────────
+
+
+class SiteStatsDashboardPanel(Component):
+    name = "bjp_site_stats"
+    template_name = "core/wagtail/dashboard_stats.html"
+    order = 30
+
+    def get_context_data(self, parent_context):
+        from apps.contact.models import ContactEnquiry
+        from apps.industries.models import Industry
+        from apps.services.models import Service
+
+        return {
+            "services_total": Service.objects.filter(is_active=True).count(),
+            "services_all": Service.objects.count(),
+            "industries_total": Industry.objects.filter(is_active=True).count(),
+            "industries_all": Industry.objects.count(),
+            "enquiries_new": ContactEnquiry.objects.filter(
+                status=ContactEnquiry.STATUS_NEW
+            ).count(),
+            "enquiries_total": ContactEnquiry.objects.count(),
+        }
+
+
+# ── Dashboard panel: recent enquiries ────────────────────────────────────────
 
 
 class EnquiriesDashboardPanel(Component):
@@ -46,6 +71,7 @@ class EnquiriesDashboardPanel(Component):
 def customize_dashboard(request, panels):
     # Remove the default "What's new in Wagtail" panel — not relevant here
     panels[:] = [p for p in panels if getattr(p, "name", "") != "whats_new_in_wagtail_version"]
+    panels.append(SiteStatsDashboardPanel())
     panels.append(EnquiriesDashboardPanel())
 
 

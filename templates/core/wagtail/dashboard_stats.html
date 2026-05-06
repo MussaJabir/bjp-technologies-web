@@ -1,0 +1,76 @@
+<div class="bjp-stats-panel">
+    <h2 class="bjp-stats-panel__title">Site Overview</h2>
+    <div class="bjp-stats-grid">
+
+        <!-- Services -->
+        <div class="bjp-stats-card">
+            <div class="bjp-stats-card__icon bjp-stats-card__icon--blue">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/>
+                </svg>
+            </div>
+            <div class="bjp-stats-card__body">
+                <div class="bjp-stats-card__number">{{ services_total }}</div>
+                <div class="bjp-stats-card__label">Active Services</div>
+                {% if services_all != services_total %}
+                <div class="bjp-stats-card__sub">{{ services_all }} total &mdash; {{ services_all|add:"-1"|add:"1" }} inactive hidden</div>
+                {% endif %}
+            </div>
+            <a href="{% url 'wagtailsnippets_services_service:list' %}" class="bjp-stats-card__link" title="Manage Services">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Industries -->
+        <div class="bjp-stats-card">
+            <div class="bjp-stats-card__icon bjp-stats-card__icon--cyan">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2"/>
+                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                    <line x1="12" y1="12" x2="12" y2="16"/>
+                    <line x1="10" y1="14" x2="14" y2="14"/>
+                </svg>
+            </div>
+            <div class="bjp-stats-card__body">
+                <div class="bjp-stats-card__number">{{ industries_total }}</div>
+                <div class="bjp-stats-card__label">Active Industries</div>
+                {% if industries_all != industries_total %}
+                <div class="bjp-stats-card__sub">{{ industries_all }} total</div>
+                {% endif %}
+            </div>
+            <a href="{% url 'wagtailsnippets_industries_industry:list' %}" class="bjp-stats-card__link" title="Manage Industries">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Enquiries -->
+        <div class="bjp-stats-card {% if enquiries_new > 0 %}bjp-stats-card--alert{% endif %}">
+            <div class="bjp-stats-card__icon bjp-stats-card__icon--navy">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+            </div>
+            <div class="bjp-stats-card__body">
+                <div class="bjp-stats-card__number">
+                    {{ enquiries_new }}
+                    {% if enquiries_new > 0 %}<span class="bjp-new-badge">NEW</span>{% endif %}
+                </div>
+                <div class="bjp-stats-card__label">Unread Enquiries</div>
+                <div class="bjp-stats-card__sub">{{ enquiries_total }} total received</div>
+            </div>
+            <a href="{% url 'wagtailsnippets_contact_contactenquiry:list' %}" class="bjp-stats-card__link" title="Manage Enquiries">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </a>
+        </div>
+
+    </div>
+</div>
