@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 import pymysql
+from django.templatetags.static import static
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 pymysql.install_as_MySQLdb()
@@ -18,6 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 INSTALLED_APPS = [
+    # Unfold must come before django.contrib.admin
+    "unfold",
+    "unfold.contrib.filters",
+    "unfold.contrib.forms",
+    # Django built-ins
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -108,3 +115,111 @@ DEFAULT_FROM_EMAIL = os.environ.get(
     "DEFAULT_FROM_EMAIL", "BJP Technologies <info@bjptechnologies.co.tz>"
 )
 CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "info@bjptechnologies.co.tz")
+
+# --- Django Unfold Admin ---
+
+
+def _env_logo(request):
+    return static("images/logo/bjp-mark-transparent.png")
+
+
+UNFOLD = {
+    "SITE_TITLE": "BJP Technologies",
+    "SITE_HEADER": "BJP Technologies (T) Ltd",
+    "SITE_URL": "/",
+    "SITE_ICON": _env_logo,
+    "SITE_LOGO": _env_logo,
+    "SITE_SYMBOL": "shield",
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": False,
+    "DASHBOARD_CALLBACK": "apps.core.admin.dashboard_callback",
+    "COLORS": {
+        "base": {
+            "50": "248 250 255",
+            "100": "235 240 253",
+            "200": "207 220 250",
+            "300": "163 191 245",
+            "400": "100 144 230",
+            "500": "21 101 192",
+            "600": "18 82 158",
+            "700": "14 62 118",
+            "800": "13 27 75",
+            "900": "8 15 46",
+            "950": "5 9 28",
+        },
+        "primary": {
+            "50": "248 250 255",
+            "100": "235 240 253",
+            "200": "207 220 250",
+            "300": "163 191 245",
+            "400": "100 144 230",
+            "500": "21 101 192",
+            "600": "18 82 158",
+            "700": "14 62 118",
+            "800": "13 27 75",
+            "900": "8 15 46",
+            "950": "5 9 28",
+        },
+    },
+    "EXTENSIONS": {
+        "modeltranslation": {
+            "flags": {},
+        },
+    },
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+        "navigation": [
+            {
+                "title": "Dashboard",
+                "separator": False,
+                "items": [
+                    {
+                        "title": "Overview",
+                        "icon": "home",
+                        "link": reverse_lazy("admin:index"),
+                    },
+                ],
+            },
+            {
+                "title": "Website Content",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Services",
+                        "icon": "list",
+                        "link": reverse_lazy("admin:services_service_changelist"),
+                    },
+                    {
+                        "title": "Industries",
+                        "icon": "category",
+                        "link": reverse_lazy("admin:industries_industry_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Enquiries",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Contact Enquiries",
+                        "icon": "mail",
+                        "link": reverse_lazy("admin:contact_contactenquiry_changelist"),
+                        "badge": "apps.core.admin.enquiry_badge",
+                    },
+                ],
+            },
+            {
+                "title": "Administration",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Users",
+                        "icon": "person",
+                        "link": reverse_lazy("admin:auth_user_changelist"),
+                    },
+                ],
+            },
+        ],
+    },
+}

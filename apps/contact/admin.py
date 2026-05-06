@@ -1,10 +1,11 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 
 from .models import ContactEnquiry
 
 
 @admin.register(ContactEnquiry)
-class ContactEnquiryAdmin(admin.ModelAdmin):
+class ContactEnquiryAdmin(ModelAdmin):
     list_display = [
         "full_name",
         "email",

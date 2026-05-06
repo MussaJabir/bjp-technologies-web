@@ -1,10 +1,11 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 
 from .models import Service
 
 
 @admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
+class ServiceAdmin(ModelAdmin):
     list_display = ["name", "slug", "order", "is_active", "created_at"]
     list_filter = ["is_active"]
     search_fields = ["name", "tagline"]
