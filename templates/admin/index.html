@@ -1,0 +1,170 @@
+{% extends "unfold/layouts/base_simple.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}{% trans "Dashboard" %} | BJP Technologies{% endblock %}
+
+{% block content %}
+<div class="px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+  <!-- Page header -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">BJP Technologies (T) Ltd — site overview</p>
+  </div>
+
+  <!-- KPI cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+    <!-- Active Services -->
+    <div class="relative rounded-xl p-5 overflow-hidden" style="background:linear-gradient(135deg,#0D1B4B 0%,#1565C0 100%);">
+      <div class="flex items-start justify-between mb-4">
+        <p class="text-xs font-semibold uppercase tracking-widest text-blue-200">Active Services</p>
+        <a href="{% url 'admin:services_service_changelist' %}"
+           class="w-7 h-7 rounded-full border border-white/25 flex items-center justify-center text-white/60 hover:bg-white/10 hover:text-white transition">
+          <span class="material-symbols-outlined" style="font-size:14px">arrow_outward</span>
+        </a>
+      </div>
+      <p class="text-5xl font-extrabold text-white leading-none">{{ services_total }}</p>
+      <p class="mt-2 text-xs text-blue-200">{{ services_all }} services total</p>
+    </div>
+
+    <!-- Active Industries -->
+    <div class="relative rounded-xl p-5 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-sm">
+      <div class="flex items-start justify-between mb-4">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Active Industries</p>
+        <a href="{% url 'admin:industries_industry_changelist' %}"
+           class="w-7 h-7 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:bg-primary-500 hover:border-primary-500 hover:text-white transition">
+          <span class="material-symbols-outlined" style="font-size:14px">arrow_outward</span>
+        </a>
+      </div>
+      <p class="text-5xl font-extrabold text-gray-900 dark:text-white leading-none">{{ industries_total }}</p>
+      <p class="mt-2 text-xs text-gray-400">{{ industries_all }} industries total</p>
+    </div>
+
+    <!-- Unread Enquiries -->
+    <div class="relative rounded-xl p-5 border shadow-sm
+      {% if enquiries_new > 0 %}bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800{% else %}bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800{% endif %}">
+      <div class="flex items-start justify-between mb-4">
+        <p class="text-xs font-semibold uppercase tracking-widest {% if enquiries_new > 0 %}text-primary-600{% else %}text-gray-400{% endif %}">Unread Enquiries</p>
+        <a href="{% url 'admin:contact_contactenquiry_changelist' %}"
+           class="w-7 h-7 rounded-full border flex items-center justify-center transition
+             {% if enquiries_new > 0 %}border-primary-300 text-primary-500 hover:bg-primary-500 hover:border-primary-500 hover:text-white{% else %}border-gray-200 dark:border-gray-700 text-gray-400 hover:bg-primary-500 hover:border-primary-500 hover:text-white{% endif %}">
+          <span class="material-symbols-outlined" style="font-size:14px">arrow_outward</span>
+        </a>
+      </div>
+      <div class="flex items-end gap-2">
+        <p class="text-5xl font-extrabold leading-none {% if enquiries_new > 0 %}text-primary-600{% else %}text-gray-900 dark:text-white{% endif %}">{{ enquiries_new }}</p>
+        {% if enquiries_new > 0 %}
+        <span class="mb-1 text-xs font-bold bg-primary-600 text-white px-2 py-0.5 rounded-full uppercase tracking-wider">New</span>
+        {% endif %}
+      </div>
+      <p class="mt-2 text-xs {% if enquiries_new > 0 %}text-primary-400{% else %}text-gray-400{% endif %}">awaiting response</p>
+    </div>
+
+    <!-- Total Received -->
+    <div class="relative rounded-xl p-5 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-sm">
+      <div class="flex items-start justify-between mb-4">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Total Received</p>
+        <a href="{% url 'admin:contact_contactenquiry_changelist' %}"
+           class="w-7 h-7 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:bg-primary-500 hover:border-primary-500 hover:text-white transition">
+          <span class="material-symbols-outlined" style="font-size:14px">arrow_outward</span>
+        </a>
+      </div>
+      <p class="text-5xl font-extrabold text-gray-900 dark:text-white leading-none">{{ enquiries_total }}</p>
+      <p class="mt-2 text-xs text-gray-400">all-time enquiries</p>
+    </div>
+
+  </div>
+
+  <!-- Enquiries breakdown + recent list -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+    <!-- Status breakdown -->
+    <div class="rounded-xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-sm p-5">
+      <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4 flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary-500" style="font-size:18px">mail</span>
+        Enquiry Status
+      </h2>
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-primary-500"></span>
+            <span class="text-sm text-gray-600 dark:text-gray-300">New</span>
+          </div>
+          <span class="text-sm font-bold text-primary-600">{{ enquiries_new }}</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+            <span class="text-sm text-gray-600 dark:text-gray-300">Read</span>
+          </div>
+          <span class="text-sm font-bold text-gray-700 dark:text-gray-200">{{ enquiries_read }}</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+            <span class="text-sm text-gray-600 dark:text-gray-300">Replied</span>
+          </div>
+          <span class="text-sm font-bold text-green-600">{{ enquiries_replied }}</span>
+        </div>
+        {% if enquiries_total > 0 %}
+        <div class="pt-2">
+          <div class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-1.5 flex overflow-hidden">
+            {% if enquiries_new > 0 %}
+            <div class="bg-primary-500 h-1.5" style="width:{% widthratio enquiries_new enquiries_total 100 %}%"></div>
+            {% endif %}
+            {% if enquiries_read > 0 %}
+            <div class="bg-gray-400 h-1.5" style="width:{% widthratio enquiries_read enquiries_total 100 %}%"></div>
+            {% endif %}
+            {% if enquiries_replied > 0 %}
+            <div class="bg-green-500 h-1.5" style="width:{% widthratio enquiries_replied enquiries_total 100 %}%"></div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Recent enquiries -->
+    <div class="lg:col-span-2 rounded-xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-sm p-5">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary-500" style="font-size:18px">inbox</span>
+          Recent Enquiries
+        </h2>
+        <a href="{% url 'admin:contact_contactenquiry_changelist' %}"
+           class="text-xs text-primary-500 hover:text-primary-700 font-medium">View all →</a>
+      </div>
+
+      {% if recent_enquiries %}
+      <div class="divide-y divide-gray-50 dark:divide-gray-800">
+        {% for enq in recent_enquiries %}
+        <div class="flex items-center justify-between py-2.5 gap-3">
+          <div class="min-w-0 flex-1">
+            <p class="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate">{{ enq.first_name }} {{ enq.last_name }}</p>
+            <p class="text-xs text-gray-400 truncate">{{ enq.email }}{% if enq.service %} · {{ enq.service.name }}{% endif %}</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="text-xs text-gray-400">{{ enq.created_at|date:"d M" }}</span>
+            {% if enq.status == "new" %}
+            <span class="text-xs font-semibold bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300 px-2 py-0.5 rounded-full uppercase tracking-wide">New</span>
+            {% elif enq.status == "read" %}
+            <span class="text-xs font-semibold bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400 px-2 py-0.5 rounded-full uppercase tracking-wide">Read</span>
+            {% else %}
+            <span class="text-xs font-semibold bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 px-2 py-0.5 rounded-full uppercase tracking-wide">Replied</span>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-sm text-gray-400 text-center py-6">No enquiries yet.</p>
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
