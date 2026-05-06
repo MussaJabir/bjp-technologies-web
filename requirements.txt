@@ -2,3 +2,7 @@ Django==6.0.4
 PyMySQL==1.1.1
 whitenoise==6.9.0
 python-dotenv==1.1.0
+wagtail==7.3.1
+django-modelcluster==6.5
+django-taggit==6.1.0
+Pillow==12.2.0

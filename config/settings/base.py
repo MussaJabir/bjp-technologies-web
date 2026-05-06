@@ -18,6 +18,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 INSTALLED_APPS = [
+    # Wagtail apps (before django.contrib.admin)
+    "wagtail.contrib.forms",
+    "wagtail.contrib.redirects",
+    "wagtail.embeds",
+    "wagtail.sites",
+    "wagtail.users",
+    "wagtail.snippets",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.search",
+    "wagtail.admin",
+    "wagtail",
+    "modelcluster",
+    "taggit",
+    # Django built-ins
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,6 +56,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -108,3 +124,9 @@ DEFAULT_FROM_EMAIL = os.environ.get(
     "DEFAULT_FROM_EMAIL", "BJP Technologies <info@bjptechnologies.co.tz>"
 )
 CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "info@bjptechnologies.co.tz")
+
+# --- Wagtail ---
+WAGTAIL_SITE_NAME = "BJP Technologies"
+WAGTAILADMIN_BASE_URL = os.environ.get("WAGTAILADMIN_BASE_URL", "https://bjptechnologies.co.tz")
+WAGTAIL_ENABLE_UPDATE_CHECK = False
+WAGTAILIMAGES_MAX_UPLOAD_SIZE = 5 * 1024 * 1024  # 5 MB

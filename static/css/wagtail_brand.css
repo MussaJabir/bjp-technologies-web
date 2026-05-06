@@ -1,0 +1,231 @@
+/* ============================================================
+   BJP Technologies — Wagtail Admin Brand Override
+   Navy #0D1B4B | Navy Dark #080F2E | Cyan #00C6FF | Blue #1565C0
+   ============================================================ */
+
+/* ---- Sidebar ---- */
+.sidebar {
+    background: linear-gradient(175deg, #080F2E 0%, #0D1B4B 100%) !important;
+    border-right: 1px solid rgba(0, 198, 255, 0.15) !important;
+}
+
+.sidebar__inner {
+    background: transparent !important;
+}
+
+/* Logo lockup */
+.sidebar-logo-lockup {
+    border-bottom: 1px solid rgba(0, 198, 255, 0.2) !important;
+    padding: 1.25rem 1rem !important;
+}
+
+/* Nav item — base */
+.sidebar-menu-item__link,
+.sidebar-sub-menu-item__link {
+    color: rgba(255, 255, 255, 0.72) !important;
+    transition: background 0.18s ease, color 0.18s ease !important;
+    border-radius: 6px !important;
+}
+
+/* Nav item — hover */
+.sidebar-menu-item__link:hover,
+.sidebar-sub-menu-item__link:hover {
+    background: rgba(0, 198, 255, 0.12) !important;
+    color: #00C6FF !important;
+}
+
+/* Nav item — active */
+.sidebar-menu-item--active > .sidebar-menu-item__link,
+.sidebar-sub-menu-item--active > .sidebar-sub-menu-item__link {
+    background: rgba(0, 198, 255, 0.18) !important;
+    color: #00C6FF !important;
+    box-shadow: inset 3px 0 0 #00C6FF !important;
+    font-weight: 600 !important;
+}
+
+/* Submenu panel */
+.sidebar-sub-menu-panel {
+    background: rgba(8, 15, 46, 0.6) !important;
+}
+
+/* Footer / account area */
+.sidebar-footer {
+    border-top: 1px solid rgba(0, 198, 255, 0.15) !important;
+}
+
+.sidebar-footer__account {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+
+/* ---- Top bar / breadcrumb ---- */
+.w-slim-header {
+    border-bottom: 2px solid #1565C0 !important;
+}
+
+/* ---- Primary action buttons ---- */
+.button-primary,
+.button.yes,
+.button.bicolor {
+    background-color: #1565C0 !important;
+    border-color: #1565C0 !important;
+}
+
+.button-primary:hover,
+.button.yes:hover,
+.button.bicolor:hover {
+    background-color: #0D1B4B !important;
+    border-color: #00C6FF !important;
+}
+
+/* ---- Wagtail header bar (top of CMS) ---- */
+.w-header {
+    border-bottom: 2px solid rgba(21, 101, 192, 0.4) !important;
+}
+
+/* ---- Dashboard summary cards ---- */
+.dashboard-summary-item {
+    border-top: 3px solid #1565C0 !important;
+}
+
+/* ---- Panels / fieldsets ---- */
+.panel {
+    border-color: rgba(21, 101, 192, 0.25) !important;
+}
+
+.panel__heading {
+    background: #f4f6fc !important;
+    border-bottom: 2px solid #1565C0 !important;
+    color: #0D1B4B !important;
+    font-weight: 600 !important;
+}
+
+/* ---- Focus / active states ---- */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #1565C0 !important;
+    box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.2) !important;
+    outline: none !important;
+}
+
+/* ---- Status tags ---- */
+.w-status--primary {
+    background: #1565C0 !important;
+}
+
+/* ---- BJP Enquiries Dashboard Panel ---- */
+.bjp-enquiries-panel {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e8ecf4;
+    border-top: 4px solid #00C6FF;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.bjp-enquiries-panel__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0D1B4B;
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bjp-enquiries-panel__stats {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.bjp-stat {
+    flex: 1;
+    min-width: 90px;
+    background: #f4f6fc;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    text-align: center;
+}
+
+.bjp-stat__count {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #0D1B4B;
+}
+
+.bjp-stat__count--new {
+    color: #1565C0;
+}
+
+.bjp-stat__label {
+    font-size: 0.75rem;
+    color: #8a94b0;
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.bjp-enquiries-panel__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #e8ecf4;
+}
+
+.bjp-enquiries-panel__list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #f4f6fc;
+    font-size: 0.875rem;
+    color: #3a4468;
+}
+
+.bjp-enquiries-panel__list li:last-child {
+    border-bottom: none;
+}
+
+.bjp-enquiry-name {
+    font-weight: 600;
+    color: #0D1B4B;
+}
+
+.bjp-enquiry-email {
+    color: #8a94b0;
+    font-size: 0.8rem;
+}
+
+.bjp-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.bjp-badge--new {
+    background: #e3f0ff;
+    color: #1565C0;
+}
+
+.bjp-badge--read {
+    background: #e8ecf4;
+    color: #8a94b0;
+}
+
+.bjp-badge--replied {
+    background: #e6f9f0;
+    color: #2e7d52;
+}
+
+.bjp-enquiries-panel__empty {
+    text-align: center;
+    color: #8a94b0;
+    padding: 1rem 0;
+    font-size: 0.875rem;
+}
