@@ -41,3 +41,17 @@ htmlcov/
 
 # Ruff / Black
 .ruff_cache/
+
+# Playwright MCP session files
+.playwright-mcp/
+
+# Loose screenshot / debug files
+*.png
+*.jpg
+*.jpeg
+
+# Scratch / reference folders (not part of the project)
+luminos/
+
+# Test output files
+*.txt

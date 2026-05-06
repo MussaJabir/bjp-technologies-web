@@ -565,3 +565,87 @@ TEMPLATE FOR NEXT SESSION — copy this block and fill in:
 - [ ] Start Phase 5 — Admin & CMS (admin branding, rich admin config, content management)
 
 ---
+
+---
+
+## Session 8 — 2026-05-06 EAT
+
+**Goal:** Phase 5 — Integrate Wagtail CMS as the primary admin dashboard; brand it with BJP identity.
+**Branch:** feature/phase-5-admin-cms
+**Status:** ✅ Complete
+**Phase:** Phase 5 — Admin & CMS
+
+### What Was Done
+- Confirmed Wagtail 7.3.1 compatibility with Django 6.0.4 and MySQL before starting
+- Installed Wagtail 7.3.1 and pinned all new dependencies in requirements.txt
+- Added all Wagtail INSTALLED_APPS and RedirectMiddleware to settings/base.py
+- Added Wagtail admin settings (WAGTAIL_SITE_NAME, WAGTAILADMIN_BASE_URL, etc.)
+- Moved Django admin to /django-admin/; Wagtail CMS available at /cms/
+- Registered Service as a Wagtail SnippetViewSet with panels (identity + content sections)
+- Registered Industry as a Wagtail SnippetViewSet with panels
+- Registered ContactEnquiry as a Wagtail SnippetViewSet — most fields read-only, only status is editable; inspect view shows full detail
+- Created apps/core/wagtail_hooks.py: BJP-branded dashboard panel showing enquiry stats + recent 5 enquiries
+- Created static/css/wagtail_brand.css: BJP navy sidebar, cyan active states, branded buttons and panel borders
+- Created templates/wagtailadmin/branding/logo.html: BJP white SVG logo in sidebar
+- Created templates/wagtailadmin/branding/favicon.html: BJP favicon
+- Created templates/core/wagtail/dashboard_enquiries.html: stat cards + recent enquiry list
+- Ran all Wagtail migrations (115 migration steps across wagtailcore, wagtailadmin, wagtaildocs, etc.)
+- All 67 existing tests pass unchanged
+- ruff + black clean
+
+### Files Changed
+| File | Action | Notes |
+|---|---|---|
+| requirements.txt | Modified | Added wagtail==7.3.1, modelcluster, taggit, Pillow |
+| config/settings/base.py | Modified | Wagtail INSTALLED_APPS, middleware, settings block |
+| config/urls.py | Modified | /cms/ → wagtailadmin, /documents/ → wagtaildocs, /django-admin/ → Django admin |
+| apps/services/wagtail_hooks.py | Created | ServiceSnippetViewSet with identity + content panels |
+| apps/industries/wagtail_hooks.py | Created | IndustrySnippetViewSet with identity + content panels |
+| apps/contact/wagtail_hooks.py | Created | ContactEnquirySnippetViewSet — read-only details, editable status |
+| apps/core/wagtail_hooks.py | Created | EnquiriesDashboardPanel + insert_global_admin_css hook |
+| static/css/wagtail_brand.css | Created | BJP navy/cyan admin theme override |
+| templates/wagtailadmin/branding/logo.html | Created | BJP white SVG logo for sidebar |
+| templates/wagtailadmin/branding/favicon.html | Created | BJP favicon |
+| templates/core/wagtail/dashboard_enquiries.html | Created | Dashboard enquiry stats panel |
+
+### Migrations
+- All 115 Wagtail migration steps applied cleanly to local dev DB
+- No new migrations created for project models (no model field changes)
+
+### Tests
+- Tests written: 0 new (Wagtail admin is integration-level; unit tests unchanged)
+- Tests passing: 67 / 67
+- All existing contact, services, industries, main tests pass
+
+### Decisions Made
+- **Decision:** Wagtail admin at /cms/, Django admin kept at /django-admin/ as fallback.
+  **Reason:** Clean separation — Wagtail is the primary CMS; Django admin available for emergency superuser/auth work without being the default entry point.
+- **Decision:** ContactEnquiry panels are mostly read-only; only status is editable.
+  **Reason:** Enquiries are form submissions, not CMS content. Staff should update status (new → read → replied) but never alter the submission data.
+- **Decision:** Service and Industry stay as plain Django models, registered as Wagtail Snippets.
+  **Reason:** They don't need Wagtail's page tree or routing — they're database-driven content served by our own Django views. Snippets give the Wagtail UI without requiring model rewrite.
+
+### Phase 5 Deliverables Completed
+- [x] All models registered with rich admin configuration (via Wagtail Snippets)
+- [x] Services editable from admin (name, description, icon, order, active toggle)
+- [x] Industries editable from admin
+- [x] Contact enquiries manageable (status update, read-only detail, inspect view)
+- [x] Admin branding customized (BJP logo, navy sidebar, cyan accents)
+- [ ] Superuser credentials documented securely (to be done post-deploy)
+
+### Deploy Steps Required on cPanel After Merge
+1. `pip install -r requirements.txt` ← installs wagtail + dependencies
+2. `manage.py migrate --no-input` ← applies all 115 Wagtail migration steps
+3. `manage.py collectstatic --no-input`
+4. Touch `tmp/restart.txt`
+5. Visit /cms/ and log in with existing superuser credentials
+6. In Wagtail Settings → Sites: update the default site to bjptechnologies.co.tz:443
+
+### Next Session Should
+- [ ] Merge feature/phase-5-admin-cms → develop → main via PR
+- [ ] Deploy to cPanel (pip install + migrate + collectstatic + restart)
+- [ ] Create superuser on server if not already done: manage.py createsuperuser
+- [ ] Update Wagtail Site record to bjptechnologies.co.tz:443 via /cms/settings/sites/
+- [ ] Begin Phase 6 — Polish & Launch (SEO, security audit, meta tags, sitemap, go-live)
+
+---
