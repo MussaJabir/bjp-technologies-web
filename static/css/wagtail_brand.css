@@ -401,3 +401,14 @@ ul.summary.nice-padding,
     text-transform: uppercase;
     line-height: 1;
 }
+
+/* ---- Sidebar logo replacement ---- */
+
+/* BJP mark logo rendered via template — size it to fit the branding area */
+.bjp-sl-img {
+    height: 36px !important;
+    width: auto !important;
+    display: block !important;
+    border-radius: 0 !important;
+    object-fit: contain !important;
+}

@@ -98,7 +98,7 @@ def clean_settings_menu(request, menu_items):
     menu_items[:] = [item for item in menu_items if item.name in keep]
 
 
-# ── BJP brand CSS injected into every admin page ─────────────────────────────
+# ── BJP brand CSS + sidebar logo injection ───────────────────────────────────
 
 
 @hooks.register("insert_global_admin_css")
@@ -106,4 +106,26 @@ def global_admin_css():
     return format_html(
         '<link rel="stylesheet" href="{}">',
         static("css/wagtail_brand.css"),
+    )
+
+
+@hooks.register("insert_global_admin_js")
+def inject_sidebar_logo():
+    logo_url = static("images/logo/bjp-mark-transparent.png")
+    return format_html(
+        """<script>
+(function() {{
+    var LOGO = '{}';
+    function populateTemplate() {{
+        var tpl = document.querySelector('[data-wagtail-sidebar-branding-logo]');
+        if (tpl && !tpl.dataset.bjp) {{
+            tpl.innerHTML = '<img src="' + LOGO + '" alt="BJP Technologies" class="bjp-sl-img">';
+            tpl.dataset.bjp = '1';
+        }}
+    }}
+    populateTemplate();
+    document.addEventListener('DOMContentLoaded', populateTemplate);
+}})();
+</script>""",
+        logo_url,
     )
