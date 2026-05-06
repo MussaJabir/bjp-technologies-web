@@ -230,133 +230,174 @@ textarea:focus {
     font-size: 0.875rem;
 }
 
-/* ---- Site Overview Stats Panel ---- */
+/* ---- Site Overview KPI Cards ---- */
 
-.bjp-stats-panel {
+/* Hide Wagtail's default "1 Page / 0 Images / 0 Documents" summary bar */
+ul.summary.nice-padding,
+.w-summary {
+    display: none !important;
+}
+
+/* Hide the "Search all pages" bar on the home dashboard — useless without page tree */
+.home .w-field,
+.home form[action*="search"] {
+    display: none !important;
+}
+
+.bjp-overview {
     background: #fff;
-    border-radius: 8px;
-    border: 1px solid #e8ecf4;
-    border-top: 4px solid #1565C0;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.bjp-stats-panel__title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #0D1B4B;
-    margin: 0 0 1.25rem;
-}
-
-.bjp-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.bjp-stats-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: #f4f6fc;
-    border-radius: 8px;
-    padding: 1.1rem 1rem;
-    border: 1px solid #e8ecf4;
-    position: relative;
-    transition: box-shadow 0.18s ease, border-color 0.18s ease;
-}
-
-.bjp-stats-card:hover {
-    box-shadow: 0 4px 16px rgba(13, 27, 75, 0.08);
-    border-color: #c4cde4;
-}
-
-.bjp-stats-card--alert {
-    border-color: #1565C0;
-    background: #eef4ff;
-}
-
-.bjp-stats-card__icon {
-    flex-shrink: 0;
-    width: 46px;
-    height: 46px;
     border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 1px solid #eaedf4;
+    padding: 1.25rem 1.4rem 1.4rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 5px rgba(13, 27, 75, 0.05);
 }
 
-.bjp-stats-card__icon--blue {
-    background: #dceeff;
-    color: #1565C0;
+.bjp-overview__header {
+    margin-bottom: 1rem;
 }
 
-.bjp-stats-card__icon--cyan {
-    background: #d0f7ff;
-    color: #0097b8;
-}
-
-.bjp-stats-card__icon--navy {
-    background: #d8def0;
-    color: #0D1B4B;
-}
-
-.bjp-stats-card__body {
-    flex: 1;
-    min-width: 0;
-}
-
-.bjp-stats-card__number {
-    font-size: 2rem;
+.bjp-overview__title {
+    font-size: 0.7rem;
     font-weight: 700;
-    line-height: 1;
-    color: #0D1B4B;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a94b0;
+    margin: 0;
+}
+
+.bjp-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.85rem;
+}
+
+@media (max-width: 980px) {
+    .bjp-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+    .bjp-kpi-grid { grid-template-columns: 1fr; }
+}
+
+.bjp-kpi {
+    background: #f8f9fc;
+    border-radius: 10px;
+    padding: 1rem 1.1rem 0.9rem;
+    border: 1px solid #eaedf4;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.bjp-kpi:hover {
+    box-shadow: 0 6px 20px rgba(13, 27, 75, 0.09);
+    transform: translateY(-2px);
+}
+
+.bjp-kpi--featured {
+    background: linear-gradient(138deg, #0D1B4B 0%, #1565C0 100%);
+    border-color: #0D1B4B;
+}
+
+.bjp-kpi--alert {
+    background: #eef4ff;
+    border-color: #1565C0;
+}
+
+/* Top row */
+.bjp-kpi__top {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
     gap: 0.5rem;
 }
 
-.bjp-stats-card__label {
-    font-size: 0.8rem;
+.bjp-kpi__label {
+    font-size: 0.67rem;
     font-weight: 600;
-    color: #3a4468;
-    margin-top: 0.25rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-
-.bjp-stats-card__sub {
-    font-size: 0.75rem;
+    letter-spacing: 0.09em;
     color: #8a94b0;
-    margin-top: 0.2rem;
+    line-height: 1.4;
+    padding-top: 2px;
 }
 
-.bjp-stats-card__link {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
+.bjp-kpi--featured .bjp-kpi__label { color: rgba(255,255,255,0.55); }
+.bjp-kpi--alert    .bjp-kpi__label { color: #1565C0; }
+
+/* Arrow button */
+.bjp-kpi__arrow {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
     border-radius: 50%;
-    background: #e8ecf4;
+    border: 1.5px solid #d4d9e8;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #8a94b0;
+    color: #9aa0b4;
     text-decoration: none;
-    transition: background 0.15s, color 0.15s;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 
-.bjp-stats-card__link:hover {
+.bjp-kpi__arrow:hover {
     background: #1565C0;
+    border-color: #1565C0;
     color: #fff;
 }
 
+.bjp-kpi--featured .bjp-kpi__arrow {
+    border-color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.6);
+}
+
+.bjp-kpi--featured .bjp-kpi__arrow:hover {
+    background: rgba(0,198,255,0.2);
+    border-color: rgba(0,198,255,0.5);
+    color: #00C6FF;
+}
+
+.bjp-kpi--alert .bjp-kpi__arrow {
+    border-color: #b3ccf5;
+    color: #1565C0;
+}
+
+/* Big number */
+.bjp-kpi__number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #0D1B4B;
+    margin-bottom: 0.28rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.bjp-kpi--featured .bjp-kpi__number { color: #fff; }
+.bjp-kpi--alert    .bjp-kpi__number { color: #1565C0; }
+
+/* Sub note */
+.bjp-kpi__sub {
+    font-size: 0.7rem;
+    color: #b4bcd0;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.bjp-kpi--featured .bjp-kpi__sub { color: rgba(255,255,255,0.35); }
+.bjp-kpi--alert    .bjp-kpi__sub { color: #7aa3d4; }
+
+/* NEW badge */
 .bjp-new-badge {
-    font-size: 0.6rem;
+    font-size: 0.52rem;
     font-weight: 700;
     background: #1565C0;
     color: #fff;
-    padding: 0.15rem 0.45rem;
+    padding: 0.18rem 0.5rem;
     border-radius: 20px;
-    letter-spacing: 0.06em;
-    vertical-align: middle;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1;
 }

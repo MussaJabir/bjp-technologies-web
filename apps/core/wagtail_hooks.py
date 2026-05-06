@@ -78,10 +78,16 @@ def customize_dashboard(request, panels):
 # ── Strip out Wagtail-default menu items not needed for BJP admin ─────────────
 
 
+@hooks.register("construct_homepage_summary_items")
+def remove_summary_items(request, summary_items):
+    # Remove "1 Page / 0 Images / 0 Documents" — irrelevant clutter
+    summary_items.clear()
+
+
 @hooks.register("construct_main_menu")
 def clean_main_menu(request, menu_items):
-    # Remove: Pages tree, Images library, Documents, Reports — none of these are used
-    hidden = {"explorer", "images", "documents", "reports"}
+    # Remove: Pages, Images, Documents, Reports, and the generic Snippets browser
+    hidden = {"explorer", "images", "documents", "reports", "snippets"}
     menu_items[:] = [item for item in menu_items if item.name not in hidden]
 
 
