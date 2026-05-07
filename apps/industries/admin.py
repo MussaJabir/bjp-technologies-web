@@ -8,7 +8,15 @@ from .models import Industry
 
 @admin.register(Industry)
 class IndustryAdmin(ModelAdmin):
-    list_display = ["name", "show_tagline", "order", "show_active", "show_services", "show_link", "show_actions"]
+    list_display = [
+        "name",
+        "show_tagline",
+        "order",
+        "show_active",
+        "show_services",
+        "show_link",
+        "show_actions",
+    ]
     list_display_links = ["name"]
     list_editable = ["order"]
     list_filter = ["is_active"]
@@ -19,22 +27,34 @@ class IndustryAdmin(ModelAdmin):
     actions = ["activate_industries", "deactivate_industries"]
 
     fieldsets = (
-        ("Industry Details", {
-            "fields": (("name", "tagline"), ("order", "is_active")),
-        }),
-        ("Content", {
-            "fields": ("description", "services_offered"),
-            "description": "services_offered — enter one item per line. Each line appears as a ✓ point on the industry detail page.",
-        }),
-        ("Image", {
-            "fields": ("image",),
-            "classes": ("collapse",),
-        }),
-        ("Advanced", {
-            "fields": ("slug", "created_at", "updated_at"),
-            "classes": ("collapse",),
-            "description": "Slug is auto-generated from the name on first save. Only edit it if you have a specific reason.",
-        }),
+        (
+            "Industry Details",
+            {
+                "fields": (("name", "tagline"), ("order", "is_active")),
+            },
+        ),
+        (
+            "Content",
+            {
+                "fields": ("description", "services_offered"),
+                "description": "services_offered — enter one item per line. Each line appears as a ✓ point on the industry detail page.",
+            },
+        ),
+        (
+            "Image",
+            {
+                "fields": ("image",),
+                "classes": ("collapse",),
+            },
+        ),
+        (
+            "Advanced",
+            {
+                "fields": ("slug", "created_at", "updated_at"),
+                "classes": ("collapse",),
+                "description": "Slug is auto-generated from the name on first save. Only edit it if you have a specific reason.",
+            },
+        ),
     )
     readonly_fields = ["created_at", "updated_at"]
 

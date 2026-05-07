@@ -22,12 +22,11 @@
                     </div>
                     <h1 class="title wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s"
                         style="font-family:'DM Serif Display', serif; color:var(--white); font-size:clamp(2rem,5vw,3rem); margin:16px 0;">
-                        Enterprise IT Solutions<br>Built for Tanzania
+                        {{ company.services_banner_headline }}
                     </h1>
                     <p class="disc wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s"
                        style="color:var(--grey-light); max-width:560px;">
-                        From custom software to cloud infrastructure — we deliver secure, scalable technology
-                        that helps businesses across East Africa grow with confidence.
+                        {{ company.services_banner_subtext }}
                     </p>
                 </div>
             </div>
@@ -43,9 +42,6 @@
         <img src="{% static 'images/banner/07.png' %}" alt="" class="two wow move-left">
     </div>
 </div>
-
-<!-- Full-width background image strip below banner -->
-<div class="large-image-area-bg-service-page jarallax rts-section-gap" data-jarallax='{"speed": 0.3}'></div>
 
 <!-- Services List (Luminos single-service-list pattern) -->
 <div class="rts-service-provide-area rts-section-gap">

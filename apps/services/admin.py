@@ -8,7 +8,15 @@ from .models import Service
 
 @admin.register(Service)
 class ServiceAdmin(ModelAdmin):
-    list_display = ["name", "show_tagline", "order", "show_active", "show_bullets", "show_link", "show_actions"]
+    list_display = [
+        "name",
+        "show_tagline",
+        "order",
+        "show_active",
+        "show_bullets",
+        "show_link",
+        "show_actions",
+    ]
     list_display_links = ["name"]
     list_editable = ["order"]
     list_filter = ["is_active"]
@@ -19,22 +27,34 @@ class ServiceAdmin(ModelAdmin):
     actions = ["activate_services", "deactivate_services"]
 
     fieldsets = (
-        ("Service Details", {
-            "fields": (("name", "tagline"), ("order", "is_active")),
-        }),
-        ("Content", {
-            "fields": ("description", "bullet_points"),
-            "description": "bullet_points — enter one item per line. Each line becomes a ✓ checkmark on the service detail page.",
-        }),
-        ("Icon", {
-            "fields": ("icon_svg",),
-            "classes": ("collapse",),
-        }),
-        ("Advanced", {
-            "fields": ("slug", "created_at", "updated_at"),
-            "classes": ("collapse",),
-            "description": "Slug is auto-generated from the name on first save. Only edit it if you have a specific reason.",
-        }),
+        (
+            "Service Details",
+            {
+                "fields": (("name", "tagline"), ("order", "is_active")),
+            },
+        ),
+        (
+            "Content",
+            {
+                "fields": ("description", "bullet_points"),
+                "description": "bullet_points — enter one item per line. Each line becomes a ✓ checkmark on the service detail page.",
+            },
+        ),
+        (
+            "Icon",
+            {
+                "fields": ("icon_svg",),
+                "classes": ("collapse",),
+            },
+        ),
+        (
+            "Advanced",
+            {
+                "fields": ("slug", "created_at", "updated_at"),
+                "classes": ("collapse",),
+                "description": "Slug is auto-generated from the name on first save. Only edit it if you have a specific reason.",
+            },
+        ),
     )
     readonly_fields = ["created_at", "updated_at"]
 

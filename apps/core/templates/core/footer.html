@@ -8,14 +8,13 @@
                 <div class="cta-main-wrapper-area-four rts-section-gap">
                     <div class="inner">
                         <h3 class="title wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
-                            Ready to Transform Your Business?
+                            {{ company.footer_cta_headline }}
                         </h3>
                         <p class="disc wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
-                            Schedule a free consultation with our team. We'll assess your needs
-                            and recommend the right technology solutions for your organisation.
+                            {{ company.footer_cta_body }}
                         </p>
                         <a href="{% url 'contact:contact' %}" class="rts-btn btn-primary btn-bold wow fadeInUp"
-                           data-wow-offset="120" data-wow-delay=".6s">Get Free Consultation</a>
+                           data-wow-offset="120" data-wow-delay=".6s">{{ company.footer_cta_button }}</a>
                     </div>
                 </div>
             </div>
@@ -23,7 +22,7 @@
     </div>
 </div>
 
-<!-- Footer — original Luminos light gradient style -->
+<!-- Footer -->
 <div class="gradient-footer-wrapper">
     <div class="rts-footer-area rts-section-gapTop pb--80">
         <div class="container">
@@ -31,10 +30,10 @@
                 <div class="col-lg-5">
                     <div class="logo-area">
                         <a href="{% url 'main:home' %}" class="logo">
-                            <img src="{% static 'images/logo/bjp-logo-horizontal-transparent.png' %}" alt="BJP Technologies (T) Limited">
+                            <img src="{% static 'images/logo/bjp-logo-horizontal-transparent.png' %}" alt="{{ company.name }}">
                         </a>
                         <p class="disc">
-                            BJP Technologies (T) Limited is Tanzania's trusted IT partner — delivering
+                            {{ company.name }} is Tanzania's trusted IT partner — delivering
                             secure, scalable technology solutions to businesses across East Africa.
                         </p>
                     </div>
@@ -45,12 +44,9 @@
                             <div class="single-nav-area-footer">
                                 <p class="parent">Services</p>
                                 <ul>
-                                    <li><a href="{% url 'services:detail' slug='software-development' %}">Software Development</a></li>
-                                    <li><a href="{% url 'services:detail' slug='website-digital-solutions' %}">Website &amp; Digital</a></li>
-                                    <li><a href="{% url 'services:detail' slug='cloud-infrastructure' %}">Cloud &amp; Infrastructure</a></li>
-                                    <li><a href="{% url 'services:detail' slug='cybersecurity' %}">Cybersecurity</a></li>
-                                    <li><a href="{% url 'services:detail' slug='managed-it-services' %}">Managed IT Services</a></li>
-                                    <li><a href="{% url 'services:detail' slug='payment-system-integrations' %}">Payment Integrations</a></li>
+                                    {% for svc in footer_services %}
+                                    <li><a href="{% url 'services:detail' slug=svc.slug %}">{{ svc.name }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -58,12 +54,9 @@
                             <div class="single-nav-area-footer">
                                 <p class="parent">Industries</p>
                                 <ul>
-                                    <li><a href="{% url 'industries:detail' slug='startups-smes' %}">Startups &amp; SMEs</a></li>
-                                    <li><a href="{% url 'industries:detail' slug='financial-institutions' %}">Financial Institutions</a></li>
-                                    <li><a href="{% url 'industries:detail' slug='ngos-development' %}">NGOs &amp; Development</a></li>
-                                    <li><a href="{% url 'industries:detail' slug='education' %}">Education</a></li>
-                                    <li><a href="{% url 'industries:detail' slug='healthcare' %}">Healthcare</a></li>
-                                    <li><a href="{% url 'industries:detail' slug='retail-wholesale' %}">Retail &amp; Wholesale</a></li>
+                                    {% for ind in footer_industries %}
+                                    <li><a href="{% url 'industries:detail' slug=ind.slug %}">{{ ind.name }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -73,10 +66,10 @@
                                 <ul>
                                     <li><a href="{% url 'main:about' %}">About Us</a></li>
                                     <li><a href="{% url 'contact:contact' %}">Contact</a></li>
-                                    <li><a href="mailto:info@bjptechnologies.co.tz">info@bjptechnologies.co.tz</a></li>
-                                    <li><a href="tel:+255678290994">+255 678 290 994</a></li>
-                                    <li><a href="#">Ubungo, Dar es Salaam</a></li>
-                                    <li><a href="#">P.O Box 7276, Mbezi</a></li>
+                                    <li><a href="mailto:{{ company.email }}">{{ company.email }}</a></li>
+                                    <li><a href="tel:{{ company.phone|cut:' ' }}">{{ company.phone }}</a></li>
+                                    <li>{{ company.address }}</li>
+                                    <li>{{ company.postal }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -92,13 +85,21 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="copyright-wrapper">
-                        <p>© {% now "Y" %} BJP Technologies (T) Limited. All rights reserved.</p>
+                        <p>© {% now "Y" %} {{ company.name }}. All rights reserved.</p>
                         <div class="social-copyright-area">
                             <ul>
-                                <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
-                                <li><a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
-                                <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></li>
+                                {% if company.facebook_url %}
+                                <li><a href="{{ company.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                {% endif %}
+                                {% if company.twitter_url %}
+                                <li><a href="{{ company.twitter_url }}" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+                                {% endif %}
+                                {% if company.youtube_url %}
+                                <li><a href="{{ company.youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></li>
+                                {% endif %}
+                                {% if company.linkedin_url %}
+                                <li><a href="{{ company.linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
