@@ -17,18 +17,17 @@
                 <div class="banner-four-wrapper">
                     <div class="inner-left">
                         <h1 class="title wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
-                            Secure Technology.<br>Scalable Growth.
+                            {{ company.hero_headline }}
                         </h1>
                         <p class="disc wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
-                            Tanzania's trusted IT partner — delivering tailored software, cybersecurity,
-                            cloud, and payment integration solutions that drive real business growth.
+                            {{ company.hero_subtext }}
                         </p>
                         <div class="d-flex gap-3 mt--40 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
                             <a href="{% url 'contact:contact' %}" class="rts-btn btn-primary btn-bold">
-                                Get Free Consultation
+                                {{ company.hero_cta_primary }}
                             </a>
                             <a href="{% url 'services:list' %}" class="rts-btn btn-border btn-bold" style="border-color:rgba(255,255,255,0.4); color:#fff;">
-                                Our Services
+                                {{ company.hero_cta_secondary }}
                             </a>
                         </div>
                     </div>
@@ -114,26 +113,26 @@
         <div class="row g-5 justify-content-center">
             <div class="col-lg-3 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
                 <div class="single-counter-up-one text-center">
-                    <h3 class="title"><span class="counter">7</span></h3>
-                    <p>IT Service Lines</p>
+                    <h3 class="title"><span class="counter">{{ company.stat_1_value }}</span></h3>
+                    <p>{{ company.stat_1_label }}</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
                 <div class="single-counter-up-one text-center">
-                    <h3 class="title"><span class="counter">6</span></h3>
-                    <p>Industries Served</p>
+                    <h3 class="title"><span class="counter">{{ company.stat_2_value }}</span></h3>
+                    <p>{{ company.stat_2_label }}</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
                 <div class="single-counter-up-one text-center">
-                    <h3 class="title"><span class="counter">24</span>/7</h3>
-                    <p>Monitoring &amp; Support</p>
+                    <h3 class="title"><span class="counter">{{ company.stat_3_value }}</span></h3>
+                    <p>{{ company.stat_3_label }}</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".8s">
                 <div class="single-counter-up-one text-center">
-                    <h3 class="title"><span class="counter">100</span>%</h3>
-                    <p>Dedicated to Your Success</p>
+                    <h3 class="title"><span class="counter">{{ company.stat_4_value }}</span></h3>
+                    <p>{{ company.stat_4_label }}</p>
                 </div>
             </div>
         </div>
@@ -152,14 +151,9 @@
                 <div class="what-we-do-main-wrapper">
                     <div class="title-style-four mb--20">
                         <span class="pre-title">Who We Are</span>
-                        <h2 class="title">Tanzania's IT Partner<br>Built for East Africa</h2>
+                        <h2 class="title">{{ company.about_headline }}</h2>
                     </div>
-                    <p class="disc">
-                        BJP Technologies (T) Limited is a full-service IT company headquartered in
-                        Ubungo, Dar es Salaam. We build and maintain the software, infrastructure,
-                        and security systems that keep growing businesses running — from Tanzanian
-                        startups to regional enterprises.
-                    </p>
+                    <p class="disc">{{ company.about_body }}</p>
                     <ul class="mt--30 mb--30" style="list-style:none; padding:0;">
                         <li class="mb--12">
                             <i class="fa-sharp fa-regular fa-check" style="color:#00C6FF; margin-right:10px;"></i>

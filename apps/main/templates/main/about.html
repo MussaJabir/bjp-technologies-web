@@ -23,7 +23,7 @@
                 </div>
                 <h1 class="title wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s"
                     style="font-family:'DM Serif Display', serif; color:var(--white); font-size:clamp(2rem,5vw,3.2rem); margin:0;">
-                    Secure Technology.<br>Scalable Growth.
+                    {{ company.about_banner_headline }}
                 </h1>
             </div>
         </div>
@@ -39,8 +39,8 @@
                     <div class="icon-area">
                         <i class="fa-regular fa-briefcase" style="font-size:28px; color:var(--accent);"></i>
                     </div>
-                    <p>Projects Delivered</p>
-                    <h3 class="title"><span class="counter">50</span>+</h3>
+                    <p>{{ company.about_stat_1_label }}</p>
+                    <h3 class="title"><span class="counter">{{ company.about_stat_1_value }}</span></h3>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
@@ -48,8 +48,8 @@
                     <div class="icon-area">
                         <i class="fa-regular fa-users" style="font-size:28px; color:var(--accent);"></i>
                     </div>
-                    <p>Happy Clients</p>
-                    <h3 class="title"><span class="counter">30</span>+</h3>
+                    <p>{{ company.about_stat_2_label }}</p>
+                    <h3 class="title"><span class="counter">{{ company.about_stat_2_value }}</span></h3>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
@@ -57,8 +57,8 @@
                     <div class="icon-area">
                         <i class="fa-regular fa-shield-check" style="font-size:28px; color:var(--accent);"></i>
                     </div>
-                    <p>Security Audits Done</p>
-                    <h3 class="title"><span class="counter">20</span>+</h3>
+                    <p>{{ company.about_stat_3_label }}</p>
+                    <h3 class="title"><span class="counter">{{ company.about_stat_3_value }}</span></h3>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
@@ -66,8 +66,8 @@
                     <div class="icon-area">
                         <i class="fa-regular fa-calendar-days" style="font-size:28px; color:var(--accent);"></i>
                     </div>
-                    <p>Years in Business</p>
-                    <h3 class="title"><span class="counter">5</span>+</h3>
+                    <p>{{ company.about_stat_4_label }}</p>
+                    <h3 class="title"><span class="counter">{{ company.about_stat_4_value }}</span></h3>
                 </div>
             </div>
         </div>
@@ -80,11 +80,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="what-we-do-wrapper-about">
-                    <p class="disc">
-                        BJP Technologies (T) Limited is a Tanzanian IT solutions company headquartered in Ubungo, Dar es Salaam.
-                        We deliver enterprise-grade technology services — from custom software development and cloud infrastructure
-                        to cybersecurity and managed IT — helping businesses across East Africa grow securely and operate at scale.
-                    </p>
+                    <p class="disc">{{ company.about_intro }}</p>
                 </div>
             </div>
         </div>
@@ -92,11 +88,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
                 <div class="what-we-do-main-wrapper">
                     <h5 class="title">What We Do</h5>
-                    <p class="disc">
-                        We bring together the technology, expertise, and support businesses need to solve real problems.
-                        From secure web applications to cloud infrastructure and mobile money payment integrations —
-                        we cover the full technology stack so our clients can focus on growth.
-                    </p>
+                    <p class="disc">{{ company.about_what_we_do }}</p>
                     <a href="{% url 'services:list' %}" class="rts-btn btn-border btn-bold">
                         Our Services
                         <img src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
@@ -106,11 +98,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
                 <div class="what-we-do-main-wrapper">
                     <h5 class="title">Our Approach</h5>
-                    <p class="disc">
-                        We believe every client deserves solutions tailored to their context — not generic off-the-shelf products.
-                        Our team works closely with each organisation to understand their operations, constraints, and goals
-                        before recommending or building anything.
-                    </p>
+                    <p class="disc">{{ company.about_our_approach }}</p>
                     <a href="{% url 'contact:contact' %}" class="rts-btn btn-border btn-bold">
                         Get In Touch
                         <img src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
@@ -233,84 +221,25 @@
             </div>
         </div>
         <div class="row g-5">
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
-                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
+            {% for service in services %}
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".{{ forloop.counter }}s">
+                <a href="{% url 'services:detail' slug=service.slug %}" class="single-service-style-two" style="display:block;">
                     <div class="inner">
                         <div class="icon">
-                            <i class="fa-regular fa-laptop-code" style="font-size:36px; color:var(--accent);"></i>
+                            {% if service.icon_svg %}
+                            <i class="{{ service.icon_svg }}" style="font-size:36px; color:var(--accent);"></i>
+                            {% else %}
+                            <i class="fa-regular fa-gear" style="font-size:36px; color:var(--accent);"></i>
+                            {% endif %}
                         </div>
                         <div class="bottom">
-                            <h3 class="title animated fadeIn">Software Development</h3>
-                            <p class="disc">Custom web apps, ERP, HR, SACCOS, POS &amp; API integrations.</p>
+                            <h3 class="title animated fadeIn">{{ service.name }}</h3>
+                            <p class="disc">{{ service.tagline }}</p>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
-                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
-                    <div class="inner">
-                        <div class="icon">
-                            <i class="fa-regular fa-globe" style="font-size:36px; color:var(--accent);"></i>
-                        </div>
-                        <div class="bottom">
-                            <h3 class="title animated fadeIn">Website &amp; Digital</h3>
-                            <p class="disc">Corporate websites, e-commerce, CMS and digital presence.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
-                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
-                    <div class="inner">
-                        <div class="icon">
-                            <i class="fa-regular fa-cloud-arrow-up" style="font-size:36px; color:var(--accent);"></i>
-                        </div>
-                        <div class="bottom">
-                            <h3 class="title animated fadeIn">Cloud &amp; Infrastructure</h3>
-                            <p class="disc">AWS, Oracle Cloud, DigitalOcean, Linux admin &amp; backup.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
-                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
-                    <div class="inner">
-                        <div class="icon">
-                            <i class="fa-regular fa-shield-halved" style="font-size:36px; color:var(--accent);"></i>
-                        </div>
-                        <div class="bottom">
-                            <h3 class="title animated fadeIn">Cybersecurity</h3>
-                            <p class="disc">WAF, VAPT, malware removal, server hardening &amp; secure auth.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
-                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
-                    <div class="inner">
-                        <div class="icon">
-                            <i class="fa-regular fa-headset" style="font-size:36px; color:var(--accent);"></i>
-                        </div>
-                        <div class="bottom">
-                            <h3 class="title animated fadeIn">Managed IT Services</h3>
-                            <p class="disc">24/7 monitoring, patching, helpdesk &amp; data backup.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
-                <a href="{% url 'services:list' %}" class="single-service-style-two" style="display:block;">
-                    <div class="inner">
-                        <div class="icon">
-                            <i class="fa-regular fa-mobile-screen-button" style="font-size:36px; color:var(--accent);"></i>
-                        </div>
-                        <div class="bottom">
-                            <h3 class="title animated fadeIn">Payment Integrations</h3>
-                            <p class="disc">M-Pesa, Tigo Pesa, Airtel Money, Mastercard &amp; bank gateways.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

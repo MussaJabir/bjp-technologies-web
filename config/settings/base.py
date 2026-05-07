@@ -199,6 +199,68 @@ UNFOLD = {
                 ],
             },
             {
+                "title": "Site Settings",
+                "separator": True,
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": "Company Identity",
+                        "icon": "business",
+                        "link": reverse_lazy("admin:core_companyidentitysettings_changelist"),
+                    },
+                    {
+                        "title": "Address",
+                        "icon": "location_on",
+                        "link": reverse_lazy("admin:core_addresssettings_changelist"),
+                    },
+                    {
+                        "title": "Social Media",
+                        "icon": "share",
+                        "link": reverse_lazy("admin:core_socialmediasettings_changelist"),
+                    },
+                    {
+                        "title": "Hero Section",
+                        "icon": "web_asset",
+                        "link": reverse_lazy("admin:core_herosectionsettings_changelist"),
+                    },
+                    {
+                        "title": "Stats Counters",
+                        "icon": "bar_chart",
+                        "link": reverse_lazy("admin:core_statscounterssettings_changelist"),
+                    },
+                    {
+                        "title": "About Strip",
+                        "icon": "info",
+                        "link": reverse_lazy("admin:core_aboutstripsettings_changelist"),
+                    },
+                    {
+                        "title": "About Page",
+                        "icon": "person",
+                        "link": reverse_lazy("admin:core_aboutpagesettings_changelist"),
+                    },
+                    {
+                        "title": "Services Page",
+                        "icon": "build",
+                        "link": reverse_lazy("admin:core_servicespagesettings_changelist"),
+                    },
+                    {
+                        "title": "Industries Page",
+                        "icon": "factory",
+                        "link": reverse_lazy("admin:core_industriespagesettings_changelist"),
+                    },
+                    {
+                        "title": "Contact Page",
+                        "icon": "map",
+                        "link": reverse_lazy("admin:core_contactpagesettings_changelist"),
+                    },
+                    {
+                        "title": "Footer CTA",
+                        "icon": "campaign",
+                        "link": reverse_lazy("admin:core_footerctasettings_changelist"),
+                    },
+                ],
+            },
+            {
                 "title": "Enquiries",
                 "separator": True,
                 "items": [
