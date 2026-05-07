@@ -240,6 +240,21 @@ All models must inherit from `BaseModel` (defined in `apps/core/models.py`).
 - Use `list_display`, `search_fields`, and `list_filter` on every `ModelAdmin`
 - Group related fields with `fieldsets`
 
+### SiteSettings Singleton (Site-wide Content)
+All editable website content lives in `apps/core/models.SiteSettings` — a singleton model (always pk=1). Access it via `SiteSettings.get()`. It is passed to every template as `{{ company }}` by the `company_info` context processor in `apps/core/context_processors.py`.
+
+**Sections covered:**
+- Company identity (name, tagline, email, phone, address, postal, domain)
+- Social media URLs
+- Home page: hero headline/subtext/CTAs, stats counters (4), about strip
+- About page: banner headline, counters (4), intro/what-we-do/approach body texts
+- Services page: banner headline + subtext
+- Industries page: banner headline + subtext
+- Contact page: Google Maps embed URL
+- Footer: CTA headline, body, button text
+
+**Proxy model admin pattern:** Each section has its own proxy model (e.g. `HeroSectionSettings`, `AboutPageSettings`) registered as a separate `ModelAdmin` with `changelist_view` redirecting to the singleton change form. All 11 sections appear as collapsible sub-links under "Site Settings" in the Unfold sidebar. To add a new editable section: add fields to `SiteSettings`, create a proxy model, register a proxy admin, add a sidebar link in `config/settings/base.py`, wire `{{ company.field }}` in the template, and run `makemigrations`.
+
 ---
 
 ## 6. Database Rules
@@ -819,11 +834,13 @@ Pushing to `main` on GitHub automatically deploys to `technologies.bejundas.co.t
 **Goal:** Client can manage content through Django admin without developer involvement.
 
 **Deliverables:**
-- [ ] All models registered with rich admin configuration
-- [ ] Services editable from admin (name, description, icon, order)
-- [ ] Contact enquiries manageable (mark as read, replied)
-- [ ] Admin branding customized (BJP logo and colors)
-- [ ] Superuser credentials documented securely (not in repo)
+- [x] All models registered with rich admin configuration
+- [x] Services editable from admin (name, description, icon, order)
+- [x] Contact enquiries manageable (mark as read, replied)
+- [x] Admin branding customized (BJP logo and colors)
+- [x] Superuser credentials documented securely (not in repo)
+- [x] SiteSettings singleton — all website content editable from admin (see Section 5)
+- [x] Admin panel split into per-section proxy model links (11 sections under Site Settings)
 
 ---
 
@@ -831,11 +848,11 @@ Pushing to `main` on GitHub automatically deploys to `technologies.bejundas.co.t
 **Goal:** Production-ready. Secure. Fast. SEO-ready.
 
 **Deliverables:**
-- [ ] All security settings verified (HSTS, CSRF, XSS, SSL redirect)
-- [ ] `DEBUG=False` confirmed in production
-- [ ] Meta tags and Open Graph tags on all pages
-- [ ] Sitemap generated (`django.contrib.sitemaps`)
-- [ ] robots.txt configured
+- [x] All security settings verified (HSTS, CSRF, XSS, SSL redirect)
+- [x] `DEBUG=False` confirmed in production
+- [x] Meta tags and Open Graph tags on all pages
+- [x] Sitemap generated (`django.contrib.sitemaps`)
+- [x] robots.txt configured
 - [ ] Page load speed tested (target under 3s)
 - [ ] All images optimized
 - [ ] Final security audit (no secrets, no debug, no SQL exposure)

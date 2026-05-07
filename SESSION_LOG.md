@@ -816,3 +816,83 @@ TEMPLATE FOR NEXT SESSION — copy this block and fill in:
 - [ ] Merge feature/phase-6-polish-launch → develop → main via PR
 
 ---
+
+---
+
+## Session 11 — 2026-05-07 17:07 EAT
+
+**Goal:** Complete dynamic content implementation — make all static website content editable from Django admin, split SiteSettings admin into per-section links, and add collapsible sidebar navigation.
+**Branch:** feature/dynamic-content
+**Status:** ✅ Complete
+
+### What Was Done
+- Completed home page about strip wiring (`{{ company.about_headline }}`, `{{ company.about_body }}`)
+- Created migration `0003_add_homepage_content_fields` for hero, stats, and about strip fields
+- Split `SiteSettings` admin into 6 proxy model admins (Company Identity, Address, Social Media, Hero Section, Stats Counters, About Strip), each with its own sidebar link under a new "Site Settings" group
+- Created migration `0004_add_sitesettings_proxy_models` for proxy models
+- Performed full site audit for remaining hardcoded content across all templates
+- Round 1 — quick wins (existing data, no new fields):
+  - Contact page: wired `{{ company.address }}`, `{{ company.phone }}`, `{{ company.email }}` (was hardcoded literals)
+  - About page services grid: replaced hardcoded 6-card duplicate with dynamic `{% for service in services %}` loop; fixed `AboutView` to pass services queryset
+- Round 1 — new fields added to `SiteSettings`:
+  - About page: banner headline, 4 counters (value + label), intro paragraph, what-we-do body, our-approach body
+  - Footer CTA: headline, body, button text
+  - Contact page: `maps_embed_url`
+- Round 2 — page banner fields added:
+  - Services page: banner headline + subtext
+  - Industries page: banner headline + subtext
+- Added 5 new proxy model admins (About Page, Services Page, Industries Page, Contact Page, Footer CTA) with sidebar links
+- Created migration `0005_add_page_content_fields` (24 new fields + 5 proxy models)
+- Made "Site Settings" sidebar group collapsible (`"collapsible": True` in Unfold nav config)
+- Pushed all 4 commits to `origin/feature/dynamic-content`
+
+### Files Changed
+| File | Action | Notes |
+|---|---|---|
+| apps/core/models.py | Modified | Added 24 new SiteSettings fields + 11 proxy models total |
+| apps/core/admin.py | Modified | 11 proxy model admins replacing single SiteSettingsAdmin |
+| apps/core/context_processors.py | Modified | Returns SiteSettings object as `company` |
+| apps/core/templates/core/footer.html | Modified | Footer CTA wired to SiteSettings |
+| apps/core/migrations/0003_add_homepage_content_fields.py | Created | Hero, stats, about strip fields |
+| apps/core/migrations/0004_add_sitesettings_proxy_models.py | Created | 6 proxy models |
+| apps/core/migrations/0005_add_page_content_fields.py | Created | 24 fields + 5 proxy models |
+| apps/main/views.py | Modified | AboutView now passes services queryset |
+| apps/main/templates/main/home.html | Modified | Hero, stats, about strip all dynamic |
+| apps/main/templates/main/about.html | Modified | Banner, counters, all body texts, services grid dynamic |
+| apps/services/templates/services/list.html | Modified | Banner headline + subtext dynamic |
+| apps/industries/templates/industries/list.html | Modified | Banner headline + subtext dynamic |
+| apps/contact/templates/contact/contact.html | Modified | Address, phone, email, maps URL dynamic |
+| config/settings/base.py | Modified | Unfold nav: Site Settings group (11 items, collapsible) |
+
+### Migrations
+- `0003_add_homepage_content_fields` — Applied ✅
+- `0004_add_sitesettings_proxy_models` — Applied ✅
+- `0005_add_page_content_fields` — Applied ✅
+- **Server note:** All 3 migrations must be applied on cPanel after pulling
+
+### Tests
+- Tests written: 0 new
+- Tests passing: all existing pass
+- Coverage: no regressions
+
+### Decisions Made
+- **Decision:** Use proxy models (not separate DB tables) for each SiteSettings admin section.
+  **Reason:** All site settings belong in one row — splitting into real models would require joins or multiple singleton patterns. Proxy models give separate admin URLs and forms while reading/writing the same row.
+- **Decision:** `collapsible: True` on Site Settings nav group rather than nesting under a parent item.
+  **Reason:** Unfold's app_list template supports `group.collapsible` natively via Alpine.js — auto-opens when an item in the group is active, collapses otherwise.
+- **Decision:** About page services grid replaced with dynamic loop (not just made editable).
+  **Reason:** It was a full duplicate of Service model data that would go stale silently. Dynamic loop is always in sync with admin edits.
+- **Decision:** Left 4 items hardcoded (About/Services/Industries bottom CTA sections, "Why Clients Choose" benefit tiles).
+  **Reason:** Boilerplate marketing text with no real edit frequency. Making them dynamic would add ~8 more fields with near-zero business value.
+
+### Blockers / Issues
+- None
+
+### Next Session Should
+- [ ] PR `feature/dynamic-content → develop` (user to action)
+- [ ] PR `develop → main` (user to action)
+- [ ] Run `python manage.py migrate` on cPanel after pull (migrations 0003, 0004, 0005)
+- [ ] Continue Phase 6: page speed test, image optimisation, final security audit
+- [ ] Go-live sign-off when Phase 6 checklist complete
+
+---
