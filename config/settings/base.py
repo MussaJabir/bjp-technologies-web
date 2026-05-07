@@ -201,6 +201,7 @@ UNFOLD = {
             {
                 "title": "Site Settings",
                 "separator": True,
+                "collapsible": True,
                 "items": [
                     {
                         "title": "Company Identity",
