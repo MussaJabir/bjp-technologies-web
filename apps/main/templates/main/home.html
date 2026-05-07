@@ -50,45 +50,21 @@
 <div class="service-area-start mt-dec-service-3">
     <div class="container">
         <div class="row g-5">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
+            {% for service in featured_services|slice:":3" %}
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".{{ forloop.counter }}s">
                 <div class="single-service-area-4">
                     <div class="icon">
-                        <img src="{% static 'images/service/icons/18.svg' %}" alt="Software Development">
+                        <img src="{% static 'images/service/icons/18.svg' %}" alt="{{ service.name }}">
                     </div>
                     <div class="title-area">
-                        <a href="{% url 'services:detail' slug='software-development' %}">
-                            <h3 class="title">Software Development</h3>
+                        <a href="{% url 'services:detail' slug=service.slug %}">
+                            <h3 class="title">{{ service.name }}</h3>
                             <img class="injectable" src="{% static 'images/service/icons/21.svg' %}" alt="arrow">
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
-                <div class="single-service-area-4">
-                    <div class="icon">
-                        <img src="{% static 'images/service/icons/19.svg' %}" alt="Cloud Infrastructure">
-                    </div>
-                    <div class="title-area">
-                        <a href="{% url 'services:detail' slug='cloud-infrastructure' %}">
-                            <h3 class="title">Cloud & Infrastructure</h3>
-                            <img class="injectable" src="{% static 'images/service/icons/21.svg' %}" alt="arrow">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
-                <div class="single-service-area-4">
-                    <div class="icon">
-                        <img src="{% static 'images/service/icons/20.svg' %}" alt="Cybersecurity">
-                    </div>
-                    <div class="title-area">
-                        <a href="{% url 'services:detail' slug='cybersecurity' %}">
-                            <h3 class="title">Cybersecurity</h3>
-                            <img class="injectable" src="{% static 'images/service/icons/21.svg' %}" alt="arrow">
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -107,69 +83,17 @@
             </div>
         </div>
         <div class="row g-5 mt--30">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
-                <a href="{% url 'services:detail' slug='software-development' %}" class="single-service-area-wrapper">
-                    <div class="icon"><img src="{% static 'images/service/icons/22.svg' %}" alt="Software Development"></div>
+            {% for service in featured_services %}
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120">
+                <a href="{% url 'services:detail' slug=service.slug %}" class="single-service-area-wrapper">
+                    <div class="icon"><img src="{% static 'images/service/icons/22.svg' %}" alt="{{ service.name }}"></div>
                     <div class="info">
-                        <h4 class="title">Software Development</h4>
+                        <h4 class="title">{{ service.name }}</h4>
                         <img class="injectable" src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
-                <a href="{% url 'services:detail' slug='website-digital-solutions' %}" class="single-service-area-wrapper">
-                    <div class="icon"><img src="{% static 'images/service/icons/23.svg' %}" alt="Website & Digital"></div>
-                    <div class="info">
-                        <h4 class="title">Website & Digital</h4>
-                        <img class="injectable" src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
-                <a href="{% url 'services:detail' slug='cloud-infrastructure' %}" class="single-service-area-wrapper">
-                    <div class="icon"><img src="{% static 'images/service/icons/24.svg' %}" alt="Cloud"></div>
-                    <div class="info">
-                        <h4 class="title">Cloud & Infrastructure</h4>
-                        <img class="injectable" src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
-                <a href="{% url 'services:detail' slug='cybersecurity' %}" class="single-service-area-wrapper">
-                    <div class="icon"><img src="{% static 'images/service/icons/25.svg' %}" alt="Cybersecurity"></div>
-                    <div class="info">
-                        <h4 class="title">Cybersecurity</h4>
-                        <img class="injectable" src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".4s">
-                <a href="{% url 'services:detail' slug='managed-it-services' %}" class="single-service-area-wrapper">
-                    <div class="icon"><img src="{% static 'images/service/icons/26.svg' %}" alt="Managed IT"></div>
-                    <div class="info">
-                        <h4 class="title">Managed IT Services</h4>
-                        <img class="injectable" src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".6s">
-                <a href="{% url 'services:detail' slug='payment-system-integrations' %}" class="single-service-area-wrapper">
-                    <div class="icon"><img src="{% static 'images/service/icons/27.svg' %}" alt="Payment Integrations"></div>
-                    <div class="info">
-                        <h4 class="title">Payment Integrations</h4>
-                        <img class="injectable" src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 wow fadeInUp" data-wow-offset="120" data-wow-delay=".2s">
-                <a href="{% url 'services:detail' slug='it-consulting-advisory' %}" class="single-service-area-wrapper">
-                    <div class="icon"><img src="{% static 'images/service/icons/28.svg' %}" alt="IT Consulting"></div>
-                    <div class="info">
-                        <h4 class="title">IT Consulting</h4>
-                        <img class="injectable" src="{% static 'images/service/icons/13.svg' %}" alt="arrow">
-                    </div>
-                </a>
-            </div>
+            {% endfor %}
         </div>
         <div class="row mt--80">
             <div class="col-lg-12">
