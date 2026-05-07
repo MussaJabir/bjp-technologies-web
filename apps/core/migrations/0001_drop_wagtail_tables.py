@@ -86,8 +86,9 @@ def drop_wagtail_tables(apps, schema_editor):
         elif vendor == "sqlite":
             cursor.execute("PRAGMA foreign_keys = OFF")
 
+        quote = "`" if vendor == "mysql" else '"'
         for table in WAGTAIL_TABLES:
-            cursor.execute(f'DROP TABLE IF EXISTS "{table}"')
+            cursor.execute(f"DROP TABLE IF EXISTS {quote}{table}{quote}")
 
         if vendor == "mysql":
             cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
