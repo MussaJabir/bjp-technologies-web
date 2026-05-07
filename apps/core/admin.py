@@ -60,7 +60,37 @@ class SiteSettingsAdmin(ModelAdmin):
             {
                 "fields": (("facebook_url", "twitter_url"), ("linkedin_url", "youtube_url")),
                 "classes": ("collapse",),
-                "description": "Leave blank if not applicable.",
+                "description": "Leave blank if not applicable. Icons only appear in the footer when a URL is set.",
+            },
+        ),
+        (
+            "Home Page — Hero Section",
+            {
+                "fields": (
+                    "hero_headline",
+                    "hero_subtext",
+                    ("hero_cta_primary", "hero_cta_secondary"),
+                ),
+                "description": "The main banner text and call-to-action buttons on the home page.",
+            },
+        ),
+        (
+            "Home Page — Stats Counters",
+            {
+                "fields": (
+                    ("stat_1_value", "stat_1_label"),
+                    ("stat_2_value", "stat_2_label"),
+                    ("stat_3_value", "stat_3_label"),
+                    ("stat_4_value", "stat_4_label"),
+                ),
+                "description": "The four animated counters shown on the home page. Value can include symbols e.g. 50+, 24/7, 100%.",
+            },
+        ),
+        (
+            "Home Page — About Strip",
+            {
+                "fields": ("about_headline", "about_body"),
+                "description": "The 'Who We Are' section on the home page.",
             },
         ),
     )
