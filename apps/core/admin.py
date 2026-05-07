@@ -7,7 +7,14 @@ from apps.contact.models import ContactEnquiry
 from apps.industries.models import Industry
 from apps.services.models import Service
 
-from .models import SiteSettings
+from .models import (
+    AboutStripSettings,
+    AddressSettings,
+    CompanyIdentitySettings,
+    HeroSectionSettings,
+    SocialMediaSettings,
+    StatsCountersSettings,
+)
 
 
 def dashboard_callback(request, context):
@@ -40,8 +47,22 @@ def enquiry_badge(request):
     return str(count) if count else None
 
 
-@admin.register(SiteSettings)
-class SiteSettingsAdmin(ModelAdmin):
+class _SiteSettingsSectionAdmin(ModelAdmin):
+    """Shared base for all SiteSettings proxy admins — singleton redirect + no add/delete."""
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def changelist_view(self, request, extra_context=None):
+        model_name = self.model._meta.model_name
+        return HttpResponseRedirect(reverse(f"admin:core_{model_name}_change", args=[1]))
+
+
+@admin.register(CompanyIdentitySettings)
+class CompanyIdentitySettingsAdmin(_SiteSettingsSectionAdmin):
     fieldsets = (
         (
             "Company Identity",
@@ -49,20 +70,37 @@ class SiteSettingsAdmin(ModelAdmin):
                 "fields": (("name", "tagline"), ("email", "phone")),
             },
         ),
+    )
+
+
+@admin.register(AddressSettings)
+class AddressSettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
         (
             "Address",
             {
                 "fields": (("address", "postal"), "domain"),
             },
         ),
+    )
+
+
+@admin.register(SocialMediaSettings)
+class SocialMediaSettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
         (
             "Social Media Links",
             {
                 "fields": (("facebook_url", "twitter_url"), ("linkedin_url", "youtube_url")),
-                "classes": ("collapse",),
                 "description": "Leave blank if not applicable. Icons only appear in the footer when a URL is set.",
             },
         ),
+    )
+
+
+@admin.register(HeroSectionSettings)
+class HeroSectionSettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
         (
             "Home Page — Hero Section",
             {
@@ -74,6 +112,12 @@ class SiteSettingsAdmin(ModelAdmin):
                 "description": "The main banner text and call-to-action buttons on the home page.",
             },
         ),
+    )
+
+
+@admin.register(StatsCountersSettings)
+class StatsCountersSettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
         (
             "Home Page — Stats Counters",
             {
@@ -86,6 +130,12 @@ class SiteSettingsAdmin(ModelAdmin):
                 "description": "The four animated counters shown on the home page. Value can include symbols e.g. 50+, 24/7, 100%.",
             },
         ),
+    )
+
+
+@admin.register(AboutStripSettings)
+class AboutStripSettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
         (
             "Home Page — About Strip",
             {
@@ -94,13 +144,3 @@ class SiteSettingsAdmin(ModelAdmin):
             },
         ),
     )
-
-    def has_add_permission(self, request):
-        return not SiteSettings.objects.exists()
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-    def changelist_view(self, request, extra_context=None):
-        """Redirect the list view straight to the edit form."""
-        return HttpResponseRedirect(reverse("admin:core_sitesettings_change", args=[1]))

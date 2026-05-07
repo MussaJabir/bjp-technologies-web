@@ -199,6 +199,42 @@ UNFOLD = {
                 ],
             },
             {
+                "title": "Site Settings",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Company Identity",
+                        "icon": "business",
+                        "link": reverse_lazy("admin:core_companyidentitysettings_changelist"),
+                    },
+                    {
+                        "title": "Address",
+                        "icon": "location_on",
+                        "link": reverse_lazy("admin:core_addresssettings_changelist"),
+                    },
+                    {
+                        "title": "Social Media",
+                        "icon": "share",
+                        "link": reverse_lazy("admin:core_socialmediasettings_changelist"),
+                    },
+                    {
+                        "title": "Hero Section",
+                        "icon": "web_asset",
+                        "link": reverse_lazy("admin:core_herosectionsettings_changelist"),
+                    },
+                    {
+                        "title": "Stats Counters",
+                        "icon": "bar_chart",
+                        "link": reverse_lazy("admin:core_statscounterssettings_changelist"),
+                    },
+                    {
+                        "title": "About Strip",
+                        "icon": "info",
+                        "link": reverse_lazy("admin:core_aboutstripsettings_changelist"),
+                    },
+                ],
+            },
+            {
                 "title": "Enquiries",
                 "separator": True,
                 "items": [

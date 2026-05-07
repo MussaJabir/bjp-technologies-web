@@ -79,3 +79,45 @@ class SiteSettings(models.Model):
     def get(cls) -> "SiteSettings":
         obj, _ = cls.objects.get_or_create(pk=1)
         return obj
+
+
+class CompanyIdentitySettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Company Identity"
+        verbose_name_plural = "Company Identity"
+
+
+class AddressSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Address"
+        verbose_name_plural = "Address"
+
+
+class SocialMediaSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Social Media Links"
+        verbose_name_plural = "Social Media Links"
+
+
+class HeroSectionSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Hero Section"
+        verbose_name_plural = "Hero Section"
+
+
+class StatsCountersSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Stats Counters"
+        verbose_name_plural = "Stats Counters"
+
+
+class AboutStripSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "About Strip"
+        verbose_name_plural = "About Strip"
