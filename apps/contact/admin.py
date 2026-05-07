@@ -27,8 +27,16 @@ class ContactEnquiryAdmin(ModelAdmin):
 
     # All client fields are readonly — only status is editable
     readonly_fields = [
-        "first_name", "last_name", "email", "phone", "company",
-        "service", "message", "ip_address", "created_at", "updated_at",
+        "first_name",
+        "last_name",
+        "email",
+        "phone",
+        "company",
+        "service",
+        "message",
+        "ip_address",
+        "created_at",
+        "updated_at",
     ]
 
     fieldsets = [
@@ -86,7 +94,9 @@ class ContactEnquiryAdmin(ModelAdmin):
         return format_html(
             '<span style="padding:3px 10px; border-radius:4px; background:{}; '
             'color:{}; font-size:12px; font-weight:600;">{}</span>',
-            bg, fg, label,
+            bg,
+            fg,
+            label,
         )
 
     @admin.display(description="Actions")
