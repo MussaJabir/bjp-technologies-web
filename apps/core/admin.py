@@ -8,10 +8,15 @@ from apps.industries.models import Industry
 from apps.services.models import Service
 
 from .models import (
+    AboutPageSettings,
     AboutStripSettings,
     AddressSettings,
     CompanyIdentitySettings,
+    ContactPageSettings,
+    FooterCTASettings,
     HeroSectionSettings,
+    IndustriesPageSettings,
+    ServicesPageSettings,
     SocialMediaSettings,
     StatsCountersSettings,
 )
@@ -141,6 +146,93 @@ class AboutStripSettingsAdmin(_SiteSettingsSectionAdmin):
             {
                 "fields": ("about_headline", "about_body"),
                 "description": "The 'Who We Are' section on the home page.",
+            },
+        ),
+    )
+
+
+@admin.register(AboutPageSettings)
+class AboutPageSettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
+        (
+            "About Page — Banner",
+            {
+                "fields": ("about_banner_headline",),
+                "description": "The headline shown in the about page hero banner.",
+            },
+        ),
+        (
+            "About Page — Counters",
+            {
+                "fields": (
+                    ("about_stat_1_value", "about_stat_1_label"),
+                    ("about_stat_2_value", "about_stat_2_label"),
+                    ("about_stat_3_value", "about_stat_3_label"),
+                    ("about_stat_4_value", "about_stat_4_label"),
+                ),
+                "description": "The four stat counters on the about page.",
+            },
+        ),
+        (
+            "About Page — Body",
+            {
+                "fields": ("about_intro", "about_what_we_do", "about_our_approach"),
+                "description": "The three body text sections on the about page.",
+            },
+        ),
+    )
+
+
+@admin.register(ServicesPageSettings)
+class ServicesPageSettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
+        (
+            "Services Page — Banner",
+            {
+                "fields": ("services_banner_headline", "services_banner_subtext"),
+                "description": "The headline and subtext shown in the services page banner.",
+            },
+        ),
+    )
+
+
+@admin.register(IndustriesPageSettings)
+class IndustriesPageSettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
+        (
+            "Industries Page — Banner",
+            {
+                "fields": ("industries_banner_headline", "industries_banner_subtext"),
+                "description": "The headline and subtext shown in the industries page banner.",
+            },
+        ),
+    )
+
+
+@admin.register(ContactPageSettings)
+class ContactPageSettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
+        (
+            "Contact Page — Map",
+            {
+                "fields": ("maps_embed_url",),
+                "description": (
+                    "Google Maps embed URL. To get a new URL: go to maps.google.com, "
+                    "find your location, click Share → Embed a map, copy the src= URL."
+                ),
+            },
+        ),
+    )
+
+
+@admin.register(FooterCTASettings)
+class FooterCTASettingsAdmin(_SiteSettingsSectionAdmin):
+    fieldsets = (
+        (
+            "Footer — Call to Action Banner",
+            {
+                "fields": ("footer_cta_headline", "footer_cta_body", "footer_cta_button"),
+                "description": "The CTA banner shown above the footer on every page.",
             },
         ),
     )

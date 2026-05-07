@@ -232,6 +232,31 @@ UNFOLD = {
                         "icon": "info",
                         "link": reverse_lazy("admin:core_aboutstripsettings_changelist"),
                     },
+                    {
+                        "title": "About Page",
+                        "icon": "person",
+                        "link": reverse_lazy("admin:core_aboutpagesettings_changelist"),
+                    },
+                    {
+                        "title": "Services Page",
+                        "icon": "build",
+                        "link": reverse_lazy("admin:core_servicespagesettings_changelist"),
+                    },
+                    {
+                        "title": "Industries Page",
+                        "icon": "factory",
+                        "link": reverse_lazy("admin:core_industriespagesettings_changelist"),
+                    },
+                    {
+                        "title": "Contact Page",
+                        "icon": "map",
+                        "link": reverse_lazy("admin:core_contactpagesettings_changelist"),
+                    },
+                    {
+                        "title": "Footer CTA",
+                        "icon": "campaign",
+                        "link": reverse_lazy("admin:core_footerctasettings_changelist"),
+                    },
                 ],
             },
             {

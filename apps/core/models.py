@@ -62,6 +62,82 @@ class SiteSettings(models.Model):
         )
     )
 
+    # About page — banner + counters + body
+    about_banner_headline = models.CharField(
+        max_length=200, default="Secure Technology. Scalable Growth."
+    )
+    about_stat_1_value = models.CharField(max_length=20, default="50+")
+    about_stat_1_label = models.CharField(max_length=60, default="Projects Delivered")
+    about_stat_2_value = models.CharField(max_length=20, default="30+")
+    about_stat_2_label = models.CharField(max_length=60, default="Happy Clients")
+    about_stat_3_value = models.CharField(max_length=20, default="20+")
+    about_stat_3_label = models.CharField(max_length=60, default="Security Audits Done")
+    about_stat_4_value = models.CharField(max_length=20, default="5+")
+    about_stat_4_label = models.CharField(max_length=60, default="Years in Business")
+    about_intro = models.TextField(
+        default=(
+            "BJP Technologies (T) Limited is a Tanzanian IT solutions company headquartered "
+            "in Ubungo, Dar es Salaam. We deliver enterprise-grade technology services — from "
+            "custom software development and cloud infrastructure to cybersecurity and managed "
+            "IT — helping businesses across East Africa grow securely and operate at scale."
+        )
+    )
+    about_what_we_do = models.TextField(
+        default=(
+            "We bring together the technology, expertise, and support businesses need to solve "
+            "real problems. From secure web applications to cloud infrastructure and mobile money "
+            "payment integrations — we cover the full technology stack so our clients can focus "
+            "on growth."
+        )
+    )
+    about_our_approach = models.TextField(
+        default=(
+            "We believe every client deserves solutions tailored to their context — not generic "
+            "off-the-shelf products. Our team works closely with each organisation to understand "
+            "their operations, constraints, and goals before recommending or building anything."
+        )
+    )
+
+    # Services page — banner
+    services_banner_headline = models.CharField(
+        max_length=200, default="Enterprise IT Solutions Built for Tanzania"
+    )
+    services_banner_subtext = models.TextField(
+        default=(
+            "From custom software to cloud infrastructure — we deliver secure, scalable "
+            "technology that helps businesses across East Africa grow with confidence."
+        )
+    )
+
+    # Industries page — banner
+    industries_banner_headline = models.CharField(
+        max_length=200, default="Tailored Solutions for Every Industry"
+    )
+    industries_banner_subtext = models.TextField(
+        default=(
+            "We understand that different sectors have unique technology needs. "
+            "BJP Technologies delivers solutions built around your industry's specific challenges."
+        )
+    )
+
+    # Contact page
+    maps_embed_url = models.CharField(
+        max_length=500,
+        default="https://www.google.com/maps?q=-6.750417,39.090111&z=17&output=embed",
+    )
+
+    # Footer CTA
+    footer_cta_headline = models.CharField(
+        max_length=200, default="Ready to Transform Your Business?"
+    )
+    footer_cta_body = models.TextField(
+        default=(
+            "Schedule a free consultation with our team. We'll assess your needs "
+            "and recommend the right technology solutions for your organisation."
+        )
+    )
+    footer_cta_button = models.CharField(max_length=60, default="Get Free Consultation")
+
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -121,3 +197,38 @@ class AboutStripSettings(SiteSettings):
         proxy = True
         verbose_name = "About Strip"
         verbose_name_plural = "About Strip"
+
+
+class AboutPageSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "About Page"
+        verbose_name_plural = "About Page"
+
+
+class ServicesPageSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Services Page"
+        verbose_name_plural = "Services Page"
+
+
+class IndustriesPageSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Industries Page"
+        verbose_name_plural = "Industries Page"
+
+
+class ContactPageSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Contact Page"
+        verbose_name_plural = "Contact Page"
+
+
+class FooterCTASettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Footer CTA"
+        verbose_name_plural = "Footer CTA"
