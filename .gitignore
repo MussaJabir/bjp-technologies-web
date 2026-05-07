@@ -55,3 +55,4 @@ luminos/
 
 # Test output files
 *.txt
+!templates/robots.txt
