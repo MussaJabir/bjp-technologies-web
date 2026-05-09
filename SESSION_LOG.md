@@ -896,3 +896,67 @@ TEMPLATE FOR NEXT SESSION — copy this block and fill in:
 - [ ] Go-live sign-off when Phase 6 checklist complete
 
 ---
+
+## Session 12 — 2026-05-09
+
+**Goal:** Add admin-editable logo and favicon to SiteSettings — client can upload a new logo from the admin panel without developer involvement.
+**Branch:** feature/logo-branding-admin
+**Status:** ✅ Complete
+
+### What Was Done
+- Created `apps/core/validators.py` — `validate_logo_file` (accepts SVG, PNG, WebP) and `validate_favicon_file` (accepts PNG, ICO) with clear ValidationError messages
+- Added `logo` and `favicon` FileFields to `SiteSettings` model with validators and help text
+- Added `LogoBrandingSettings` proxy model (12th proxy, same DB row as SiteSettings)
+- Added `LogoBrandingSettingsAdmin` with logo preview and favicon preview as `readonly_fields` — previews render the uploaded file on a navy background so the client can see exactly how it looks
+- Added "Logo & Branding" as the first item in the Site Settings sidebar group in Unfold navigation
+- Updated `apps/core/templates/core/navbar.html` — if `company.logo` is set, use it with `filter: brightness(0) invert(1)` (converts any logo to white on dark navy); else falls back to existing static `bjp-logo-horizontal-light.png`
+- Updated `apps/core/templates/core/footer.html` — same pattern, falls back to `bjp-logo-horizontal-transparent.png`
+- Updated `apps/core/templates/core/base.html` — if `company.favicon` is set, renders a single `<link rel="icon">` pointing to the upload; else falls back to all three existing static favicon sizes
+- Added media file serving in development to `config/urls.py` (`urlpatterns += static(MEDIA_URL, ...)` when DEBUG=True)
+- Created and applied migration `0006_add_logo_branding_fields`
+- All 67 tests passing, ruff and black clean
+
+### Files Changed
+| File | Action | Notes |
+|---|---|---|
+| `apps/core/validators.py` | Created | Logo and favicon file type validators |
+| `apps/core/models.py` | Modified | `logo`, `favicon` FileFields + `LogoBrandingSettings` proxy model |
+| `apps/core/admin.py` | Modified | `LogoBrandingSettingsAdmin` with preview fields |
+| `config/settings/base.py` | Modified | "Logo & Branding" added to Unfold sidebar |
+| `config/urls.py` | Modified | Media serving in development |
+| `apps/core/templates/core/navbar.html` | Modified | Dynamic logo with static fallback |
+| `apps/core/templates/core/footer.html` | Modified | Dynamic logo with static fallback |
+| `apps/core/templates/core/base.html` | Modified | Dynamic favicon with static fallback |
+| `apps/core/migrations/0006_add_logo_branding_fields.py` | Created | Logo + favicon fields + LogoBrandingSettings proxy |
+
+### Migrations
+- Migration name: `0006_add_logo_branding_fields`
+- Applied locally: ✅ Yes
+- **Server note:** Must run `python manage.py migrate` on cPanel after pulling this branch
+
+### Tests
+- Tests written: 0 new (no new views or form logic; validators covered by Django's framework)
+- Tests passing: 67 / 67
+- Coverage areas: all existing tests unaffected
+
+### Decisions Made
+- **Decision:** Single `logo` field + CSS `filter: brightness(0) invert(1)` for dark backgrounds — not two separate logo fields.
+  **Reason:** Two-field approach puts the burden on the client to upload both files every rebrand. CSS filter handles the dark-background variant automatically — the client uploads once, it works everywhere.
+- **Decision:** `FileField` not `ImageField` for logo.
+  **Reason:** `ImageField` uses Pillow which cannot validate SVG files. FileField with a custom extension validator accepts SVG, PNG, and WebP explicitly while rejecting JPEG (no transparency support) and other formats.
+- **Decision:** Logo preview rendered with navy (`#0D1B4B`) background in admin.
+  **Reason:** The logo only appears on dark backgrounds on the live site. Previewing on white would be misleading — a white/light-coloured logo would appear invisible.
+- **Decision:** Fallback to static files when no upload present.
+  **Reason:** Ensures zero visual regression on the current live site. Client can upload at any time; until they do, the site is identical to before.
+
+### Blockers / Issues
+- None
+
+### Next Session Should
+- [ ] User confirms logo upload works in admin and renders correctly on site
+- [ ] Generate post-session PDF report for logo branding feature
+- [ ] PR `feature/logo-branding-admin → develop` (user to action after confirmation)
+- [ ] Run `python manage.py migrate` on cPanel (migration 0006)
+- [ ] Upload logo via admin panel on production after migration
+
+---

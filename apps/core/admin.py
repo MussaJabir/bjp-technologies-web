@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils.html import format_html
 from unfold.admin import ModelAdmin
 
 from apps.contact.models import ContactEnquiry
@@ -16,6 +17,7 @@ from .models import (
     FooterCTASettings,
     HeroSectionSettings,
     IndustriesPageSettings,
+    LogoBrandingSettings,
     ServicesPageSettings,
     SocialMediaSettings,
     StatsCountersSettings,
@@ -236,3 +238,53 @@ class FooterCTASettingsAdmin(_SiteSettingsSectionAdmin):
             },
         ),
     )
+
+
+@admin.register(LogoBrandingSettings)
+class LogoBrandingSettingsAdmin(_SiteSettingsSectionAdmin):
+    readonly_fields = ("logo_preview", "favicon_preview")
+    fieldsets = (
+        (
+            "Company Logo",
+            {
+                "fields": (("logo", "logo_preview"),),
+                "description": (
+                    "Accepted formats: SVG, PNG, WebP. Must have a transparent background. "
+                    "The logo appears on dark navy backgrounds (navbar and footer) and is "
+                    "automatically displayed in white via CSS — no separate white version needed."
+                ),
+            },
+        ),
+        (
+            "Favicon",
+            {
+                "fields": (("favicon", "favicon_preview"),),
+                "description": (
+                    "The small icon shown in browser tabs and bookmarks. "
+                    "Accepted formats: PNG, ICO. Must be square — 32×32 minimum, 64×64 recommended."
+                ),
+            },
+        ),
+    )
+
+    def logo_preview(self, obj):
+        if obj.logo:
+            return format_html(
+                '<img src="{}" style="max-height:60px; background:#0D1B4B; '
+                'padding:10px 16px; border-radius:6px;" alt="Current logo">',
+                obj.logo.url,
+            )
+        return "No logo uploaded — site is using the default static logo file."
+
+    logo_preview.short_description = "Current Logo Preview"
+
+    def favicon_preview(self, obj):
+        if obj.favicon:
+            return format_html(
+                '<img src="{}" style="width:32px; height:32px; image-rendering:crisp-edges;" '
+                'alt="Current favicon">',
+                obj.favicon.url,
+            )
+        return "No favicon uploaded — site is using the default static favicon files."
+
+    favicon_preview.short_description = "Current Favicon Preview"

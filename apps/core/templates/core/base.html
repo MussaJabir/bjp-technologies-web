@@ -15,9 +15,13 @@
     <meta property="og:url" content="https://bjptechnologies.co.tz{% block og_url %}{% endblock %}">
     <meta property="og:image" content="https://bjptechnologies.co.tz{% static 'images/logo/bjp-app-icon-512-navy.png' %}">
 
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/logo/bjp-favicon-32.png' %}">
-    <link rel="icon" type="image/png" sizes="64x64" href="{% static 'images/logo/bjp-favicon-64.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'images/logo/bjp-favicon-256.png' %}">
+    {% if company.favicon %}
+        <link rel="icon" href="{{ company.favicon.url }}">
+    {% else %}
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/logo/bjp-favicon-32.png' %}">
+        <link rel="icon" type="image/png" sizes="64x64" href="{% static 'images/logo/bjp-favicon-64.png' %}">
+        <link rel="apple-touch-icon" href="{% static 'images/logo/bjp-favicon-256.png' %}">
+    {% endif %}
     <title>{% block title %}BJP Technologies (T) Limited{% endblock %} | Secure Technology. Scalable Growth.</title>
 
     <!-- Google Fonts -->
