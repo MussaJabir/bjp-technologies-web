@@ -49,13 +49,17 @@ jobs:
       - uses: actions/checkout@v4
       - name: Deploy to cPanel via SSH
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         with:
           host:     ${{ secrets.CPANEL_HOST }}
           username: ${{ secrets.CPANEL_USER }}
           password: ${{ secrets.CPANEL_PASS }}
+          envs: GH_PAT
           script: |
             cd ~/bjp-technologies-web
-            git pull origin main
+            git fetch https://$GH_PAT@github.com/MussaJabir/bjp-technologies-web.git main
+            git reset --hard FETCH_HEAD
             source ~/virtualenv/bjp-technologies-web/3.12/bin/activate
             pip install -r requirements.txt --quiet
             python manage.py migrate --no-input
