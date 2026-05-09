@@ -2,6 +2,8 @@ import uuid
 
 from django.db import models
 
+from .validators import validate_favicon_file, validate_logo_file
+
 
 class BaseModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -126,6 +128,23 @@ class SiteSettings(models.Model):
         default="https://www.google.com/maps?q=-6.750417,39.090111&z=17&output=embed",
     )
 
+    # Branding — logo & favicon
+    logo = models.FileField(
+        upload_to="branding/",
+        blank=True,
+        validators=[validate_logo_file],
+        help_text=(
+            "Accepted: SVG, PNG, WebP. Must have a transparent background. "
+            "Used in the navbar and footer on dark navy backgrounds."
+        ),
+    )
+    favicon = models.FileField(
+        upload_to="branding/",
+        blank=True,
+        validators=[validate_favicon_file],
+        help_text="Accepted: PNG, ICO. Must be square — 32×32 pixels minimum, 64×64 recommended.",
+    )
+
     # Footer CTA
     footer_cta_headline = models.CharField(
         max_length=200, default="Ready to Transform Your Business?"
@@ -232,3 +251,10 @@ class FooterCTASettings(SiteSettings):
         proxy = True
         verbose_name = "Footer CTA"
         verbose_name_plural = "Footer CTA"
+
+
+class LogoBrandingSettings(SiteSettings):
+    class Meta:
+        proxy = True
+        verbose_name = "Logo & Branding"
+        verbose_name_plural = "Logo & Branding"

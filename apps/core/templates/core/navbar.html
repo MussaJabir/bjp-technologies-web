@@ -5,7 +5,11 @@
             <div class="col-lg-12">
                 <div class="header-four-wrapper">
                     <a href="{% url 'main:home' %}" class="logo">
-                        <img src="{% static 'images/logo/bjp-logo-horizontal-light.png' %}" alt="BJP Technologies (T) Limited" style="height:40px; width:auto;">
+                        {% if company.logo %}
+                            <img src="{{ company.logo.url }}" alt="{{ company.name }}" style="height:40px; width:auto; filter: brightness(0) invert(1);">
+                        {% else %}
+                            <img src="{% static 'images/logo/bjp-logo-horizontal-light.png' %}" alt="BJP Technologies (T) Limited" style="height:40px; width:auto;">
+                        {% endif %}
                     </a>
                     <div class="nav-area">
                         <nav>
