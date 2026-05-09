@@ -30,7 +30,11 @@
                 <div class="col-lg-5">
                     <div class="logo-area">
                         <a href="{% url 'main:home' %}" class="logo">
-                            <img src="{% static 'images/logo/bjp-logo-horizontal-transparent.png' %}" alt="{{ company.name }}">
+                            {% if company.logo %}
+                                <img src="{{ company.logo.url }}" alt="{{ company.name }}" style="filter: brightness(0) invert(1); max-height:50px; width:auto;">
+                            {% else %}
+                                <img src="{% static 'images/logo/bjp-logo-horizontal-transparent.png' %}" alt="{{ company.name }}">
+                            {% endif %}
                         </a>
                         <p class="disc">
                             {{ company.name }} is Tanzania's trusted IT partner — delivering

@@ -204,6 +204,11 @@ UNFOLD = {
                 "collapsible": True,
                 "items": [
                     {
+                        "title": "Logo & Branding",
+                        "icon": "image",
+                        "link": reverse_lazy("admin:core_logobrandingsettings_changelist"),
+                    },
+                    {
                         "title": "Company Identity",
                         "icon": "business",
                         "link": reverse_lazy("admin:core_companyidentitysettings_changelist"),
