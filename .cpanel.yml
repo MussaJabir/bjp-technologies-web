@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/bjptechn/bjp-technologies-web
+    - export VENV=/home/bjptechn/virtualenv/bjp-technologies-web/3.12/bin
+    - $VENV/pip install -r $DEPLOYPATH/requirements.txt --quiet
+    - $VENV/python $DEPLOYPATH/manage.py migrate --no-input
+    - $VENV/python $DEPLOYPATH/manage.py collectstatic --no-input
+    - touch $DEPLOYPATH/tmp/restart.txt
