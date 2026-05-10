@@ -43,8 +43,8 @@
   Reason: Passenger restarts on `touch tmp/restart.txt` — detached process survives the parent being killed
 
 ### Next Session Should
-- [ ] Confirm webhook deploy works end-to-end (test PR → main)
-- [ ] Check `/tmp/bjp_deploy.log` on server to verify deploy script ran
+- [x] Confirm webhook deploy works end-to-end — webhook returns 200 ✅
+- [ ] Confirm deploy script ran via `/tmp/bjp_deploy.log`
 - [ ] Address private repo if hosting provider enables SSH access
 
 > This file is updated by Claude Code at the end of every working session.
