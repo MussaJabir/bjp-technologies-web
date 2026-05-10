@@ -1,6 +1,52 @@
 # SESSION_LOG.md — BJP Technologies (T) Limited
 # technologies.bejundas.co.tz
 
+---
+
+## Session 13 — 2026-05-10 EAT
+
+**Goal:** Automate cPanel deployment on merge to main via GitHub webhook.
+**Branch:** chore/automate-cpanel-deploy → chore/test-webhook-deploy
+**Status:** 🔄 In Progress
+
+### What Was Done
+- Added GitHub repo About section (description, website, topics) via `gh repo edit`
+- Diagnosed homepage counter bug: `24/7` and `100%` values were being overwritten with `0` by counter-up.js
+- Fixed counter animation in `static/js/main.js` to skip non-numeric values
+- Investigated automated cPanel deployment — SSH (port 22) blocked by host, cPanel UAPI (port 2083) blocked externally by OpenResty proxy
+- Added `.cpanel.yml` for post-deploy tasks
+- Replaced all failed approaches (SSH, UAPI, JSON API) with GitHub webhook → Django endpoint → detached shell script
+- Created `apps/core/webhook.py` with HMAC signature validation
+- Created `scripts/deploy.sh` (git pull, pip install, migrate, collectstatic, Passenger restart)
+- Wired `/deploy/webhook/` URL in `config/urls.py`
+- Stripped deploy job from GitHub Actions — tests only now
+- User configured GitHub webhook pointing to `https://bjptechnologies.co.tz/deploy/webhook/`
+- User added `GITHUB_WEBHOOK_SECRET` to server `.env`
+
+### Files Changed
+| File | Action | Notes |
+|---|---|---|
+| static/js/main.js | Modified | Skip counter animation for non-numeric values |
+| .github/workflows/deploy.yml | Modified | Removed deploy job, tests only |
+| .cpanel.yml | Created | Post-deploy tasks for cPanel Git Version Control |
+| apps/core/webhook.py | Created | GitHub webhook receiver with HMAC validation |
+| scripts/deploy.sh | Created | Shell script: git pull + pip + migrate + collectstatic + restart |
+| config/urls.py | Modified | Added /deploy/webhook/ route |
+| .env.example | Modified | Added GITHUB_WEBHOOK_SECRET |
+
+### Decisions Made
+- Decision: Use GitHub webhook → Django endpoint instead of cPanel UAPI
+  Reason: Host's OpenResty proxy blocks all external calls to port 2083 regardless of method or content-type
+- Decision: Keep repo public for now
+  Reason: No terminal access on host, SSH blocked, cPanel UI blocks PAT in clone URL — private repo auth not achievable without hosting provider help
+- Decision: Deploy script runs fully detached (`start_new_session=True`)
+  Reason: Passenger restarts on `touch tmp/restart.txt` — detached process survives the parent being killed
+
+### Next Session Should
+- [ ] Confirm webhook deploy works end-to-end (test PR → main)
+- [ ] Check `/tmp/bjp_deploy.log` on server to verify deploy script ran
+- [ ] Address private repo if hosting provider enables SSH access
+
 > This file is updated by Claude Code at the end of every working session.
 > It is the single source of truth for project progress, decisions, and context.
 > Never delete entries. Always append new entries at the bottom.
