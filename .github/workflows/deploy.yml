@@ -46,23 +46,15 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
-      - uses: actions/checkout@v4
-      - name: Deploy to cPanel via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        with:
-          host:     ${{ secrets.CPANEL_HOST }}
-          username: ${{ secrets.CPANEL_USER }}
-          password: ${{ secrets.CPANEL_PASS }}
-          envs: GH_PAT
-          script: |
-            cd ~/bjp-technologies-web
-            git fetch https://$GH_PAT@github.com/MussaJabir/bjp-technologies-web.git main
-            git reset --hard FETCH_HEAD
-            source ~/virtualenv/bjp-technologies-web/3.12/bin/activate
-            pip install -r requirements.txt --quiet
-            python manage.py migrate --no-input
-            python manage.py collectstatic --no-input
-            touch tmp/restart.txt
-            echo "Deploy complete: $(date)"
+      - name: Trigger cPanel Git Deployment
+        run: |
+          RESPONSE=$(curl -sk \
+            -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_API_TOKEN }}" \
+            "https://${{ secrets.CPANEL_HOST }}:2083/execute/VersionControlDeployment/create?repository_root=%2Fhome%2Fbjptechn%2Fbjp-technologies-web")
+          echo "$RESPONSE"
+          STATUS=$(echo "$RESPONSE" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status',0))")
+          if [ "$STATUS" != "1" ]; then
+            echo "Deployment trigger failed"
+            exit 1
+          fi
+          echo "Deployment triggered successfully"
