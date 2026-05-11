@@ -86,9 +86,7 @@ def cover_page(canvas, doc):
 
     canvas.setFillColor(WHITE)
     canvas.setFont("Helvetica", 8)
-    canvas.drawCentredString(
-        PAGE_W / 2, 20 * mm, "Secure Technology. Scalable Growth."
-    )
+    canvas.drawCentredString(PAGE_W / 2, 20 * mm, "Secure Technology. Scalable Growth.")
     canvas.restoreState()
 
 
@@ -153,21 +151,23 @@ def build_styles():
 
 
 def ruled_table(data, col_widths, header_bg=NAVY, header_fg=WHITE):
-    style = TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), header_bg),
-        ("TEXTCOLOR", (0, 0), (-1, 0), header_fg),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("FONTSIZE", (0, 0), (-1, 0), 9),
-        ("FONTNAME", (0, 1), (-1, -1), "Helvetica"),
-        ("FONTSIZE", (0, 1), (-1, -1), 8.5),
-        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [WHITE, LIGHT_GREY]),
-        ("GRID", (0, 0), (-1, -1), 0.4, GREY),
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("TOPPADDING", (0, 0), (-1, -1), 4),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
-        ("LEFTPADDING", (0, 0), (-1, -1), 6),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 6),
-    ])
+    style = TableStyle(
+        [
+            ("BACKGROUND", (0, 0), (-1, 0), header_bg),
+            ("TEXTCOLOR", (0, 0), (-1, 0), header_fg),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, 0), 9),
+            ("FONTNAME", (0, 1), (-1, -1), "Helvetica"),
+            ("FONTSIZE", (0, 1), (-1, -1), 8.5),
+            ("ROWBACKGROUNDS", (0, 1), (-1, -1), [WHITE, LIGHT_GREY]),
+            ("GRID", (0, 0), (-1, -1), 0.4, GREY),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("TOPPADDING", (0, 0), (-1, -1), 4),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+            ("LEFTPADDING", (0, 0), (-1, -1), 6),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+        ]
+    )
     return Table(data, colWidths=col_widths, style=style, repeatRows=1)
 
 
@@ -180,21 +180,28 @@ def build_story(styles):
     story.append(HRFlowable(width=CONTENT_W, thickness=1, color=CYAN, spaceAfter=3 * mm))
 
     story.append(Paragraph("<b>Problem:</b>", s["subsection"]))
-    story.append(Paragraph(
-        "The repository had no description, website URL, or topic tags — presenting "
-        "a blank 'About' panel to anyone visiting the repo on GitHub.",
-        s["body"],
-    ))
+    story.append(
+        Paragraph(
+            "The repository had no description, website URL, or topic tags — presenting "
+            "a blank 'About' panel to anyone visiting the repo on GitHub.",
+            s["body"],
+        )
+    )
 
     story.append(Paragraph("<b>Resolution:</b>", s["subsection"]))
-    story.append(Paragraph(
-        "The About section was populated using <font name='Courier'>gh repo edit</font> via the GitHub CLI:",
-        s["body"],
-    ))
+    story.append(
+        Paragraph(
+            "The About section was populated using <font name='Courier'>gh repo edit</font> via the GitHub CLI:",
+            s["body"],
+        )
+    )
 
     about_data = [
         ["Field", "Value"],
-        ["Description", "Corporate website for BJP Technologies (T) Limited — IT solutions\ncompany in Tanzania. Built with Django 6, MySQL, and deployed on cPanel."],
+        [
+            "Description",
+            "Corporate website for BJP Technologies (T) Limited — IT solutions\ncompany in Tanzania. Built with Django 6, MySQL, and deployed on cPanel.",
+        ],
         ["Website", "https://bjptechnologies.co.tz"],
         ["Topics", "django, python, mysql, cpanel, corporate-website, tanzania"],
     ]
@@ -206,36 +213,44 @@ def build_story(styles):
     story.append(HRFlowable(width=CONTENT_W, thickness=1, color=CYAN, spaceAfter=3 * mm))
 
     story.append(Paragraph("<b>Problem:</b>", s["subsection"]))
-    story.append(Paragraph(
-        "The homepage stats section displayed four counters: <b>7</b> IT Service Lines, "
-        "<b>6</b> Industries Served, <b>24/7</b> Monitoring &amp; Support, and "
-        "<b>100%</b> Dedicated to Your Success. The first two animated correctly. "
-        "The last two displayed as <b>0</b>.",
-        s["body"],
-    ))
-    story.append(Paragraph(
-        "Root cause: the <font name='Courier'>counter-up.js</font> plugin reads each "
-        "<font name='Courier'>.counter</font> span's text content and parses it as a "
-        "number. Values containing non-numeric characters (<font name='Courier'>24/7</font>, "
-        "<font name='Courier'>100%</font>) produce <font name='Courier'>NaN</font>, "
-        "which the plugin renders as <b>0</b>, overwriting the correct value.",
-        s["body"],
-    ))
+    story.append(
+        Paragraph(
+            "The homepage stats section displayed four counters: <b>7</b> IT Service Lines, "
+            "<b>6</b> Industries Served, <b>24/7</b> Monitoring &amp; Support, and "
+            "<b>100%</b> Dedicated to Your Success. The first two animated correctly. "
+            "The last two displayed as <b>0</b>.",
+            s["body"],
+        )
+    )
+    story.append(
+        Paragraph(
+            "Root cause: the <font name='Courier'>counter-up.js</font> plugin reads each "
+            "<font name='Courier'>.counter</font> span's text content and parses it as a "
+            "number. Values containing non-numeric characters (<font name='Courier'>24/7</font>, "
+            "<font name='Courier'>100%</font>) produce <font name='Courier'>NaN</font>, "
+            "which the plugin renders as <b>0</b>, overwriting the correct value.",
+            s["body"],
+        )
+    )
 
     story.append(Paragraph("<b>Fix:</b>", s["subsection"]))
-    story.append(Paragraph(
-        "Modified <font name='Courier'>static/js/main.js</font> — the "
-        "<font name='Courier'>counterUp</font> function now iterates each "
-        "<font name='Courier'>.counter</font> span and applies the animation only "
-        "when the value matches a purely numeric pattern "
-        "(<font name='Courier'>/^[\\d,]+(\\.[\\d]+)?$/</font>). "
-        "Non-numeric values are displayed as-is without animation.",
-        s["body"],
-    ))
-    story.append(Paragraph(
-        "<b>Branch merged:</b> <font name='Courier'>fix/homepage-counter-non-numeric</font>",
-        s["body"],
-    ))
+    story.append(
+        Paragraph(
+            "Modified <font name='Courier'>static/js/main.js</font> — the "
+            "<font name='Courier'>counterUp</font> function now iterates each "
+            "<font name='Courier'>.counter</font> span and applies the animation only "
+            "when the value matches a purely numeric pattern "
+            "(<font name='Courier'>/^[\\d,]+(\\.[\\d]+)?$/</font>). "
+            "Non-numeric values are displayed as-is without animation.",
+            s["body"],
+        )
+    )
+    story.append(
+        Paragraph(
+            "<b>Branch merged:</b> <font name='Courier'>fix/homepage-counter-non-numeric</font>",
+            s["body"],
+        )
+    )
 
     # ── Section 3: Automated Deploy ──────────────────────────────────────────
     story.append(Spacer(1, 4 * mm))
@@ -243,12 +258,14 @@ def build_story(styles):
     story.append(HRFlowable(width=CONTENT_W, thickness=1, color=CYAN, spaceAfter=3 * mm))
 
     story.append(Paragraph("<b>Problem:</b>", s["subsection"]))
-    story.append(Paragraph(
-        "Every deployment required manual intervention: log into cPanel, navigate to "
-        "Git Version Control, and click Pull. There was no automation triggered by "
-        "merges to the main branch.",
-        s["body"],
-    ))
+    story.append(
+        Paragraph(
+            "Every deployment required manual intervention: log into cPanel, navigate to "
+            "Git Version Control, and click Pull. There was no automation triggered by "
+            "merges to the main branch.",
+            s["body"],
+        )
+    )
 
     story.append(Paragraph("<b>Goal:</b> Auto-deploy on every merge to main.", s["body"]))
 
@@ -264,12 +281,16 @@ def build_story(styles):
     story.append(ruled_table(ruled_out, [65 * mm, CONTENT_W - 65 * mm]))
 
     story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph("<b>Final Solution: GitHub Webhook + Django Endpoint</b>", s["subsection"]))
-    story.append(Paragraph(
-        "Since the cPanel API is blocked from external IPs but the live Django site "
-        "is publicly reachable, a webhook-based approach was implemented:",
-        s["body"],
-    ))
+    story.append(
+        Paragraph("<b>Final Solution: GitHub Webhook + Django Endpoint</b>", s["subsection"])
+    )
+    story.append(
+        Paragraph(
+            "Since the cPanel API is blocked from external IPs but the live Django site "
+            "is publicly reachable, a webhook-based approach was implemented:",
+            s["body"],
+        )
+    )
 
     flow_data = [
         ["Step", "Action"],
@@ -290,16 +311,22 @@ def build_story(styles):
     files_data = [
         ["File", "Action", "Notes"],
         ["apps/core/webhook.py", "Created", "Django webhook view with HMAC-SHA256 validation"],
-        ["scripts/deploy.sh", "Created", "Shell script: git pull, pip, migrate, collectstatic, restart"],
+        [
+            "scripts/deploy.sh",
+            "Created",
+            "Shell script: git pull, pip, migrate, collectstatic, restart",
+        ],
         ["config/urls.py", "Modified", "Registered /deploy/webhook/ route"],
         [".github/workflows/deploy.yml", "Modified", "Removed broken deploy job — tests only now"],
         [".cpanel.yml", "Created", "cPanel post-deploy config (fallback for manual pulls)"],
         [".env.example", "Modified", "Added GITHUB_WEBHOOK_SECRET variable"],
     ]
-    story.append(ruled_table(
-        files_data,
-        [55 * mm, 28 * mm, CONTENT_W - 55 * mm - 28 * mm],
-    ))
+    story.append(
+        ruled_table(
+            files_data,
+            [55 * mm, 28 * mm, CONTENT_W - 55 * mm - 28 * mm],
+        )
+    )
 
     story.append(Spacer(1, 4 * mm))
     story.append(Paragraph("<b>Server-Side Setup (Manual, One-Time):</b>", s["subsection"]))
@@ -313,13 +340,15 @@ def build_story(styles):
 
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph("<b>Result:</b>", s["subsection"]))
-    story.append(Paragraph(
-        "Webhook delivery confirmed returning HTTP 200. Deploy script confirmed running "
-        "on the server — log output visible at "
-        "<font name='Courier'>/tmp/bjp_deploy.log</font>. "
-        "Automated deployment is fully operational.",
-        s["body"],
-    ))
+    story.append(
+        Paragraph(
+            "Webhook delivery confirmed returning HTTP 200. Deploy script confirmed running "
+            "on the server — log output visible at "
+            "<font name='Courier'>/tmp/bjp_deploy.log</font>. "
+            "Automated deployment is fully operational.",
+            s["body"],
+        )
+    )
 
     # ── Section 4: Current State ─────────────────────────────────────────────
     story.append(Spacer(1, 4 * mm))
@@ -334,20 +363,28 @@ def build_story(styles):
         ["Image optimisation", "Pending", "All images to be compressed"],
         ["Final security audit", "Pending", "No secrets, no DEBUG, no SQL exposure"],
         ["Go-live sign-off", "Pending", "Awaiting all Phase 6 items"],
-        ["Private repository", "Blocked", "Host blocks SSH + PAT auth — needs provider help or VPS"],
+        [
+            "Private repository",
+            "Blocked",
+            "Host blocks SSH + PAT auth — needs provider help or VPS",
+        ],
     ]
-    story.append(ruled_table(
-        status_data,
-        [60 * mm, 32 * mm, CONTENT_W - 60 * mm - 32 * mm],
-    ))
+    story.append(
+        ruled_table(
+            status_data,
+            [60 * mm, 32 * mm, CONTENT_W - 60 * mm - 32 * mm],
+        )
+    )
 
     story.append(Spacer(1, 6 * mm))
     story.append(HRFlowable(width=CONTENT_W, thickness=0.5, color=GREY, spaceAfter=3 * mm))
-    story.append(Paragraph(
-        "<i>Report prepared by Claude Code (Sonnet 4.6) — BJP Technologies (T) Limited "
-        "— bjptechnologies.co.tz</i>",
-        ParagraphStyle("footer_note", fontName="Helvetica-Oblique", fontSize=8, textColor=GREY),
-    ))
+    story.append(
+        Paragraph(
+            "<i>Report prepared by Claude Code (Sonnet 4.6) — BJP Technologies (T) Limited "
+            "— bjptechnologies.co.tz</i>",
+            ParagraphStyle("footer_note", fontName="Helvetica-Oblique", fontSize=8, textColor=GREY),
+        )
+    )
 
     return story
 
@@ -356,19 +393,27 @@ def main():
     doc = BaseDocTemplate(OUTPUT, pagesize=A4)
 
     cover_frame = Frame(
-        0, 0, PAGE_W, PAGE_H,
-        leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0,
+        0,
+        0,
+        PAGE_W,
+        PAGE_H,
+        leftPadding=0,
+        rightPadding=0,
+        topPadding=0,
+        bottomPadding=0,
         id="cover",
     )
     content_frame = Frame(18 * mm, 20 * mm, CONTENT_W, PAGE_H - 45 * mm, id="content")
 
-    doc.addPageTemplates([
-        PageTemplate(id="cover", frames=[cover_frame], onPage=cover_page),
-        PageTemplate(id="content", frames=[content_frame], onPage=header_footer),
-    ])
+    doc.addPageTemplates(
+        [
+            PageTemplate(id="cover", frames=[cover_frame], onPage=cover_page),
+            PageTemplate(id="content", frames=[content_frame], onPage=header_footer),
+        ]
+    )
 
     styles = build_styles()
-    story = [NextPageTemplate('content'), PageBreak()]
+    story = [NextPageTemplate("content"), PageBreak()]
     story += build_story(styles)
 
     doc.build(story)
