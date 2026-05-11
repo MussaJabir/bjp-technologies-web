@@ -6,8 +6,8 @@
 ## Session 13 — 2026-05-10 EAT
 
 **Goal:** Automate cPanel deployment on merge to main via GitHub webhook.
-**Branch:** chore/automate-cpanel-deploy → chore/test-webhook-deploy
-**Status:** 🔄 In Progress
+**Branch:** chore/automate-cpanel-deploy → chore/test-webhook-deploy → chore/webhook-live-test
+**Status:** ✅ Complete
 
 ### What Was Done
 - Added GitHub repo About section (description, website, topics) via `gh repo edit`
@@ -42,10 +42,14 @@
 - Decision: Deploy script runs fully detached (`start_new_session=True`)
   Reason: Passenger restarts on `touch tmp/restart.txt` — detached process survives the parent being killed
 
+### Outcome
+- Automated deploy fully working ✅
+- Webhook returns 200, deploy script confirmed running via `/tmp/bjp_deploy.log` ✅
+- Every future merge to `main` auto-deploys: git pull → pip install → migrate → collectstatic → Passenger restart
+
 ### Next Session Should
-- [x] Confirm webhook deploy works end-to-end — webhook returns 200 ✅
-- [ ] Confirm deploy script ran via `/tmp/bjp_deploy.log`
 - [ ] Address private repo if hosting provider enables SSH access
+- [ ] Continue Phase 6: page load speed, image optimisation, final security audit
 
 > This file is updated by Claude Code at the end of every working session.
 > It is the single source of truth for project progress, decisions, and context.
